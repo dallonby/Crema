@@ -1,0 +1,601 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		085B0A4D43505401210C0B1A /* ShotPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268764B7A856C391071C786 /* ShotPlayback.swift */; };
+		0AFE3514D79EB46A87DC7F1C /* ShotChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45970EE58AAB2B10D530FA /* ShotChart.swift */; };
+		150A333B8855F0D10A5FEAC6 /* MachinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE0AA8AC6B81C3EC4698E5 /* MachinesView.swift */; };
+		191CEFBAA5DD6744FE688F38 /* brew_testyt_full.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */; };
+		21C0A0F8B7D8DFDF65A74828 /* MetricHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AB9E8955DAF4265D52871 /* MetricHUD.swift */; };
+		25DE44274A6EE4E5238AE365 /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
+		2A987296E13976ACF87C55FE /* MachinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE0AA8AC6B81C3EC4698E5 /* MachinesView.swift */; };
+		2D20D745DD464D8268ABABD8 /* LiveShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7082747C6956FB747956 /* LiveShotView.swift */; };
+		3951D08908C94F688DC84C00 /* ShotSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5084C7A86F78F12486B22F /* ShotSample.swift */; };
+		4593F6681CDC56D18ED17A1E /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
+		4B17A10F4E9022F60E243877 /* ShotPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268764B7A856C391071C786 /* ShotPlayback.swift */; };
+		4C35FF428F56863FF6133397 /* CremaKit in Frameworks */ = {isa = PBXBuildFile; productRef = D78B39B3787E10A7F8C82C89 /* CremaKit */; };
+		59E6546EA949B1D0C125B4CE /* CremaTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */; };
+		5FAEBAEF898BE17734EE65AC /* CremaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2DBDB56972958BC26ECEDF /* CremaApp.swift */; };
+		79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
+		7C5A6A22EC88C6A9F1B576FE /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
+		8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
+		8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
+		A31B736B59FFB10ED836A423 /* LiveShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7082747C6956FB747956 /* LiveShotView.swift */; };
+		A55FEF7D1E150CCF1F370A94 /* CremaKit in Frameworks */ = {isa = PBXBuildFile; productRef = F41B9BFD9A7FED8F14F0C8D1 /* CremaKit */; };
+		B5159DFD6E6AE4BB7325F30C /* CremaTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */; };
+		BB2BEC75064AEA73630DB61D /* CremaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2DBDB56972958BC26ECEDF /* CremaApp.swift */; };
+		BF176755A6800F8CD5E03B76 /* StageTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */; };
+		C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45970EE58AAB2B10D530FA /* ShotChart.swift */; };
+		E6D60E5885F07D14D79F42CB /* brew_testyt_full.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */; };
+		ED300449F7D59E8A7E76976E /* MetricHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AB9E8955DAF4265D52871 /* MetricHUD.swift */; };
+		F55DE796358D95592BAE1420 /* ShotSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5084C7A86F78F12486B22F /* ShotSample.swift */; };
+		FF391478471D1B17F6F1DFCD /* StageTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D5084C7A86F78F12486B22F /* ShotSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotSample.swift; sourceTree = "<group>"; };
+		238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageTimeline.swift; sourceTree = "<group>"; };
+		2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CremaTheme.swift; sourceTree = "<group>"; };
+		2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */ = {isa = PBXFileReference; path = brew_testyt_full.csv; sourceTree = "<group>"; };
+		2DCE0AA8AC6B81C3EC4698E5 /* MachinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachinesView.swift; sourceTree = "<group>"; };
+		2E90AD8ADFA3032B567FC1C7 /* Crema-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Crema-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewActionZone.swift; sourceTree = "<group>"; };
+		39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathSmoothing.swift; sourceTree = "<group>"; };
+		3E4D7082747C6956FB747956 /* LiveShotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveShotView.swift; sourceTree = "<group>"; };
+		4629FB39D3A5FC432EE5D9B9 /* Crema */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Crema; path = .; sourceTree = SOURCE_ROOT; };
+		4E668C17D382823B628CF672 /* Crema-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crema-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5268764B7A856C391071C786 /* ShotPlayback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotPlayback.swift; sourceTree = "<group>"; };
+		769AB9E8955DAF4265D52871 /* MetricHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricHUD.swift; sourceTree = "<group>"; };
+		7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriver.swift; sourceTree = "<group>"; };
+		CD2DBDB56972958BC26ECEDF /* CremaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CremaApp.swift; sourceTree = "<group>"; };
+		CF45970EE58AAB2B10D530FA /* ShotChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotChart.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F27670C9929C631BB21E198 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C35FF428F56863FF6133397 /* CremaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94228377E7FEC84FA47AD7F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55FEF7D1E150CCF1F370A94 /* CremaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2AA5D90B26B72F4024DA45E9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3242644EC12EAF137450144F /* CremaApp */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		3242644EC12EAF137450144F /* CremaApp */ = {
+			isa = PBXGroup;
+			children = (
+				CD2DBDB56972958BC26ECEDF /* CremaApp.swift */,
+				FCA80F29F8A6F4F36A4EE1AD /* Data */,
+				787F5B82A4536B887D6C0A55 /* Resources */,
+				F51D758E42B3994666192DDD /* Theme */,
+				F6B150AE5D3A1088354DF1BA /* Views */,
+			);
+			path = CremaApp;
+			sourceTree = "<group>";
+		};
+		787F5B82A4536B887D6C0A55 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8D20CA351A651993EA939F05 = {
+			isa = PBXGroup;
+			children = (
+				DBC4595FE019A38B5F0D0E61 /* Packages */,
+				2AA5D90B26B72F4024DA45E9 /* Sources */,
+				A5A2A5F454DE940293ED5A6A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A5A2A5F454DE940293ED5A6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2E90AD8ADFA3032B567FC1C7 /* Crema-iOS.app */,
+				4E668C17D382823B628CF672 /* Crema-macOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DBC4595FE019A38B5F0D0E61 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				4629FB39D3A5FC432EE5D9B9 /* Crema */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		F51D758E42B3994666192DDD /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		F6B150AE5D3A1088354DF1BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */,
+				3E4D7082747C6956FB747956 /* LiveShotView.swift */,
+				2DCE0AA8AC6B81C3EC4698E5 /* MachinesView.swift */,
+				769AB9E8955DAF4265D52871 /* MetricHUD.swift */,
+				39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */,
+				CF45970EE58AAB2B10D530FA /* ShotChart.swift */,
+				238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FCA80F29F8A6F4F36A4EE1AD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */,
+				5268764B7A856C391071C786 /* ShotPlayback.swift */,
+				1D5084C7A86F78F12486B22F /* ShotSample.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5EDF9DDC5789E5EFBBE215FE /* Crema-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F5DB61E2737693DE36ABA83 /* Build configuration list for PBXNativeTarget "Crema-iOS" */;
+			buildPhases = (
+				A6C72AD783AD7DD504FCCB45 /* Sources */,
+				3F6A7573F79D9E892A4F4CCC /* Resources */,
+				94228377E7FEC84FA47AD7F5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Crema-iOS";
+			packageProductDependencies = (
+				F41B9BFD9A7FED8F14F0C8D1 /* CremaKit */,
+			);
+			productName = "Crema-iOS";
+			productReference = 2E90AD8ADFA3032B567FC1C7 /* Crema-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F6F9154A133754C88AB46B95 /* Crema-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE5801D4C1042A2B2B55F209 /* Build configuration list for PBXNativeTarget "Crema-macOS" */;
+			buildPhases = (
+				911AE969A2BB51DC59F17908 /* Sources */,
+				C22D8B423253BD9CEC2138E5 /* Resources */,
+				2F27670C9929C631BB21E198 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Crema-macOS";
+			packageProductDependencies = (
+				D78B39B3787E10A7F8C82C89 /* CremaKit */,
+			);
+			productName = "Crema-macOS";
+			productReference = 4E668C17D382823B628CF672 /* Crema-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1B89533F1CADC30494E4451B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					5EDF9DDC5789E5EFBBE215FE = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					F6F9154A133754C88AB46B95 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1E0DB48DDDD0E80DA54B2742 /* Build configuration list for PBXProject "Crema" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8D20CA351A651993EA939F05;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A776458BD1002E4F20594C35 /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A5A2A5F454DE940293ED5A6A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5EDF9DDC5789E5EFBBE215FE /* Crema-iOS */,
+				F6F9154A133754C88AB46B95 /* Crema-macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F6A7573F79D9E892A4F4CCC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6D60E5885F07D14D79F42CB /* brew_testyt_full.csv in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C22D8B423253BD9CEC2138E5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				191CEFBAA5DD6744FE688F38 /* brew_testyt_full.csv in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		911AE969A2BB51DC59F17908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25DE44274A6EE4E5238AE365 /* BrewActionZone.swift in Sources */,
+				BB2BEC75064AEA73630DB61D /* CremaApp.swift in Sources */,
+				B5159DFD6E6AE4BB7325F30C /* CremaTheme.swift in Sources */,
+				79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */,
+				2D20D745DD464D8268ABABD8 /* LiveShotView.swift in Sources */,
+				150A333B8855F0D10A5FEAC6 /* MachinesView.swift in Sources */,
+				ED300449F7D59E8A7E76976E /* MetricHUD.swift in Sources */,
+				4593F6681CDC56D18ED17A1E /* PathSmoothing.swift in Sources */,
+				0AFE3514D79EB46A87DC7F1C /* ShotChart.swift in Sources */,
+				085B0A4D43505401210C0B1A /* ShotPlayback.swift in Sources */,
+				3951D08908C94F688DC84C00 /* ShotSample.swift in Sources */,
+				FF391478471D1B17F6F1DFCD /* StageTimeline.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6C72AD783AD7DD504FCCB45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */,
+				5FAEBAEF898BE17734EE65AC /* CremaApp.swift in Sources */,
+				59E6546EA949B1D0C125B4CE /* CremaTheme.swift in Sources */,
+				8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */,
+				A31B736B59FFB10ED836A423 /* LiveShotView.swift in Sources */,
+				2A987296E13976ACF87C55FE /* MachinesView.swift in Sources */,
+				21C0A0F8B7D8DFDF65A74828 /* MetricHUD.swift in Sources */,
+				7C5A6A22EC88C6A9F1B576FE /* PathSmoothing.swift in Sources */,
+				C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */,
+				4B17A10F4E9022F60E243877 /* ShotPlayback.swift in Sources */,
+				F55DE796358D95592BAE1420 /* ShotSample.swift in Sources */,
+				BF176755A6800F8CD5E03B76 /* StageTimeline.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		07349364A477A09DA9E384AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Crema;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = coffee.crema.app;
+				PRODUCT_NAME = Crema;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1F0FD05C3273A97CBD24DCC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Crema;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = coffee.crema.app;
+				PRODUCT_NAME = Crema;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		28703C50E0BB80BED8B6779D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Crema;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = coffee.crema.app;
+				PRODUCT_NAME = Crema;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4C8EF3533D00CDA7E5A8347F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Crema;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = coffee.crema.app;
+				PRODUCT_NAME = Crema;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		76356326655B4B55C07AB152 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		9167039653F44165522A0D89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E0DB48DDDD0E80DA54B2742 /* Build configuration list for PBXProject "Crema" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9167039653F44165522A0D89 /* Debug */,
+				76356326655B4B55C07AB152 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3F5DB61E2737693DE36ABA83 /* Build configuration list for PBXNativeTarget "Crema-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28703C50E0BB80BED8B6779D /* Debug */,
+				07349364A477A09DA9E384AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BE5801D4C1042A2B2B55F209 /* Build configuration list for PBXNativeTarget "Crema-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C8EF3533D00CDA7E5A8347F /* Debug */,
+				1F0FD05C3273A97CBD24DCC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A776458BD1002E4F20594C35 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D78B39B3787E10A7F8C82C89 /* CremaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CremaKit;
+		};
+		F41B9BFD9A7FED8F14F0C8D1 /* CremaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CremaKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1B89533F1CADC30494E4451B /* Project object */;
+}

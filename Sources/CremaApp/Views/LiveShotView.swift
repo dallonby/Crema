@@ -92,6 +92,18 @@ struct LiveShotView: View {
 
     // MARK: - Header
 
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var headerSizeClass
+    #endif
+
+    private var isCompactHeader: Bool {
+        #if os(iOS)
+        return headerSizeClass == .compact
+        #else
+        return false
+        #endif
+    }
+
     private var header: some View {
         HStack(alignment: .firstTextBaseline, spacing: 14) {
             ZStack {
@@ -105,21 +117,27 @@ struct LiveShotView: View {
             Text(playback.profile.name)
                 .font(CremaFont.headerTitle)
                 .foregroundStyle(CremaColor.cream)
-            Text("·")
-                .foregroundStyle(CremaColor.secondary)
-            Text("18.0 g → 36.0 g")
-                .font(CremaFont.headerMeta)
-                .foregroundStyle(CremaColor.secondary)
-            Text("·")
-                .foregroundStyle(CremaColor.secondary)
-            Text("ratio 1 : 2.0")
-                .font(CremaFont.headerMeta)
-                .foregroundStyle(CremaColor.secondary)
+                .lineLimit(1)
+                .fixedSize()
+            // iPhone portrait drops the dose / ratio meta — there's no room.
+            if !isCompactHeader {
+                Text("·")
+                    .foregroundStyle(CremaColor.secondary)
+                Text("18.0 g → 36.0 g")
+                    .font(CremaFont.headerMeta)
+                    .foregroundStyle(CremaColor.secondary)
+                Text("·")
+                    .foregroundStyle(CremaColor.secondary)
+                Text("ratio 1 : 2.0")
+                    .font(CremaFont.headerMeta)
+                    .foregroundStyle(CremaColor.secondary)
+            }
             Spacer()
             modePill
             Text(String(format: "%05.2f s", playback.t))
                 .font(.system(size: 13, weight: .regular, design: .rounded).monospacedDigit())
                 .foregroundStyle(CremaColor.secondary)
+                .fixedSize()
         }
     }
 

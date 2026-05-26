@@ -23,6 +23,12 @@ public actor StubMachineTransport: MachineTransport {
     private var replayTask: Task<Void, Never>?
     private var scanTask: Task<Void, Never>?
     private let replaySource: [LiveTelemetry]
+    /// Latest telemetry sample the replay loop has emitted. Polled readHolding
+    /// requests for the live block return THIS — otherwise the polling
+    /// alternates real samples with zero-filled responses and the chart sees
+    /// `[good, 0, good, 0, ...]` (visible as a "bouncing" HUD and squished
+    /// curves on iOS, found 2026-05-26).
+    private var currentReplaySample: LiveTelemetry?
     private let simulatedPeripherals: [DiscoveredPeripheral]
     private var connectedIdentifier: String?
 
@@ -198,6 +204,7 @@ public actor StubMachineTransport: MachineTransport {
     private func startReplay() {
         guard !replaySource.isEmpty else { return }
         replayTask?.cancel()
+        currentReplaySample = nil  // fresh shot — discard any prior brew's state
         let samples = replaySource
         replayTask = Task { [weak self] in
             let start = ContinuousClock.now
@@ -217,6 +224,7 @@ public actor StubMachineTransport: MachineTransport {
     }
 
     private func emitReplay(_ sample: LiveTelemetry) {
+        currentReplaySample = sample
         let resp = makeStubReadHoldingResponse(from: sample)
         emit(.modbus(resp))
     }
@@ -238,14 +246,28 @@ public actor StubMachineTransport: MachineTransport {
             var body = Data([0x01, req.function])
             body.append(req.data.prefix(4))
             return wrap(body)
-        case Modbus.FunctionCode.readHolding.rawValue,
-             Modbus.FunctionCode.readCoils.rawValue:
-            // Return a zero-filled block of the requested size.
+        case Modbus.FunctionCode.readHolding.rawValue:
+            // If a brew is in progress and we have a current replayed sample,
+            // return ITS register block — that's the only way the polling done
+            // by LiveDriver gets meaningful data through the stub.
+            let addr = (UInt16(req.data[req.data.startIndex])     << 8) |
+                        UInt16(req.data[req.data.startIndex + 1])
+            let qty  = (UInt16(req.data[req.data.startIndex + 2]) << 8) |
+                        UInt16(req.data[req.data.startIndex + 3])
+            if let sample = currentReplaySample,
+               addr == Machine.liveBlockBase,
+               qty == Machine.liveBlockCount {
+                return makeStubReadHoldingResponse(from: sample)
+            }
+            // Otherwise (no brew yet, or different read), zero-filled.
+            let byteCount = Int(qty) * 2
+            var body = Data([0x01, req.function, UInt8(byteCount)])
+            body.append(Data(repeating: 0, count: byteCount))
+            return wrap(body)
+        case Modbus.FunctionCode.readCoils.rawValue:
             let qty = (UInt16(req.data[req.data.startIndex + 2]) << 8) |
                        UInt16(req.data[req.data.startIndex + 3])
-            let byteCount = req.function == Modbus.FunctionCode.readHolding.rawValue
-                ? Int(qty) * 2
-                : (Int(qty) + 7) / 8
+            let byteCount = (Int(qty) + 7) / 8
             var body = Data([0x01, req.function, UInt8(byteCount)])
             body.append(Data(repeating: 0, count: byteCount))
             return wrap(body)

@@ -18,9 +18,12 @@ struct ShotChart: View {
         return max(6.0, min(12.0, max(dataPeak, profilePeak) * 1.25))
     }
     private var maxFlow: Double {
-        let dataPeak = samples.map(\.flowMlPerSec).max() ?? 0
-        let profilePeak = profile.stages.map(\.flowMlPerSec).max() ?? 0
-        return max(3.0, min(8.0, max(dataPeak, profilePeak) * 1.6))
+        // Locked at 8 mL/s — espresso flow basically never goes above this
+        // even during preinfusion peaks (typical max is 5-6 mL/s as water
+        // floods a dry puck). Letting this rescale dynamically as samples
+        // arrive in live mode causes the flow line to visibly "bounce" — every
+        // new high-water-mark repositions every previously-drawn point.
+        8.0
     }
     private var maxVolume: Double {
         // Anchor to the profile's target volume so the y-axis is STABLE through
@@ -45,7 +48,11 @@ struct ShotChart: View {
             drawValuePills(ctx: ctx, in: plot)
             drawAxisLabels(ctx: ctx, in: plot)
         }
-        .drawingGroup()  // Render off-screen → Metal → guaranteed smooth on retina.
+        // No drawingGroup() — it forces Metal rasterization which interacts badly
+        // with the high-frequency sample appends in live mode (causes the
+        // "squished straight lines" effect because the rasterized layer lags
+        // the underlying data). The plain Canvas renders crisp on retina/iOS
+        // and updates smoothly per sample.
     }
 
     /// Faint dashed horizontal line at the volume target — marathon-finish-line

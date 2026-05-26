@@ -9,10 +9,14 @@ Package.resolved
 Crema.app/Contents/MacOS/
 Crema.app/Contents/Resources/
 
-# Xcode user state, should we add Xcode projects later.
+# Xcode user state. The Crema.xcodeproj itself IS source-controlled (regenerated
+# from project.yml via xcodegen) but per-user state inside it is not.
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
 *.xcworkspace/xcuserdata/
+
+# Xcode DerivedData (build output)
+DerivedData/
 
 # macOS clutter.
 .DS_Store

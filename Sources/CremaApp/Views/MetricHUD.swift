@@ -10,17 +10,52 @@ struct MetricHUD: View {
     let volume: Double
     let elapsed: Double
 
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    private var isCompact: Bool { sizeClass == .compact }
+    #else
+    private var isCompact: Bool { false }
+    #endif
+
     var body: some View {
-        HStack(spacing: 10) {
-            tile(value: String(format: "%.1f", pressure), unit: "bar",
-                 caption: "Pressure", accent: CremaColor.crema)
-            tile(value: String(format: "%.1f", flow), unit: "mL/s",
-                 caption: "Pump flow", accent: CremaColor.matcha)
-            tile(value: String(format: "%.0f", volume), unit: "mL",
-                 caption: "Pumped", accent: CremaColor.cream)
-            tile(value: timeString(elapsed), unit: "s",
-                 caption: "Time", accent: CremaColor.cream)
+        if isCompact {
+            // iPhone portrait: 2x2 grid so each tile gets ~half the width and
+            // the ultralight 46pt numerals don't get clipped.
+            VStack(spacing: 8) {
+                HStack(spacing: 8) {
+                    pressureTile
+                    flowTile
+                }
+                HStack(spacing: 8) {
+                    volumeTile
+                    timeTile
+                }
+            }
+        } else {
+            HStack(spacing: 10) {
+                pressureTile
+                flowTile
+                volumeTile
+                timeTile
+            }
         }
+    }
+
+    private var pressureTile: some View {
+        tile(value: String(format: "%.1f", pressure), unit: "bar",
+             caption: "Pressure", accent: CremaColor.crema)
+    }
+    private var flowTile: some View {
+        tile(value: String(format: "%.1f", flow), unit: "mL/s",
+             caption: "Pump flow", accent: CremaColor.matcha)
+    }
+    private var volumeTile: some View {
+        tile(value: String(format: "%.0f", volume), unit: "mL",
+             caption: "Pumped", accent: CremaColor.cream)
+    }
+    private var timeTile: some View {
+        tile(value: timeString(elapsed), unit: "s",
+             caption: "Time", accent: CremaColor.cream)
     }
 
     private func tile(value: String, unit: String, caption: String, accent: Color) -> some View {
@@ -38,8 +73,12 @@ struct MetricHUD: View {
                 Text(value)
                     .font(CremaFont.hudNumber(46))
                     .foregroundStyle(accent)
-                    .contentTransition(.numericText())
-                    .animation(.snappy(duration: 0.25), value: value)
+                    // No .contentTransition(.numericText()) — at the ~3.4 Hz
+                    // sample cadence the interpolation takes longer than the
+                    // gap between samples, so the displayed value lags behind
+                    // and visually "bounces" between old and new. The native
+                    // monospaced-digit refresh feels instant and matches the
+                    // cursor pills on the chart.
                 if !unit.isEmpty {
                     Text(unit)
                         .font(.system(size: 12, weight: .medium, design: .rounded))

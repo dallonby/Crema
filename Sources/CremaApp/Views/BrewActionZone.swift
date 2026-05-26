@@ -50,6 +50,13 @@ private struct LiveBrewBar: View {
     @Bindable var driver: LiveDriver
     @State private var showMachines = false
 
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    private var isCompact: Bool { sizeClass == .compact }
+    #else
+    private var isCompact: Bool { false }
+    #endif
+
     var body: some View {
         Group {
             switch phase {
@@ -61,66 +68,120 @@ private struct LiveBrewBar: View {
                     action: { showMachines = true }
                 )
             case .primaryDisconnected(let name):
-                HStack(spacing: 16) {
-                    MachinesMenuButton(driver: driver, showSheet: $showMachines)
-                    Spacer(minLength: 12)
-                    PrimaryPill(label: "Connect to \(name)",
-                                systemImage: "wave.3.right",
-                                tint: .crema, pulsing: true,
-                                action: { driver.connectToPrimary() })
-                }
+                ResponsiveTwoSlot(
+                    isCompact: isCompact,
+                    leading: { MachinesMenuButton(driver: driver, showSheet: $showMachines) },
+                    trailing: {
+                        PrimaryPill(label: "Connect to \(name)",
+                                    systemImage: "wave.3.right",
+                                    tint: .crema, pulsing: true,
+                                    action: { driver.connectToPrimary() })
+                    }
+                )
             case .scanning(let msg):
                 ProgressRow(text: msg, onCancel: { driver.stop() })
             case .readyToBrew(let name):
-                HStack(spacing: 16) {
-                    ConnectionChip(name: name, active: true, isDimmed: false,
-                                   onTap: { showMachines = true })
-                    Spacer(minLength: 12)
-                    PrimaryPill(label: "Brew",
-                                systemImage: "drop.fill",
-                                tint: .crema, pulsing: true,
-                                action: { driver.brew() })
-                }
+                ResponsiveTwoSlot(
+                    isCompact: isCompact,
+                    leading: {
+                        ConnectionChip(name: name, active: true, isDimmed: false,
+                                       onTap: { showMachines = true })
+                    },
+                    trailing: {
+                        PrimaryPill(label: "Brew",
+                                    systemImage: "drop.fill",
+                                    tint: .crema, pulsing: true,
+                                    action: { driver.brew() })
+                    }
+                )
             case .brewing(let name):
-                HStack(spacing: 16) {
-                    ConnectionChip(name: name, active: true, isDimmed: true,
-                                   onTap: nil)
-                    Spacer(minLength: 12)
-                    PrimaryPill(label: "Abort",
-                                systemImage: "stop.fill",
-                                tint: .danger, pulsing: false,
-                                action: { driver.abort() })
-                }
+                ResponsiveTwoSlot(
+                    isCompact: isCompact,
+                    leading: {
+                        ConnectionChip(name: name, active: true, isDimmed: true, onTap: nil)
+                    },
+                    trailing: {
+                        PrimaryPill(label: "Abort",
+                                    systemImage: "stop.fill",
+                                    tint: .danger, pulsing: false,
+                                    action: { driver.abort() })
+                    }
+                )
             case .done(let name):
-                HStack(spacing: 12) {
-                    ConnectionChip(name: name, active: true, isDimmed: false,
-                                   onTap: { showMachines = true })
-                    Spacer(minLength: 8)
-                    SecondaryPill(label: "Save",    systemImage: "square.and.arrow.down",
-                                  action: { /* TODO: save shot */ })
-                    SecondaryPill(label: "Discard", systemImage: "trash",
-                                  action: { driver.clearShot() })
-                    PrimaryPill(label: "Brew again",
-                                systemImage: "arrow.clockwise",
-                                tint: .crema, pulsing: false,
-                                action: { driver.clearShot(); driver.brew() })
+                if isCompact {
+                    VStack(spacing: 10) {
+                        ConnectionChip(name: name, active: true, isDimmed: false,
+                                       onTap: { showMachines = true })
+                        HStack(spacing: 8) {
+                            SecondaryPill(label: "Save",    systemImage: "square.and.arrow.down",
+                                          action: { /* TODO: save shot */ })
+                            SecondaryPill(label: "Discard", systemImage: "trash",
+                                          action: { driver.clearShot() })
+                        }
+                        PrimaryPill(label: "Brew again",
+                                    systemImage: "arrow.clockwise",
+                                    tint: .crema, pulsing: false,
+                                    action: { driver.clearShot(); driver.brew() })
+                    }
+                } else {
+                    HStack(spacing: 12) {
+                        ConnectionChip(name: name, active: true, isDimmed: false,
+                                       onTap: { showMachines = true })
+                        Spacer(minLength: 8)
+                        SecondaryPill(label: "Save",    systemImage: "square.and.arrow.down",
+                                      action: { /* TODO: save shot */ })
+                        SecondaryPill(label: "Discard", systemImage: "trash",
+                                      action: { driver.clearShot() })
+                        PrimaryPill(label: "Brew again",
+                                    systemImage: "arrow.clockwise",
+                                    tint: .crema, pulsing: false,
+                                    action: { driver.clearShot(); driver.brew() })
+                    }
                 }
             case .failed(let reason):
-                HStack(spacing: 12) {
-                    StatusGlyph(systemImage: "exclamationmark.triangle.fill", tint: .danger)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Connection failed").font(.system(size: 13, weight: .semibold, design: .rounded))
-                            .foregroundStyle(CremaColor.cream)
-                        Text(reason).font(.system(size: 11, design: .rounded))
-                            .foregroundStyle(CremaColor.secondary)
-                            .lineLimit(1)
+                if isCompact {
+                    VStack(spacing: 10) {
+                        HStack(spacing: 10) {
+                            StatusGlyph(systemImage: "exclamationmark.triangle.fill", tint: .danger)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Connection failed")
+                                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                                    .foregroundStyle(CremaColor.cream)
+                                Text(reason)
+                                    .font(.system(size: 11, design: .rounded))
+                                    .foregroundStyle(CremaColor.secondary)
+                                    .lineLimit(2)
+                                    .multilineTextAlignment(.leading)
+                            }
+                            Spacer()
+                        }
+                        HStack(spacing: 8) {
+                            SecondaryPill(label: "Machines", systemImage: "antenna.radiowaves.left.and.right",
+                                          action: { showMachines = true })
+                            PrimaryPill(label: "Retry", systemImage: "arrow.clockwise",
+                                        tint: .crema, pulsing: false,
+                                        action: { driver.connectToPrimary() })
+                        }
                     }
-                    Spacer()
-                    SecondaryPill(label: "Machines", systemImage: "ellipsis",
-                                  action: { showMachines = true })
-                    PrimaryPill(label: "Retry", systemImage: "arrow.clockwise",
-                                tint: .crema, pulsing: false,
-                                action: { driver.connectToPrimary() })
+                } else {
+                    HStack(spacing: 12) {
+                        StatusGlyph(systemImage: "exclamationmark.triangle.fill", tint: .danger)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Connection failed")
+                                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                                .foregroundStyle(CremaColor.cream)
+                            Text(reason)
+                                .font(.system(size: 11, design: .rounded))
+                                .foregroundStyle(CremaColor.secondary)
+                                .lineLimit(1)
+                        }
+                        Spacer()
+                        SecondaryPill(label: "Machines", systemImage: "antenna.radiowaves.left.and.right",
+                                      action: { showMachines = true })
+                        PrimaryPill(label: "Retry", systemImage: "arrow.clockwise",
+                                    tint: .crema, pulsing: false,
+                                    action: { driver.connectToPrimary() })
+                    }
                 }
             }
         }
@@ -463,6 +524,30 @@ private struct StatusGlyph: View {
             .font(.system(size: 18, weight: .semibold))
             .foregroundStyle(tint == .danger ? CremaColor.danger : CremaColor.crema)
             .frame(width: 36, height: 36)
+    }
+}
+
+/// Two-slot layout (status on the left, primary action on the right) that
+/// becomes a vertical stack on compact width so labels never get clipped.
+/// Used by all the "[status]  ←spacer→  [BREW / CONNECT / ABORT]" rows.
+private struct ResponsiveTwoSlot<Leading: View, Trailing: View>: View {
+    let isCompact: Bool
+    @ViewBuilder let leading: () -> Leading
+    @ViewBuilder let trailing: () -> Trailing
+
+    var body: some View {
+        if isCompact {
+            VStack(spacing: 10) {
+                leading()
+                trailing()
+            }
+        } else {
+            HStack(spacing: 16) {
+                leading()
+                Spacer(minLength: 12)
+                trailing()
+            }
+        }
     }
 }
 

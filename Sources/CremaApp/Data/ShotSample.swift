@@ -32,7 +32,7 @@ extension ShotSample {
 /// Columns: `t_ms,elapsed_brew_ms,pressure_bar,flow_ml_s,volume_ml,shot_time_s,progress_pct,brew_temp_c,steam_temp_c,raw_regs,event_hex`
 enum BrewCSVLoader {
     static func load(resource: String, withExtension ext: String = "csv") throws -> [ShotSample] {
-        guard let url = Bundle.module.url(forResource: resource, withExtension: ext) else {
+        guard let url = Bundle.main.url(forResource: resource, withExtension: ext) else {
             throw LoadError.notFound(resource)
         }
         let raw = try String(contentsOf: url, encoding: .utf8)

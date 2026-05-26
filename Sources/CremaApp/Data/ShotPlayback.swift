@@ -121,15 +121,20 @@ final class ShotPlayback {
     }
 
     /// Update the trailing N samples' `flowMlPerSec` using a lookback-only
-    /// centered window over the volume column. Same algorithm as the replay-mode
-    /// CSV loader, adapted for the live "no future samples" constraint.
+    /// window over the volume column. Same algorithm as the replay-mode CSV
+    /// loader, adapted for the live "no future samples" constraint.
+    ///
+    /// Window is intentionally wide (11 samples ≈ 3.2 s at 3.4 Hz). At small
+    /// windows the derivative is dominated by 1-mL volume quantization noise
+    /// and the rendered line looks jittery. ~3 s of lag is imperceptible vs.
+    /// real espresso timescales but kills almost all the noise.
     private func recomputeRecentFlow() {
-        let lookback = 7
+        let lookback = 11
         guard samples.count >= 2 else { return }
         let start = Swift.max(0, samples.count - lookback - 1)
         for i in start..<samples.count {
-            let lo = Swift.max(0, i - lookback / 2)
-            let hi = i  // no future
+            let lo = Swift.max(0, i - lookback)
+            let hi = i  // no future samples
             let dv = samples[hi].volumeMl - samples[lo].volumeMl
             let dt = samples[hi].t - samples[lo].t
             let flow = dt > 0 ? dv / dt : 0
