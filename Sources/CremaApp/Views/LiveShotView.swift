@@ -90,6 +90,18 @@ struct LiveShotView: View {
             CremaGradient.vignette
                 .ignoresSafeArea()
                 .allowsHitTesting(false)
+
+            // Dim scrim when a modal sheet is up. iPad form-sheet presentation
+            // applies a very faint system dim; this adds enough additional
+            // darkness to clearly focus attention on the modal. On iPhone the
+            // sheet covers the screen anyway, so the scrim has no visible
+            // effect there. On macOS dialogs sit over a single window — this
+            // scrim makes the focus shift obvious.
+            Color.black
+                .opacity(showLibrary ? 0.45 : 0)
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+                .animation(.easeInOut(duration: 0.25), value: showLibrary)
         }
         .preferredColorScheme(.dark)
         .sheet(isPresented: $showLibrary) {
