@@ -21,10 +21,17 @@ public struct PairedMachine: Sendable, Codable, Hashable, Identifiable {
 
     public var displayName: String { nickname ?? prettyAdvertisedName }
 
-    /// `WDG_Data_AB07116957` → `WDG · AB071169…` — terser for chips and rows.
+    /// `WDG_Data_AB07116957` → `Wendougee · 116957`. See `prettify(_:)`.
     public var prettyAdvertisedName: String {
-        if let suffix = advertisedName.split(separator: "_").last {
-            return "WDG · \(suffix.prefix(8))…"
+        PairedMachine.prettify(advertisedName)
+    }
+
+    /// Static prettifier so the discovery UI (which only has the raw BLE
+    /// advertised name in a `DiscoveredPeripheral`) gets the same friendly
+    /// label as the paired list.
+    public static func prettify(_ advertisedName: String) -> String {
+        if let suffix = advertisedName.split(separator: "_").last, suffix.count >= 6 {
+            return "Wendougee · \(suffix.suffix(6))"
         }
         return advertisedName
     }

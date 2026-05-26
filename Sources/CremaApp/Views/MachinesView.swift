@@ -16,6 +16,8 @@ struct MachinesView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var scanning: Bool = false
+    @State private var renamingMachine: PairedMachine?
+    @State private var renameText: String = ""
 
     var body: some View {
         VStack(spacing: 0) {
@@ -38,6 +40,24 @@ struct MachinesView: View {
         .preferredColorScheme(.dark)
         .onAppear { startScan() }
         .onDisappear { driver.stopScan() }
+        .alert("Rename machine", isPresented: Binding(
+            get: { renamingMachine != nil },
+            set: { if !$0 { renamingMachine = nil } }
+        ), presenting: renamingMachine) { machine in
+            TextField("Nickname", text: $renameText)
+                .textInputAutocapitalization(.words)
+            Button("Save") {
+                driver.registry.rename(machine.id, to: renameText)
+                renamingMachine = nil
+            }
+            Button("Reset to default", role: .destructive) {
+                driver.registry.rename(machine.id, to: nil)
+                renamingMachine = nil
+            }
+            Button("Cancel", role: .cancel) { renamingMachine = nil }
+        } message: { machine in
+            Text("Give “\(machine.prettyAdvertisedName)” a friendly name like “Kitchen Lita” or “Saturday Espresso”.")
+        }
     }
 
     // MARK: - Sections
@@ -75,6 +95,10 @@ struct MachinesView: View {
                         isConnected: isConnected(machine),
                         onTap: { driver.connect(to: machine.id) },
                         onSetPrimary: { driver.registry.setPrimary(machine.id) },
+                        onRename: {
+                            renameText = machine.nickname ?? ""
+                            renamingMachine = machine
+                        },
                         onForget: { driver.registry.forget(machine.id) }
                     )
                 }
@@ -175,6 +199,7 @@ private struct PairedRow: View {
     let isConnected: Bool
     let onTap: () -> Void
     let onSetPrimary: () -> Void
+    let onRename: () -> Void
     let onForget: () -> Void
 
     var body: some View {
@@ -213,9 +238,11 @@ private struct PairedRow: View {
                 }
                 Spacer()
                 Menu {
+                    Button("Rename", systemImage: "pencil", action: onRename)
                     if !isPrimary {
                         Button("Set as primary", systemImage: "star", action: onSetPrimary)
                     }
+                    Divider()
                     Button("Forget machine", systemImage: "trash", role: .destructive, action: onForget)
                 } label: {
                     Image(systemName: "ellipsis")
@@ -260,13 +287,19 @@ private struct DiscoveredRow: View {
                     .foregroundStyle(CremaColor.crema)
                     .frame(width: 24)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(peer.name)
+                    Text(PairedMachine.prettify(peer.name))
                         .font(.system(size: 13, weight: .semibold, design: .rounded))
                         .foregroundStyle(CremaColor.cream)
-                    if let rssi = peer.rssi {
-                        Text("\(rssi) dBm")
-                            .font(.system(size: 10, design: .rounded).monospacedDigit())
-                            .foregroundStyle(CremaColor.secondary)
+                    HStack(spacing: 6) {
+                        Text(peer.name)
+                            .font(.system(size: 10, design: .monospaced))
+                            .foregroundStyle(CremaColor.secondary.opacity(0.7))
+                            .lineLimit(1)
+                        if let rssi = peer.rssi {
+                            Text("·")
+                                .foregroundStyle(CremaColor.secondary.opacity(0.5))
+                            SignalBars(rssi: rssi)
+                        }
                     }
                 }
                 Spacer()
@@ -291,6 +324,35 @@ private struct DiscoveredRow: View {
 }
 
 // MARK: - Small bits
+
+/// 4-bar signal strength visualization. RSSI in dBm → bars filled.
+/// Replaces raw "-54 dBm" which is too technical for non-power-users.
+private struct SignalBars: View {
+    let rssi: Int
+
+    private var filledBars: Int {
+        switch rssi {
+        case (-50)...:   return 4  // excellent
+        case (-65)...:   return 3  // good
+        case (-80)...:   return 2  // fair
+        default:         return 1  // weak
+        }
+    }
+
+    var body: some View {
+        HStack(alignment: .bottom, spacing: 1.5) {
+            ForEach(0..<4) { i in
+                let height = 3 + CGFloat(i) * 2
+                Capsule()
+                    .fill(i < filledBars
+                          ? CremaColor.cream.opacity(0.85)
+                          : CremaColor.secondary.opacity(0.25))
+                    .frame(width: 2.5, height: height)
+            }
+        }
+        .frame(height: 9, alignment: .bottom)
+    }
+}
 
 private struct SectionLabel: View {
     let text: String

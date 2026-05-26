@@ -61,12 +61,20 @@ private struct LiveBrewBar: View {
         Group {
             switch phase {
             case .needsSetup:
-                CenterPrimaryButton(
-                    label: "Set up your machine",
-                    systemImage: "wave.3.right",
-                    tint: .crema,
-                    action: { showMachines = true }
-                )
+                VStack(spacing: 10) {
+                    CenterPrimaryButton(
+                        label: "Set up your machine",
+                        systemImage: "wave.3.right",
+                        tint: .crema,
+                        action: { showMachines = true }
+                    )
+                    Text("Pair your Wendougee over Bluetooth to brew. The curve above is your selected recipe — tap its name to switch.")
+                        .font(.system(size: 11, design: .rounded))
+                        .foregroundStyle(CremaColor.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 24)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             case .primaryDisconnected(let name):
                 ResponsiveTwoSlot(
                     isCompact: isCompact,
