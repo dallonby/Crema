@@ -28,6 +28,7 @@
 		7C5A6A22EC88C6A9F1B576FE /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
 		8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
 		8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
+		8FDF32AFF6E4FBAF9685E135 /* ProfileNodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */; };
 		A31B736B59FFB10ED836A423 /* LiveShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7082747C6956FB747956 /* LiveShotView.swift */; };
 		A55FEF7D1E150CCF1F370A94 /* CremaKit in Frameworks */ = {isa = PBXBuildFile; productRef = F41B9BFD9A7FED8F14F0C8D1 /* CremaKit */; };
 		B0F3F6993E8764119A1AE016 /* EditableProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */; };
@@ -36,6 +37,7 @@
 		BF176755A6800F8CD5E03B76 /* StageTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */; };
 		C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45970EE58AAB2B10D530FA /* ShotChart.swift */; };
 		D33ECE005FA2F2DB5634FEF6 /* EditableProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */; };
+		D977CD7155F1BC4C94F97256 /* ProfileNodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */; };
 		E22045411B8067008C8BEEBB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAEF0CC73B720A89E31883D /* ProfileEditView.swift */; };
 		E6D60E5885F07D14D79F42CB /* brew_testyt_full.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */; };
 		ED300449F7D59E8A7E76976E /* MetricHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AB9E8955DAF4265D52871 /* MetricHUD.swift */; };
@@ -59,6 +61,7 @@
 		769AB9E8955DAF4265D52871 /* MetricHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricHUD.swift; sourceTree = "<group>"; };
 		7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriver.swift; sourceTree = "<group>"; };
 		B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableProfile.swift; sourceTree = "<group>"; };
+		B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNodeEditor.swift; sourceTree = "<group>"; };
 		CD2DBDB56972958BC26ECEDF /* CremaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CremaApp.swift; sourceTree = "<group>"; };
 		CF45970EE58AAB2B10D530FA /* ShotChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotChart.swift; sourceTree = "<group>"; };
 		DEAEF0CC73B720A89E31883D /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 				769AB9E8955DAF4265D52871 /* MetricHUD.swift */,
 				39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */,
 				DEAEF0CC73B720A89E31883D /* ProfileEditView.swift */,
+				B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */,
 				F0DAEBDABF1BDCFE698044D8 /* ProfilesView.swift */,
 				CF45970EE58AAB2B10D530FA /* ShotChart.swift */,
 				238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */,
@@ -293,6 +297,7 @@
 				ED300449F7D59E8A7E76976E /* MetricHUD.swift in Sources */,
 				4593F6681CDC56D18ED17A1E /* PathSmoothing.swift in Sources */,
 				E22045411B8067008C8BEEBB /* ProfileEditView.swift in Sources */,
+				8FDF32AFF6E4FBAF9685E135 /* ProfileNodeEditor.swift in Sources */,
 				39C23732A2F9A610918CB805 /* ProfilesView.swift in Sources */,
 				0AFE3514D79EB46A87DC7F1C /* ShotChart.swift in Sources */,
 				085B0A4D43505401210C0B1A /* ShotPlayback.swift in Sources */,
@@ -315,6 +320,7 @@
 				21C0A0F8B7D8DFDF65A74828 /* MetricHUD.swift in Sources */,
 				7C5A6A22EC88C6A9F1B576FE /* PathSmoothing.swift in Sources */,
 				18BDBCC6DDCF946566D09CF4 /* ProfileEditView.swift in Sources */,
+				D977CD7155F1BC4C94F97256 /* ProfileNodeEditor.swift in Sources */,
 				10D35C3F64C5BE44CA565300 /* ProfilesView.swift in Sources */,
 				C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */,
 				4B17A10F4E9022F60E243877 /* ShotPlayback.swift in Sources */,

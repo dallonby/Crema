@@ -15,14 +15,25 @@ struct ProfileEditView: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    enum Mode: String, Hashable { case visual, list }
+    @State private var mode: Mode = .visual
+    @State private var selectedStageID: UUID?
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 header
                     .safeAreaPadding(.top)
-                preview
+                modePicker
+                if mode == .visual {
+                    visualEditor
+                } else {
+                    preview
+                }
                 recipeSection
-                stagesSection
+                if mode == .list {
+                    stagesSection
+                }
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 24)
@@ -32,6 +43,62 @@ struct ProfileEditView: View {
         #if os(macOS)
         .frame(minWidth: 460, idealWidth: 540, minHeight: 640, idealHeight: 800)
         #endif
+    }
+
+    private var modePicker: some View {
+        Picker("Mode", selection: $mode) {
+            Label("Visual", systemImage: "chart.xyaxis.line").tag(Mode.visual)
+            Label("List", systemImage: "list.bullet").tag(Mode.list)
+        }
+        .pickerStyle(.segmented)
+    }
+
+    @ViewBuilder
+    private var visualEditor: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("PROFILE")
+                    .font(.system(size: 10, weight: .semibold, design: .rounded).smallCaps())
+                    .tracking(0.6)
+                    .foregroundStyle(CremaColor.secondary)
+                Spacer()
+                Text(visualHint)
+                    .font(.system(size: 11, design: .rounded).monospacedDigit())
+                    .foregroundStyle(CremaColor.secondary)
+            }
+            ProfileNodeEditor(editing: editing, selectedStageID: $selectedStageID)
+                .frame(height: 280)
+                .background(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .overlay(RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .strokeBorder(CremaColor.hairline.opacity(0.5), lineWidth: 0.5))
+                )
+
+            if let selected = editing.stages.first(where: { $0.id == selectedStageID }) {
+                SelectedStageBar(
+                    stage: selected,
+                    canDelete: editing.canRemoveAnyStage,
+                    onDelete: {
+                        let id = selected.id
+                        editing.remove(stageID: id)
+                        selectedStageID = nil
+                    },
+                    onDeselect: { selectedStageID = nil }
+                )
+            } else {
+                Text("Tap a node to edit it · Drag to reshape · Tap empty space to add a stage")
+                    .font(.system(size: 11, design: .rounded))
+                    .foregroundStyle(CremaColor.secondary)
+                    .padding(.horizontal, 4)
+            }
+        }
+        .animation(.smooth(duration: 0.22), value: selectedStageID)
+    }
+
+    private var visualHint: String {
+        let compiled = editing.compile()
+        return "\(compiled.stages.count) stage\(compiled.stages.count == 1 ? "" : "s")  ·  \(Int(compiled.totalDuration)) s  ·  \(Int(compiled.targetVolumeMl ?? 0)) mL"
     }
 
     // MARK: - Header / preview / recipe
