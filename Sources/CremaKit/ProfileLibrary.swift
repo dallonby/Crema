@@ -105,11 +105,11 @@ public final class ProfileLibrary {
 // MARK: - Bundled defaults
 
 extension ProfileLibrary {
-    /// Profiles every new install ships with. The captured TestyT plus a couple
-    /// of opinionated starter recipes so the user can play without authoring
-    /// anything first.
+    /// Profiles every new install ships with. Classic Espresso is FIRST so it
+    /// becomes the default-active for fresh installs — friendlier than the
+    /// dev-fixture-named TestyT for someone opening the app for the first time.
     public static var bundledDefaults: [BrewProfile] {
-        [.testyT, .classicEspresso, .turbo]
+        [.classicEspresso, .turbo, .testyT]
     }
 }
 

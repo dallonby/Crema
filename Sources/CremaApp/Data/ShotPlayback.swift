@@ -109,15 +109,25 @@ final class ShotPlayback {
         }
     }
 
-    /// Live mode: a new telemetry sample arrived. Append it, advance `t` to
-    /// match, and recompute the flow series via dV/dt over a lookback window
-    /// so the curve matches what the recorder produces in replay mode.
-    func appendLive(_ sample: ShotSample) {
-        guard isLiveDriven else { return }
+    /// Live mode: a new telemetry sample arrived. Returns `true` iff the
+    /// sample was actually new (its `t` advanced beyond the previous one).
+    /// Returns `false` for duplicates / stale data — the polling loop keeps
+    /// asking the machine for current state long after a brew has ended,
+    /// and without this guard the chart would grow unbounded with dupes and
+    /// the watchdog would never detect end-of-shot.
+    @discardableResult
+    func appendLive(_ sample: ShotSample) -> Bool {
+        guard isLiveDriven else { return false }
+        // Drop dupes / out-of-order samples. The machine re-reports the same
+        // elapsed_brew_ms forever once a brew is over (or hasn't started yet).
+        if let last = samples.last, sample.t <= last.t {
+            return false
+        }
         samples.append(sample)
         t = sample.t
         if !isPlaying { isPlaying = true }
         recomputeRecentFlow()
+        return true
     }
 
     /// Update the trailing N samples' `flowMlPerSec` using a lookback-only

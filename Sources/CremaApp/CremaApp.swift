@@ -8,7 +8,10 @@ enum AppMode: Hashable, Sendable { case replay, live }
 
 @main
 struct CremaApp: App {
-    @State private var mode: AppMode = .replay
+    // Live is the default for first-run users — they see the empty-state
+    // "Set up your machine" CTA rather than a confusing auto-playing chart.
+    // Demo/Replay is opt-in for showing off the visualization.
+    @State private var mode: AppMode = .live
     @State private var registry: MachineRegistry
     @State private var library: ProfileLibrary
     @State private var replayPlayback: ShotPlayback

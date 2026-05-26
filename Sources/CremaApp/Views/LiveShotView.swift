@@ -174,15 +174,15 @@ struct LiveShotView: View {
     /// are explicit user actions in their own zone.
     private var modePill: some View {
         HStack(spacing: 0) {
-            modeChip(label: "Replay", active: mode == .replay) {
+            modeChip(label: "Live", active: mode == .live) {
+                mode = .live
+                replayPlayback.pause()
+            }
+            modeChip(label: "Demo", active: mode == .replay) {
                 mode = .replay
                 liveDriver.stop()
                 replayPlayback.reset()
                 replayPlayback.play()
-            }
-            modeChip(label: "Live", active: mode == .live) {
-                mode = .live
-                replayPlayback.pause()
             }
         }
         .padding(2)

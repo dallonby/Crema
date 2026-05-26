@@ -75,8 +75,13 @@ final class LiveDriver {
                 if case .modbus(let resp) = frame,
                    let telemetry = LiveTelemetry.decode(response: resp) {
                     let sample = ShotSample(from: telemetry)
-                    playback.appendLive(sample)
-                    self?.lastSampleAt = Date()
+                    // Only bump the watchdog clock if the sample was actually
+                    // new (its time advanced). Otherwise polling responses
+                    // would refresh it forever and the brew would never be
+                    // declared finished.
+                    if playback.appendLive(sample) {
+                        self?.lastSampleAt = Date()
+                    }
                 }
             }
         }
