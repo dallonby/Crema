@@ -1,125 +1,166 @@
 import Foundation
 import CremaKit
 
-/// Simplified mutable model the guided editor binds sliders to. Compiles into
-/// a real `BrewProfile` with a fixed 3-stage shape (preinfuse → bloom-wait →
-/// extract → tail). Suits ~80% of espresso recipes; the full node editor lands
-/// later for the rest.
+/// One stage in the multi-stage editor. Wraps the immutable `BrewStage` with
+/// mutable, observable fields that bind directly to the editor's controls.
+/// `id` survives compilation so SwiftUI's `ForEach` doesn't lose card state
+/// when the underlying profile is rebuilt during preview re-renders.
+@MainActor
+@Observable
+final class EditableStage: Identifiable {
+    let id: UUID
+    var label: String
+    var priority: BrewStage.Priority
+    var duration: Double
+    var pressureBar: Double
+    var flowMlPerSec: Double
+    var waitAfter: Double
+
+    /// UI-only: whether the card is expanded to show all controls. Doesn't
+    /// affect compilation.
+    var isExpanded: Bool = false
+
+    init(id: UUID = UUID(),
+         label: String,
+         priority: BrewStage.Priority,
+         duration: Double,
+         pressureBar: Double = 0,
+         flowMlPerSec: Double = 0,
+         waitAfter: Double = 0) {
+        self.id = id
+        self.label = label
+        self.priority = priority
+        self.duration = duration
+        self.pressureBar = pressureBar
+        self.flowMlPerSec = flowMlPerSec
+        self.waitAfter = waitAfter
+    }
+
+    convenience init(from stage: BrewStage) {
+        self.init(
+            id: stage.id,
+            label: stage.label,
+            priority: stage.priority,
+            duration: stage.duration,
+            pressureBar: stage.pressureBar,
+            flowMlPerSec: stage.flowMlPerSec,
+            waitAfter: stage.waitAfter
+        )
+    }
+
+    func toStage(isLast: Bool) -> BrewStage {
+        BrewStage(
+            id: id,
+            label: label,
+            duration: duration,
+            priority: priority,
+            pressureBar: priority == .pressure ? pressureBar : 0,
+            flowMlPerSec: priority == .flow ? flowMlPerSec : 0,
+            // Last stage's waitAfter is ignored by the firmware (it just
+            // ends the brew), but we keep the UI value so a user can move
+            // a stage around without losing the wait time they set.
+            waitAfter: isLast ? 0 : waitAfter
+        )
+    }
+}
+
+/// Mutable profile model the multi-stage editor binds to. Compiles into a
+/// real `BrewProfile` with arbitrary stage count.
 @MainActor
 @Observable
 final class EditableProfile: Identifiable {
-    /// Backing identity — preserved through edits so the library can match the
-    /// resulting BrewProfile to the existing row.
     let id: UUID
-
     var name: String
-
-    /// Dose in grams, displayed in the header (informational only — the machine
-    /// doesn't see this, but downstream we can use it for ratio math + scale
-    /// integration).
-    var doseG: Double          // typical range 14…22
-    var targetYieldG: Double   // typical range 18…60 (we treat this as mL too since espresso ≈ 1 g/mL)
-
-    // Preinfuse: gentle pressure-priority push to saturate the puck
-    var preinfusionBar: Double  // 0…9
-    var preinfusionTime: Double // 0…15 (0 = skip preinfuse entirely)
-
-    // Bloom: pump-off wait after preinfuse
-    var bloomTime: Double       // 0…20 (0 = skip)
-
-    // Extract: the main flow-priority stage
-    var extractFlow: Double     // 1…5 mL/s
-    var extractTime: Double     // 5…40
-
-    // Tail: short low-pressure finish (optional)
-    var tailBar: Double         // 0…3 (0 = skip)
-    var tailTime: Double        // 0…10
+    var doseG: Double          // 12…22 typical
+    var targetYieldG: Double   // 18…80 typical (= mL since espresso ≈ 1 g/mL)
+    var stages: [EditableStage]
 
     init(id: UUID = UUID(),
          name: String = "New profile",
          doseG: Double = 18,
          targetYieldG: Double = 36,
-         preinfusionBar: Double = 4,
-         preinfusionTime: Double = 6,
-         bloomTime: Double = 6,
-         extractFlow: Double = 1.7,
-         extractTime: Double = 22,
-         tailBar: Double = 1.0,
-         tailTime: Double = 4) {
+         stages: [EditableStage] = EditableProfile.defaultStages()) {
         self.id = id
         self.name = name
         self.doseG = doseG
         self.targetYieldG = targetYieldG
-        self.preinfusionBar = preinfusionBar
-        self.preinfusionTime = preinfusionTime
-        self.bloomTime = bloomTime
-        self.extractFlow = extractFlow
-        self.extractTime = extractTime
-        self.tailBar = tailBar
-        self.tailTime = tailTime
+        self.stages = stages
     }
 
-    /// Snapshot the current edit state into a real BrewProfile that the
-    /// library can store and the machine can run.
+    /// Default 4-stage shape for a new profile — gives the user a real starting
+    /// point to modify instead of an empty list.
+    static func defaultStages() -> [EditableStage] {
+        [
+            EditableStage(label: "Preinfuse", priority: .pressure,
+                          duration: 6, pressureBar: 4.0, waitAfter: 6),
+            EditableStage(label: "Soak", priority: .pressure,
+                          duration: 3, pressureBar: 2.5, waitAfter: 0),
+            EditableStage(label: "Extract", priority: .flow,
+                          duration: 20, flowMlPerSec: 1.7, waitAfter: 0),
+            EditableStage(label: "Tail", priority: .pressure,
+                          duration: 4, pressureBar: 1.0, waitAfter: 0),
+        ]
+    }
+
     func compile() -> BrewProfile {
-        var stages: [BrewStage] = []
-        if preinfusionTime > 0 && preinfusionBar > 0 {
-            stages.append(BrewStage(
-                label: "Preinfuse",
-                duration: preinfusionTime,
-                priority: .pressure,
-                pressureBar: preinfusionBar,
-                waitAfter: bloomTime
-            ))
-        }
-        stages.append(BrewStage(
-            label: "Extract",
-            duration: extractTime,
-            priority: .flow,
-            flowMlPerSec: extractFlow,
-            waitAfter: 0
-        ))
-        if tailTime > 0 && tailBar > 0 {
-            stages.append(BrewStage(
-                label: "Tail",
-                duration: tailTime,
-                priority: .pressure,
-                pressureBar: tailBar,
-                waitAfter: 0
-            ))
+        let last = stages.count - 1
+        let compiledStages = stages.enumerated().map { i, s in
+            s.toStage(isLast: i == last)
         }
         return BrewProfile(
             id: id,
             name: name.isEmpty ? "Untitled" : name,
-            stages: stages,
+            stages: compiledStages,
             mode: .flowVariablePressure,
             target: .flow,
             targetVolumeMl: UInt16(targetYieldG.rounded())
         )
     }
 
-    /// Inverse — populate this editor's fields from an existing BrewProfile.
-    /// Used when editing a row from the library. Unknown / advanced shapes
-    /// (e.g. profiles with extra stages) are flattened down to the editor's
-    /// 3-stage view; we only round-trip what the editor knows about.
     static func from(_ profile: BrewProfile) -> EditableProfile {
-        let preinfuse = profile.stages.first(where: { $0.label.lowercased().contains("preinf") })
-        let extractStage = profile.stages.first(where: { $0.priority == .flow })
-            ?? profile.stages.first
-        let tail = profile.stages.last(where: { $0.priority == .pressure
-                                             && $0.label.lowercased().contains("tail") })
-        return EditableProfile(
+        EditableProfile(
             id: profile.id,
             name: profile.name,
-            doseG: 18,
+            doseG: 18,                      // not stored in BrewProfile yet
             targetYieldG: Double(profile.targetVolumeMl ?? 36),
-            preinfusionBar: preinfuse?.pressureBar ?? 0,
-            preinfusionTime: preinfuse?.duration ?? 0,
-            bloomTime: preinfuse?.waitAfter ?? 0,
-            extractFlow: extractStage?.flowMlPerSec ?? 1.7,
-            extractTime: extractStage?.duration ?? 22,
-            tailBar: tail?.pressureBar ?? 0,
-            tailTime: tail?.duration ?? 0
+            stages: profile.stages.map(EditableStage.init(from:))
         )
+    }
+
+    // MARK: - Stage list mutations
+
+    func addStage() {
+        // Insert a new stage that resembles a "continue from here" extension —
+        // same priority as the last one, half its duration, copy its setpoint.
+        // Better than landing the user on default zeros.
+        let template = stages.last
+        let new = EditableStage(
+            label: "Stage \(stages.count + 1)",
+            priority: template?.priority ?? .flow,
+            duration: max(3, (template?.duration ?? 6) / 2),
+            pressureBar: template?.pressureBar ?? 2,
+            flowMlPerSec: template?.flowMlPerSec ?? 1.5,
+            waitAfter: 0
+        )
+        new.isExpanded = true
+        stages.append(new)
+    }
+
+    func remove(stageID: UUID) {
+        guard stages.count > 1 else { return }   // can't have zero stages
+        stages.removeAll { $0.id == stageID }
+    }
+
+    func moveStage(id: UUID, by offset: Int) {
+        guard let i = stages.firstIndex(where: { $0.id == id }) else { return }
+        let j = i + offset
+        guard j >= 0, j < stages.count else { return }
+        stages.swapAt(i, j)
+    }
+
+    var canRemoveAnyStage: Bool { stages.count > 1 }
+
+    var totalDuration: Double {
+        stages.reduce(0) { $0 + $1.duration + $1.waitAfter }
     }
 }
