@@ -1,0 +1,22 @@
+# SwiftPM build artifacts — large, regenerable, never useful in version control.
+.build/
+.swiftpm/
+Package.resolved
+
+# The .app bundle's MacOS/ holds the compiled binary; rebuilt every time.
+# The Resources/ subfolder holds the SwiftPM resource bundle, also copied at
+# build time. Info.plist IS source of truth — keep that.
+Crema.app/Contents/MacOS/
+Crema.app/Contents/Resources/
+
+# Xcode user state, should we add Xcode projects later.
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# macOS clutter.
+.DS_Store
+
+# Editor / IDE.
+.idea/
+.vscode/
