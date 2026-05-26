@@ -1,4 +1,5 @@
 import SwiftUI
+import CremaKit
 
 /// Hero composition: header → chart → metric HUD → stage timeline → playback bar.
 /// The chart auto-advances using a `TimelineView(.animation)` so the playhead glides
@@ -7,6 +8,9 @@ struct LiveShotView: View {
     @Binding var mode: AppMode
     @State var replayPlayback: ShotPlayback
     @State var liveDriver: LiveDriver
+    @Bindable var library: ProfileLibrary
+
+    @State private var showLibrary = false
 
     /// Whichever engine is currently driving the chart.
     private var playback: ShotPlayback {
@@ -88,6 +92,9 @@ struct LiveShotView: View {
                 .allowsHitTesting(false)
         }
         .preferredColorScheme(.dark)
+        .sheet(isPresented: $showLibrary) {
+            ProfilesView(library: library)
+        }
     }
 
     // MARK: - Header
@@ -114,11 +121,19 @@ struct LiveShotView: View {
                     .fill(CremaColor.crema)
                     .frame(width: 8, height: 8)
             }
-            Text(playback.profile.name)
-                .font(CremaFont.headerTitle)
-                .foregroundStyle(CremaColor.cream)
-                .lineLimit(1)
-                .fixedSize()
+            Button(action: { showLibrary = true }) {
+                HStack(spacing: 4) {
+                    Text(playback.profile.name)
+                        .font(CremaFont.headerTitle)
+                        .foregroundStyle(CremaColor.cream)
+                        .lineLimit(1)
+                        .fixedSize()
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(CremaColor.secondary)
+                }
+            }
+            .buttonStyle(.plain)
             // iPhone portrait drops the dose / ratio meta — there's no room.
             if !isCompactHeader {
                 Text("·")

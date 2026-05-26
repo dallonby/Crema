@@ -2,8 +2,8 @@ import Foundation
 
 /// One stage of a brew profile, in the shape the LITA firmware actually executes.
 /// Mirrors the 6-reg-per-stage layout in `PROTOCOL.md §3`.
-public struct BrewStage: Sendable, Hashable, Identifiable {
-    public enum Priority: Sendable, Hashable { case pressure, flow }
+public struct BrewStage: Sendable, Hashable, Identifiable, Codable {
+    public enum Priority: String, Sendable, Hashable, Codable { case pressure, flow }
 
     public let id: UUID
     public let label: String
@@ -34,12 +34,12 @@ public struct BrewStage: Sendable, Hashable, Identifiable {
 /// A complete brew profile — the unit Crema lets you author, share, and send to
 /// the machine. The fields below match the in-app data model captured live and
 /// documented in `PROTOCOL.md §3a` (slot-header layout).
-public struct BrewProfile: Sendable, Hashable, Identifiable {
+public struct BrewProfile: Sendable, Hashable, Identifiable, Codable {
 
     /// Whether the profile targets a flow volume (mL) or a weight (g).
     /// "Weight" mode requires a connected BLE scale — Crema enforces this at
     /// brew-time, not here.
-    public enum TargetKind: Sendable, Hashable { case flow, weight }
+    public enum TargetKind: String, Sendable, Hashable, Codable { case flow, weight }
 
     public let id: UUID
     public let name: String

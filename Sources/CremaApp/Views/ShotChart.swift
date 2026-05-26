@@ -9,6 +9,10 @@ struct ShotChart: View {
     let profile: BrewProfile
     let playhead: Double
     let totalDuration: Double
+    /// Compact mode strips axis labels, the volume-target text, and the y/x
+    /// label margins so the chart fits cleanly into tiny preview frames
+    /// (~110×64 in the library row). Pure-curve rendering only.
+    var compact: Bool = false
 
     // Y-axis ceilings — computed from data + profile, with sensible minimums so the
     // chart doesn't shrink-wrap so tight that a small overshoot pops off the top.
@@ -37,16 +41,22 @@ struct ShotChart: View {
 
     var body: some View {
         Canvas { ctx, size in
-            // Left margin holds pressure labels; right margin holds volume labels.
-            let plot = CGRect(x: 38, y: 14, width: size.width - 80, height: size.height - 42)
-            drawGrid(ctx: ctx, in: plot)
+            // Compact mode reclaims the y/x label margins so the curves use the
+            // full frame — no text rendering at all.
+            let plot: CGRect
+            if compact {
+                plot = CGRect(x: 4, y: 4, width: size.width - 8, height: size.height - 8)
+            } else {
+                plot = CGRect(x: 38, y: 14, width: size.width - 80, height: size.height - 42)
+            }
+            if !compact { drawGrid(ctx: ctx, in: plot) }
             drawWaitGaps(ctx: ctx, in: plot)
             drawVolumeTarget(ctx: ctx, in: plot)
             drawGhostProfile(ctx: ctx, in: plot)
             drawLiveSeries(ctx: ctx, in: plot)
             drawPlayhead(ctx: ctx, in: plot)
-            drawValuePills(ctx: ctx, in: plot)
-            drawAxisLabels(ctx: ctx, in: plot)
+            if !compact { drawValuePills(ctx: ctx, in: plot) }
+            if !compact { drawAxisLabels(ctx: ctx, in: plot) }
         }
         // No drawingGroup() — it forces Metal rasterization which interacts badly
         // with the high-frequency sample appends in live mode (causes the
@@ -65,6 +75,7 @@ struct ShotChart: View {
         line.addLine(to: CGPoint(x: r.maxX, y: y))
         ctx.stroke(line, with: .color(CremaColor.cream.opacity(0.18)),
                    style: StrokeStyle(lineWidth: 0.75, dash: [3, 4]))
+        if compact { return }   // skip the "target N mL" text in mini previews
         let label = Text("target \(Int(target)) mL")
             .font(.system(size: 9, weight: .medium, design: .rounded).monospacedDigit())
             .foregroundColor(CremaColor.cream.opacity(0.5))

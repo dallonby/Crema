@@ -80,7 +80,7 @@ public enum Machine {
 
 /// `craft.real_mode` — the active brew mode written to `Machine.activeModeRegister`
 /// before triggering coil 150. Names from `PROTOCOL.md §3 Brew mode taxonomy`.
-public enum BrewMode: Int, Sendable, Hashable, CaseIterable {
+public enum BrewMode: Int, Sendable, Hashable, CaseIterable, Codable {
     /// 流量恒压 — flow target, constant pressure.
     case flowConstantPressure   = 0
     /// 称重恒压 — weight target, constant pressure.

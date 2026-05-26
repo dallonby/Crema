@@ -20,6 +20,7 @@ struct MachinesView: View {
     var body: some View {
         VStack(spacing: 0) {
             header
+                .safeAreaPadding(.top)   // iPhone Dynamic Island / notch
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     pairedSection
@@ -30,7 +31,9 @@ struct MachinesView: View {
             }
             footer
         }
+        #if os(macOS)
         .frame(minWidth: 420, minHeight: 480, idealHeight: 580)
+        #endif
         .background(CremaColor.bg.ignoresSafeArea())
         .preferredColorScheme(.dark)
         .onAppear { startScan() }
