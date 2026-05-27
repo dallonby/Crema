@@ -72,10 +72,20 @@ struct BrowseCommunitySheet: View {
 
     @ViewBuilder
     private func content(store: CommunityProfileStore) -> some View {
-        if store.profiles.isEmpty && !store.isLoading {
+        if store.profiles.isEmpty && !store.isLoading && store.error == nil {
             emptyState
         } else {
             List {
+                if let err = store.error {
+                    InlineErrorBanner(
+                        message: err,
+                        onRetry:  { Task { await store.refresh() } },
+                        onDismiss: { Task { await MainActor.run { store.clearError() } } }
+                    )
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 6, trailing: 12))
+                }
                 ForEach(store.profiles) { p in
                     ProfileRow(
                         profile: p,

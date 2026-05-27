@@ -47,8 +47,10 @@
 		79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
 		79FA9CD5628B5B0EE3AE3EDA /* brew_testyt_full.csv.bak in Resources */ = {isa = PBXBuildFile; fileRef = CDF90C8056300B65EB23C188 /* brew_testyt_full.csv.bak */; };
 		7C5A6A22EC88C6A9F1B576FE /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
+		80AA1291A2F9057180D2025B /* ErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2274757F42D1FBBBC713A7 /* ErrorBanner.swift */; };
 		84AD1A47B521380E5C962B1C /* GoogleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073603F8F66596E7A114D8D7 /* GoogleSignInController.swift */; };
 		8A082F3A28BA6FDBFB681C86 /* BrowseCommunitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */; };
+		8B80F7C9BEDB68D198B642BA /* ErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2274757F42D1FBBBC713A7 /* ErrorBanner.swift */; };
 		8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
 		8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
 		8FDF32AFF6E4FBAF9685E135 /* ProfileNodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */; };
@@ -87,6 +89,7 @@
 		073603F8F66596E7A114D8D7 /* GoogleSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInController.swift; sourceTree = "<group>"; };
 		1C223C290BF955812B56D865 /* AutoTuneSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTuneSteps.swift; sourceTree = "<group>"; };
 		1D5084C7A86F78F12486B22F /* ShotSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotSample.swift; sourceTree = "<group>"; };
+		1F2274757F42D1FBBBC713A7 /* ErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBanner.swift; sourceTree = "<group>"; };
 		238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageTimeline.swift; sourceTree = "<group>"; };
 		2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CremaTheme.swift; sourceTree = "<group>"; };
 		2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */ = {isa = PBXFileReference; path = brew_testyt_full.csv; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */,
+				1F2274757F42D1FBBBC713A7 /* ErrorBanner.swift */,
 				AFB4334C0FD26AF9EE22E9BE /* ImportProfileSheet.swift */,
 				020E89A6E20DF116D43976B3 /* QRCode.swift */,
 				AF2DA186DBAC5A5C132A9A7F /* SettingsSheet.swift */,
@@ -389,6 +393,7 @@
 				BB2BEC75064AEA73630DB61D /* CremaApp.swift in Sources */,
 				B5159DFD6E6AE4BB7325F30C /* CremaTheme.swift in Sources */,
 				D33ECE005FA2F2DB5634FEF6 /* EditableProfile.swift in Sources */,
+				8B80F7C9BEDB68D198B642BA /* ErrorBanner.swift in Sources */,
 				4B11BDDD5894A5A0C5EB3815 /* GoogleSignInController.swift in Sources */,
 				B5DA22CF6D580DB0390BA2A6 /* ImportProfileSheet.swift in Sources */,
 				79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */,
@@ -428,6 +433,7 @@
 				5FAEBAEF898BE17734EE65AC /* CremaApp.swift in Sources */,
 				59E6546EA949B1D0C125B4CE /* CremaTheme.swift in Sources */,
 				B0F3F6993E8764119A1AE016 /* EditableProfile.swift in Sources */,
+				80AA1291A2F9057180D2025B /* ErrorBanner.swift in Sources */,
 				84AD1A47B521380E5C962B1C /* GoogleSignInController.swift in Sources */,
 				E6C4D7CF2284993E3F953B19 /* ImportProfileSheet.swift in Sources */,
 				8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */,

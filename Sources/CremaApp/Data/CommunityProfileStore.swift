@@ -21,6 +21,8 @@ final class CommunityProfileStore {
     private(set) var profiles: [ShareAPIClient.ProfileDTO] = []
     private(set) var isLoading = false
     private(set) var error: String?
+
+    func clearError() { error = nil }
     private var mode: Mode = .recent
     private var cursor: String?
     private var loadedAtLeastOnce = false
