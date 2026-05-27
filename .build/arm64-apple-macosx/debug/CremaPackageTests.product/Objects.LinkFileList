@@ -1,3 +1,5 @@
+/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.swift.o
+/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BrewProfile.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/FF55.swift.o
@@ -9,7 +11,11 @@
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineTransport.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Modbus.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileLibrary.swift.o
+/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.swift.o
+/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.swift.o
+/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.swift.o
+/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShotHistory.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/StubMachineTransport.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.swift.o
@@ -17,6 +23,7 @@
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swift.o
+/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ProfileSharingTests.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.swift.o
 /Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/runner.swift.o

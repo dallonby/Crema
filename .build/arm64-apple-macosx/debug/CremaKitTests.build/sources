@@ -3,5 +3,6 @@
 /Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift
 /Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift
 /Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift
+/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ProfileSharingTests.swift
 /Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift
 /Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift

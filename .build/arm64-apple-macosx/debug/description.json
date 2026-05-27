@@ -28,6 +28,18 @@
       "inputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneRecommender.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/ScaleTransport.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift"
         },
         {
@@ -76,6 +88,18 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ProfileShareCodec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareAPIClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareableProfileURL.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift"
         },
         {
@@ -95,6 +119,9 @@
       "moduleName" : "CremaKit",
       "moduleOutputPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaKit.swiftmodule",
       "objects" : [
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BrewProfile.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/FF55.swift.o",
@@ -107,6 +134,9 @@
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Modbus.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileLibrary.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShotHistory.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/StubMachineTransport.swift.o"
       ],
@@ -169,6 +199,18 @@
       "outputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.swift.o"
         },
         {
@@ -217,6 +259,18 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShotHistory.swift.o"
         },
         {
@@ -230,6 +284,9 @@
       ],
       "prepareForIndexing" : false,
       "sources" : [
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneRecommender.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneTypes.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/ScaleTransport.swift",
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift",
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/BrewProfile.swift",
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/FF55.swift",
@@ -242,6 +299,9 @@
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/Modbus.swift",
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileLibrary.swift",
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileTweakSuggester.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ProfileShareCodec.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareAPIClient.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareableProfileURL.swift",
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift",
         "/Users/davidallonby/Source/Crema/Sources/CremaKit/StubMachineTransport.swift"
       ],
@@ -275,6 +335,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ProfileSharingTests.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift"
         },
         {
@@ -303,6 +367,7 @@
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ProfileSharingTests.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swift.o",
         "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.swift.o"
       ],
@@ -384,6 +449,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ProfileSharingTests.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swift.o"
         },
         {
@@ -402,6 +471,7 @@
         "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift",
         "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift",
         "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift",
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ProfileSharingTests.swift",
         "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift",
         "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift"
       ],
@@ -521,6 +591,9 @@
       "-package-name",
       "crema",
       "-c",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneRecommender.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneTypes.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/ScaleTransport.swift",
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift",
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/BrewProfile.swift",
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/FF55.swift",
@@ -533,6 +606,9 @@
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/Modbus.swift",
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileLibrary.swift",
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileTweakSuggester.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ProfileShareCodec.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareAPIClient.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareableProfileURL.swift",
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift",
       "/Users/davidallonby/Source/Crema/Sources/CremaKit/StubMachineTransport.swift",
       "-I",
@@ -605,6 +681,7 @@
       "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift",
       "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift",
       "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ProfileSharingTests.swift",
       "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift",
       "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift",
       "-I",
@@ -774,6 +851,18 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneRecommender.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/ScaleTransport.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift"
         },
         {
@@ -822,6 +911,18 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ProfileShareCodec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareAPIClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareableProfileURL.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift"
         },
         {
@@ -860,6 +961,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ProfileSharingTests.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift"
         },
         {
@@ -889,6 +994,14 @@
         {
           "kind" : "virtual",
           "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.swift.o"
         },
         {
           "kind" : "file",
@@ -936,7 +1049,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.swift.o"
         },
         {
           "kind" : "file",
@@ -965,6 +1094,10 @@
         {
           "kind" : "file",
           "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ProfileSharingTests.swift.o"
         },
         {
           "kind" : "file",

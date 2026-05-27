@@ -1,3 +1,6 @@
+/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneRecommender.swift
+/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneTypes.swift
+/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/ScaleTransport.swift
 /Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift
 /Users/davidallonby/Source/Crema/Sources/CremaKit/BrewProfile.swift
 /Users/davidallonby/Source/Crema/Sources/CremaKit/FF55.swift
@@ -10,5 +13,8 @@
 /Users/davidallonby/Source/Crema/Sources/CremaKit/Modbus.swift
 /Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileLibrary.swift
 /Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileTweakSuggester.swift
+/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ProfileShareCodec.swift
+/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareAPIClient.swift
+/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareableProfileURL.swift
 /Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift
 /Users/davidallonby/Source/Crema/Sources/CremaKit/StubMachineTransport.swift

@@ -2,6 +2,27 @@
   "": {
     "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/master.swiftdeps"
   },
+  "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneRecommender.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneRecommender.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/AutoTuneTypes.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/AutoTuneTypes.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Sources/CremaKit/AutoTune/ScaleTransport.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ScaleTransport.dia"
+  },
   "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift": {
     "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.d",
     "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.swift.o",
@@ -85,6 +106,27 @@
     "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester~partial.swiftmodule",
     "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.swiftdeps",
     "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ProfileShareCodec.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileShareCodec.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareAPIClient.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareAPIClient.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Sources/CremaKit/Sharing/ShareableProfileURL.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShareableProfileURL.dia"
   },
   "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift": {
     "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShotHistory.d",
