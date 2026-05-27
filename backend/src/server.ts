@@ -13,8 +13,17 @@ app.use("*", cors({ origin: "*", allowMethods: ["GET", "POST", "PATCH", "DELETE"
 
 app.get("/", (c) => c.json({
   service: "crema-backend",
-  version: "0.1.0",
-  endpoints: ["/auth/sign-in-with-apple", "/me", "/profiles", "/users/:id"],
+  version: "0.2.0",
+  endpoints: [
+    "/health",
+    "/auth/sign-in-with-apple",
+    "/auth/sign-in-with-google",
+    "/users/me", "/users/:id", "/users/:id/follow",
+    "/users/:id/followers", "/users/:id/following", "/users/:id/stats",
+    "/profiles", "/profiles/:id", "/profiles/:id/like",
+    "/.well-known/apple-app-site-association",
+    "/.well-known/assetlinks.json",
+  ],
 }));
 app.get("/health", (c) => c.json({ ok: true }));
 
