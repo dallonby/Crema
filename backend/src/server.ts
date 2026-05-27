@@ -7,6 +7,7 @@ import profiles from "./routes/profiles.js";
 import users from "./routes/users.js";
 import wellKnown from "./routes/wellKnown.js";
 import preview from "./routes/preview.js";
+import pages from "./routes/pages.js";
 import { makeRateLimiter } from "./lib/rateLimit.js";
 
 const app = new Hono();
@@ -30,7 +31,8 @@ app.use("*", cors({
 const authLimit    = makeRateLimiter({ capacity: 10,  refillPerSec: 0.1 });
 const generalLimit = makeRateLimiter({ capacity: 120, refillPerSec: 2.0 });
 
-app.get("/", (c) => c.json({
+// Discovery JSON moved to /api so the apex can serve the marketing landing.
+app.get("/api", (c) => c.json({
   service: "crema-backend",
   version: "0.2.0",
   endpoints: [
@@ -40,6 +42,8 @@ app.get("/", (c) => c.json({
     "/users/me", "/users/:id", "/users/:id/follow",
     "/users/:id/followers", "/users/:id/following", "/users/:id/stats",
     "/profiles", "/profiles/:id", "/profiles/:id/like",
+    "/p/:id  (HTML preview)",
+    "/privacy", "/support",
     "/.well-known/apple-app-site-association",
     "/.well-known/assetlinks.json",
   ],
@@ -58,6 +62,7 @@ app.route("/profiles", profiles);
 app.route("/users", users);
 app.route("/.well-known", wellKnown);
 app.route("/p", preview);   // public HTML preview at /p/<id>
+app.route("/", pages);      // /, /privacy, /support landing pages
 
 // `/me` is just a convenience alias for `/users/me` — let users hit either.
 app.route("/me", new Hono().get("/", async (c) => {
