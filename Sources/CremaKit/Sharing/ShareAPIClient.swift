@@ -34,6 +34,18 @@ public actor ShareAPIClient {
         self.session = URLSession(configuration: cfg)
     }
 
+    /// Testing seam — inject a pre-configured URLSession (typically one
+    /// with a URLProtocol mock baked into the configuration).
+    public init(
+        config: Config,
+        session: URLSession,
+        sessionTokenProvider: @Sendable @escaping () async -> String?
+    ) {
+        self.config = config
+        self.session = session
+        self.sessionTokenProvider = sessionTokenProvider
+    }
+
     public func updateBaseURL(_ url: URL) { self.config.baseURL = url }
 
     // MARK: - Wire shapes
