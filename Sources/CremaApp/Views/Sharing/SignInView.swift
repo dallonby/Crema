@@ -40,11 +40,42 @@ struct SignInView: View {
                 .overlay(
                     // The branded button is decoration; this transparent tap
                     // target actually triggers the flow so we can await it.
-                    Button(action: doSignIn) {
+                    Button(action: doAppleSignIn) {
                         Color.clear.contentShape(Rectangle())
                     }
                     .disabled(signingIn)
                 )
+
+            if session.googleConfig != nil {
+                Button(action: doGoogleSignIn) {
+                    HStack(spacing: 10) {
+                        // Google "G" — drawn rather than depending on a brand
+                        // asset. Multi-color circle approximating the official
+                        // mark. Good enough for an MVP; swap to the official
+                        // asset before launching publicly.
+                        ZStack {
+                            Circle().stroke(LinearGradient(colors: [
+                                Color(red: 0.26, green: 0.52, blue: 0.96), // blue
+                                Color(red: 0.22, green: 0.66, blue: 0.36), // green
+                                Color(red: 0.98, green: 0.74, blue: 0.02), // yellow
+                                Color(red: 0.92, green: 0.26, blue: 0.21), // red
+                            ], startPoint: .topLeading, endPoint: .bottomTrailing),
+                                              lineWidth: 2.5)
+                                .frame(width: 18, height: 18)
+                            Text("G").font(.system(size: 11, weight: .bold))
+                                .foregroundStyle(CremaColor.bg)
+                        }
+                        Text("Sign in with Google")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(CremaColor.bg)
+                    }
+                    .frame(width: 260, height: 48)
+                    .background(RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.white))
+                }
+                .buttonStyle(.plain)
+                .disabled(signingIn)
+            }
 
             if signingIn {
                 ProgressView().controlSize(.small).tint(CremaColor.cream)
@@ -59,12 +90,20 @@ struct SignInView: View {
         .padding(24)
     }
 
-    private func doSignIn() {
+    private func doAppleSignIn() {
+        run { try await session.signInWithApple() }
+    }
+
+    private func doGoogleSignIn() {
+        run { try await session.signInWithGoogle() }
+    }
+
+    private func run(_ action: @MainActor @escaping () async throws -> Void) {
         signingIn = true
         errorText = nil
         Task {
             do {
-                try await session.signInWithApple()
+                try await action()
                 signingIn = false
                 onSignedIn()
             } catch {

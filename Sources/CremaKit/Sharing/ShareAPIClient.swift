@@ -86,6 +86,13 @@ public actor ShareAPIClient {
                         auth: false)
     }
 
+    public func signInWithGoogle(identityToken: String, displayName: String?) async throws -> SignInResponse {
+        try await post("/auth/sign-in-with-google",
+                        body: ["identityToken": identityToken,
+                               "displayName": displayName as Any],
+                        auth: false)
+    }
+
     public func me() async throws -> UserDTO {
         struct R: Codable { let user: ShareAPIClient.UserDTO }
         let r: R = try await get("/users/me", auth: true)

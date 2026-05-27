@@ -31,10 +31,17 @@ final class SignedInUser {
 
     private let defaults: UserDefaults
 
+    /// Google OAuth config — `nil` disables the Google button. Set to a
+    /// real config (via Google Cloud Console; see
+    /// `GoogleSignInController.swift` header) to enable.
+    let googleConfig: GoogleSignInController.Config?
+
     /// `backendBaseURL` is configurable per build / per user — defaults to a
     /// placeholder. Production builds point this at the user's deployed
     /// instance.
-    init(backendBaseURL: URL, defaults: UserDefaults = .standard) {
+    init(backendBaseURL: URL, googleConfig: GoogleSignInController.Config? = nil,
+         defaults: UserDefaults = .standard) {
+        self.googleConfig = googleConfig
         self.defaults = defaults
         // Restore persisted session before constructing the client so the
         // provider closure can see it.
@@ -71,6 +78,24 @@ final class SignedInUser {
         let response = try await client.signInWithApple(
             identityToken: result.identityToken,
             displayName: displayName
+        )
+        if let n = result.displayName { cachedDisplayName = n }
+        adopt(token: response.sessionToken, user: response.user)
+    }
+
+    /// Drive Google Sign-In (PKCE OAuth via ASWebAuthenticationSession) +
+    /// trade the id token for a session. Throws if no Google config is set.
+    func signInWithGoogle() async throws {
+        guard let cfg = googleConfig else {
+            throw NSError(domain: "Crema.SignedInUser", code: 0, userInfo: [
+                NSLocalizedDescriptionKey:
+                    "Google Sign-In not configured in this build."
+            ])
+        }
+        let result = try await GoogleSignInController(config: cfg).request()
+        let response = try await client.signInWithGoogle(
+            identityToken: result.idToken,
+            displayName: result.displayName ?? cachedDisplayName
         )
         if let n = result.displayName { cachedDisplayName = n }
         adopt(token: response.sessionToken, user: response.user)

@@ -31,6 +31,7 @@
 		39C23732A2F9A610918CB805 /* ProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAEBDABF1BDCFE698044D8 /* ProfilesView.swift */; };
 		4593F6681CDC56D18ED17A1E /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
 		472CFF019CFCE0F81269CE54 /* BrowseCommunitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */; };
+		4B11BDDD5894A5A0C5EB3815 /* GoogleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073603F8F66596E7A114D8D7 /* GoogleSignInController.swift */; };
 		4B17A10F4E9022F60E243877 /* ShotPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268764B7A856C391071C786 /* ShotPlayback.swift */; };
 		4C35FF428F56863FF6133397 /* CremaKit in Frameworks */ = {isa = PBXBuildFile; productRef = D78B39B3787E10A7F8C82C89 /* CremaKit */; };
 		53F5BCD87620B45C69931530 /* ShotFeedbackSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCBFCE01BD2339F7E6A92E4 /* ShotFeedbackSheet.swift */; };
@@ -46,6 +47,7 @@
 		79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
 		79FA9CD5628B5B0EE3AE3EDA /* brew_testyt_full.csv.bak in Resources */ = {isa = PBXBuildFile; fileRef = CDF90C8056300B65EB23C188 /* brew_testyt_full.csv.bak */; };
 		7C5A6A22EC88C6A9F1B576FE /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
+		84AD1A47B521380E5C962B1C /* GoogleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073603F8F66596E7A114D8D7 /* GoogleSignInController.swift */; };
 		8A082F3A28BA6FDBFB681C86 /* BrowseCommunitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */; };
 		8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
 		8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
@@ -80,6 +82,7 @@
 /* Begin PBXFileReference section */
 		0192EC451394CD56402653CD /* CommunityProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityProfileStore.swift; sourceTree = "<group>"; };
 		020E89A6E20DF116D43976B3 /* QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		073603F8F66596E7A114D8D7 /* GoogleSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInController.swift; sourceTree = "<group>"; };
 		1C223C290BF955812B56D865 /* AutoTuneSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTuneSteps.swift; sourceTree = "<group>"; };
 		1D5084C7A86F78F12486B22F /* ShotSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotSample.swift; sourceTree = "<group>"; };
 		238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageTimeline.swift; sourceTree = "<group>"; };
@@ -250,6 +253,7 @@
 				565F92D6C26FB5D865237C96 /* AutoTuneSession.swift */,
 				0192EC451394CD56402653CD /* CommunityProfileStore.swift */,
 				B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */,
+				073603F8F66596E7A114D8D7 /* GoogleSignInController.swift */,
 				7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */,
 				5268764B7A856C391071C786 /* ShotPlayback.swift */,
 				1D5084C7A86F78F12486B22F /* ShotSample.swift */,
@@ -381,6 +385,7 @@
 				BB2BEC75064AEA73630DB61D /* CremaApp.swift in Sources */,
 				B5159DFD6E6AE4BB7325F30C /* CremaTheme.swift in Sources */,
 				D33ECE005FA2F2DB5634FEF6 /* EditableProfile.swift in Sources */,
+				4B11BDDD5894A5A0C5EB3815 /* GoogleSignInController.swift in Sources */,
 				B5DA22CF6D580DB0390BA2A6 /* ImportProfileSheet.swift in Sources */,
 				79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */,
 				2D20D745DD464D8268ABABD8 /* LiveShotView.swift in Sources */,
@@ -418,6 +423,7 @@
 				5FAEBAEF898BE17734EE65AC /* CremaApp.swift in Sources */,
 				59E6546EA949B1D0C125B4CE /* CremaTheme.swift in Sources */,
 				B0F3F6993E8764119A1AE016 /* EditableProfile.swift in Sources */,
+				84AD1A47B521380E5C962B1C /* GoogleSignInController.swift in Sources */,
 				E6C4D7CF2284993E3F953B19 /* ImportProfileSheet.swift in Sources */,
 				8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */,
 				A31B736B59FFB10ED836A423 /* LiveShotView.swift in Sources */,
