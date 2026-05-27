@@ -11,9 +11,11 @@ struct LiveShotView: View {
     @Bindable var library: ProfileLibrary
     @Bindable var history: ShotHistory
     @Bindable var tipPreferences: TipPreferences
+    @Bindable var session: SignedInUser
 
     @State private var showLibrary = false
     @State private var showHistory = false
+    @State private var autoTuneSession: AutoTuneSession?
 
     /// Whichever engine is currently driving the chart.
     private var playback: ShotPlayback {
@@ -24,13 +26,48 @@ struct LiveShotView: View {
     }
 
     var body: some View {
-        TimelineView(.animation(minimumInterval: 1.0 / 120.0, paused: !playback.isPlaying)) { timeline in
-            let _ = advance(to: timeline.date)
-            content
+        // `.animation` schedule only fires WHILE animations are active, which
+        // makes it unreliable here — we need a continuous tick. `.periodic`
+        // is guaranteed to fire at the requested cadence.
+        //
+        // CRITICAL: the advance() call MUST be deferred outside the view
+        // builder. Mutating @State (lastTick) or @Observable state
+        // (playback.t) during view evaluation is a hard SwiftUI rule
+        // violation — the mutations were being dropped silently, which is
+        // why the chart never moved despite isPlaying=true. Dispatching
+        // back to the main queue puts the mutation after the current view
+        // update completes.
+        TimelineView(.periodic(from: .now, by: 1.0 / 60.0)) { timeline in
+            // Multiple statements + content view → use explicit return so the
+            // ViewBuilder can infer the result type.
+            let date = timeline.date
+            DispatchQueue.main.async { advance(to: date) }
+            return content
         }
     }
 
     @State private var lastTick: Date = .now
+
+    /// Spin up a fresh AutoTuneSession with a scale-of-the-day. Today that's
+    /// `StubScale` everywhere (simulated weight ramp) — a real Bookoo / Acaia
+    /// BLE transport will plug in here later. The user can also fall back to
+    /// `ManualScale()` if they explicitly want manual-only entry.
+    @MainActor
+    private func startAutoTune() {
+        #if targetEnvironment(simulator)
+        let scale: ScaleTransport = StubScale(
+            targetG: 36, durationS: 28
+        )
+        #else
+        // No real BLE scale wired up yet — manual entry only on device.
+        let scale: ScaleTransport = ManualScale()
+        #endif
+        autoTuneSession = AutoTuneSession(
+            liveDriver: liveDriver,
+            library: library,
+            scale: scale
+        )
+    }
 
     @MainActor
     private func advance(to date: Date) {
@@ -85,7 +122,8 @@ struct LiveShotView: View {
                     replayPlayback: replayPlayback,
                     library: library,
                     history: history,
-                    tipPreferences: tipPreferences
+                    tipPreferences: tipPreferences,
+                    onAutoTune: { startAutoTune() }
                 )
                 .padding(.horizontal, 10)
                 .padding(.top, 14)
@@ -111,8 +149,18 @@ struct LiveShotView: View {
         }
         .preferredColorScheme(.dark)
         .sheet(isPresented: $showLibrary) {
-            ProfilesView(library: library)
+            ProfilesView(library: library, session: session)
         }
+        #if os(iOS)
+        .fullScreenCover(item: $autoTuneSession) { session in
+            AutoTuneSheet(session: session, onClose: { autoTuneSession = nil })
+        }
+        #else
+        .sheet(item: $autoTuneSession) { session in
+            AutoTuneSheet(session: session, onClose: { autoTuneSession = nil })
+                .frame(minWidth: 700, minHeight: 720)
+        }
+        #endif
         .sheet(isPresented: $showHistory) {
             ShotHistoryView(history: history)
         }

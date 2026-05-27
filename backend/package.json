@@ -1,0 +1,31 @@
+{
+  "name": "crema-backend",
+  "version": "0.1.0",
+  "description": "Community profile sharing backend for the Crema espresso app.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "@noble/hashes": "^1.5.0",
+    "drizzle-orm": "^0.36.0",
+    "hono": "^4.6.5",
+    "jose": "^5.9.0",
+    "nanoid": "^5.0.0",
+    "pg": "^8.13.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "@types/pg": "^8.11.0",
+    "drizzle-kit": "^0.28.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

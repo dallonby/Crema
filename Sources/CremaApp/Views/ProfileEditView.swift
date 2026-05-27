@@ -20,10 +20,35 @@ struct ProfileEditView: View {
     @State private var selectedStageID: UUID?
 
     var body: some View {
+        GeometryReader { geo in
+            // Wide enough for a side-by-side layout? Triggers on iPad landscape
+            // and macOS, falls back to stacked on iPhone / iPad portrait.
+            let isWide = geo.size.width > 820 && mode == .visual
+            VStack(spacing: 0) {
+                header
+                    .padding(.horizontal, 24)
+                    .padding(.top, 18)
+                    .padding(.bottom, 10)
+                    .safeAreaPadding(.top)
+
+                if isWide {
+                    splitLayout
+                } else {
+                    stackedLayout
+                }
+            }
+            .background(CremaColor.bg.ignoresSafeArea())
+            .preferredColorScheme(.dark)
+        }
+        #if os(macOS)
+        .frame(minWidth: 980, idealWidth: 1180, minHeight: 640, idealHeight: 760)
+        #endif
+    }
+
+    /// Stacked vertical scroll — iPhone, iPad portrait, and List mode.
+    private var stackedLayout: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                header
-                    .safeAreaPadding(.top)
                 modePicker
                 if mode == .visual {
                     visualEditor
@@ -39,11 +64,30 @@ struct ProfileEditView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 24)
         }
-        .background(CremaColor.bg.ignoresSafeArea())
-        .preferredColorScheme(.dark)
-        #if os(macOS)
-        .frame(minWidth: 460, idealWidth: 540, minHeight: 640, idealHeight: 800)
-        #endif
+    }
+
+    /// Landscape split — chart fills the left ~60%, controls scroll on the
+    /// right ~40%. Only used in Visual mode where the chart is the hero.
+    private var splitLayout: some View {
+        HStack(alignment: .top, spacing: 24) {
+            VStack(alignment: .leading, spacing: 14) {
+                modePicker
+                visualEditor
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.leading, 20)
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    recipeSection
+                    grinderSection
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 24)
+            }
+            .frame(width: 380)
+        }
     }
 
     private var modePicker: some View {
@@ -57,7 +101,7 @@ struct ProfileEditView: View {
     @ViewBuilder
     private var visualEditor: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
+            HStack(spacing: 10) {
                 Text("PROFILE")
                     .font(.system(size: 10, weight: .semibold, design: .rounded).smallCaps())
                     .tracking(0.6)
@@ -66,6 +110,25 @@ struct ProfileEditView: View {
                 Text(visualHint)
                     .font(.system(size: 11, design: .rounded).monospacedDigit())
                     .foregroundStyle(CremaColor.secondary)
+                Button(action: {
+                    editing.addStage()
+                    selectedStageID = editing.stages.last?.id
+                }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 11, weight: .semibold))
+                        Text("Add stage")
+                            .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    }
+                    .foregroundStyle(CremaColor.crema)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(
+                        Capsule().fill(CremaColor.crema.opacity(0.16))
+                            .overlay(Capsule().strokeBorder(CremaColor.crema.opacity(0.35), lineWidth: 0.5))
+                    )
+                }
+                .buttonStyle(.plain)
             }
             ProfileNodeEditor(editing: editing, selectedStageID: $selectedStageID)
                 .frame(height: 280)
@@ -185,8 +248,20 @@ struct ProfileEditView: View {
         }
         SliderRow(label: "Dose", value: $editing.doseG, range: 12...22, step: 0.5,
                   format: { String(format: "%.1f g", $0) }, accent: CremaColor.cream)
-        SliderRow(label: "Target yield", value: $editing.targetYieldG, range: 18...80, step: 1,
+        // Yield range scales with dose: 1:1 ristretto to 1:10 long shot.
+        // Dynamic max so heavier doses can reach correspondingly heavier yields
+        // (22 g dose → up to 220 g yield) without hitting an arbitrary cap.
+        SliderRow(label: "Target yield", value: $editing.targetYieldG,
+                  range: editing.doseG ... editing.doseG * 10, step: 1,
                   format: { String(format: "%.0f g", $0) }, accent: CremaColor.cream)
+            // Auto-clamp yield into the new range when dose changes — otherwise
+            // a previously-set yield can sit outside the slider's bounds, leaving
+            // the thumb visually pegged until the user touches it.
+            .onChange(of: editing.doseG) { _, newDose in
+                let lo = newDose
+                let hi = newDose * 10
+                editing.targetYieldG = min(hi, max(lo, editing.targetYieldG))
+            }
         Text(String(format: "Ratio 1 : %.2f", editing.targetYieldG / max(editing.doseG, 1)))
             .font(.system(size: 11, design: .rounded).monospacedDigit())
             .foregroundStyle(CremaColor.secondary)

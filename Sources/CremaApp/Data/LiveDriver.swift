@@ -168,6 +168,38 @@ final class LiveDriver {
 
     // MARK: - Brew lifecycle
 
+    /// One-shot temporary profile that overrides `playback.profile` for the
+    /// next brew. Used by the auto-tune flow to drive shots with a recipe
+    /// the user hasn't saved to their library yet. Cleared automatically
+    /// after the brew completes (or on abort).
+    private(set) var tempProfileOverride: BrewProfile?
+
+    /// Set a one-shot profile override for the next brew. AutoTuneSession uses
+    /// this to drive each iteration's shot without polluting the user's library.
+    func setTempProfile(_ profile: BrewProfile?) {
+        tempProfileOverride = profile
+    }
+
+    /// Forcibly reset local brew state to `.ready` WITHOUT sending any commands
+    /// to the machine. Used when the app's notion of "we're brewing" is out of
+    /// sync with reality (e.g. a BLE write got dropped and no telemetry ever
+    /// arrived) — we need to unstick `canBrew` without accidentally toggling
+    /// coil 150 (which would START a brew if the machine wasn't actually
+    /// brewing in the first place).
+    func forceResetLocalBrewState() {
+        stopPolling()
+        brewWatchdog?.cancel(); brewWatchdog = nil
+        brewState = .ready
+        playback.pause()
+        tempProfileOverride = nil
+        lastSampleAt = nil
+    }
+
+    /// The profile that's actually being SENT to the machine for the
+    /// current/next brew. Auto-tune sets `tempProfileOverride`; everything
+    /// else uses the library-bound `playback.profile`.
+    var effectiveProfile: BrewProfile { tempProfileOverride ?? playback.profile }
+
     func brew() {
         guard canBrew else { return }
         playback.reset()
@@ -175,9 +207,16 @@ final class LiveDriver {
         lastSampleAt = nil
         lastError = nil
 
-        Task { [transport, playback, slot, weak self] in
+        let profileToSend = effectiveProfile
+        // Re-point the chart's ghost lines at the profile we're actually
+        // sending — critical when auto-tune drives the shot with a temp
+        // override. Otherwise the trace appears over the user's library
+        // profile and looks wildly wrong.
+        playback.profile = profileToSend
+
+        Task { [transport, slot, weak self] in
             do {
-                try await transport.sendProfile(playback.profile,
+                try await transport.sendProfile(profileToSend,
                                                  toSlot: slot, triggerBrew: true)
                 // Profile and coil-150 trigger sent. Now start polling the live
                 // register block — the machine doesn't push these unsolicited
@@ -186,7 +225,7 @@ final class LiveDriver {
             } catch {
                 self?.lastError = String(describing: error)
                 self?.brewState = .ready
-                playback.pause()
+                self?.playback.pause()
             }
         }
 
@@ -202,6 +241,9 @@ final class LiveDriver {
                     self.brewState = .done
                     self.playback.pause()
                     self.stopPolling()
+                    // Auto-tune's one-shot override is done — clear so the
+                    // next "normal" brew uses the library-bound profile again.
+                    self.tempProfileOverride = nil
                     return
                 }
             }
@@ -212,17 +254,22 @@ final class LiveDriver {
     /// profile has none. Fire-and-forget — the FF55 grinder write doesn't
     /// produce a parseable ack from the firmware.
     func sendGrinderSettings() {
-        guard let g = playback.profile.grinder else { return }
+        guard let g = effectiveProfile.grinder else { return }
         Task { [transport] in
             try? await transport.sendGrinderSettings(g)
         }
     }
 
-    /// User-initiated abort. The machine's stop protocol isn't fully captured
-    /// yet — we send a press-and-release of coil 150 (mirror of the start
-    /// gesture, on the theory the button toggles in/out of brewing). If that
-    /// turns out to be wrong, the right next step is to HCI-snoop the official
-    /// app stopping a shot mid-flight.
+    /// User-initiated abort. Press + release coil 150 momentarily — same gesture
+    /// as starting, since the coil toggles in/out of brewing. HCI snoop of the
+    /// official Android app cancelling mid-shot confirms the sequence: write
+    /// coil 0x0096 = FF00, then 0x0096 = 0000 about 50 ms later. The KEY detail
+    /// is that we DON'T wait for the response notification between the two
+    /// writes — `sendModbus` was awaiting the ack and stretching our pulse to
+    /// ~130 ms, which the firmware sometimes failed to recognise as a momentary
+    /// toggle (the source of the flakey abort). `sendModbusOneWay` queues each
+    /// write and returns immediately, so both packets hit the radio back to
+    /// back like the official app does.
     func abort() {
         guard brewState == .brewing else { return }
         // Stop polling first so we don't race our own outgoing reads against
@@ -234,12 +281,13 @@ final class LiveDriver {
         // command goes out in the background.
         brewState = .done
         playback.pause()
+        tempProfileOverride = nil  // also clear any auto-tune override
 
         Task { [transport] in
-            try? await transport.sendModbus(
-                Modbus.writeCoil(at: Machine.startBrewCoil, on: true), timeout: 1.0)
-            try? await transport.sendModbus(
-                Modbus.writeCoil(at: Machine.startBrewCoil, on: false), timeout: 1.0)
+            try? await transport.sendModbusOneWay(
+                Modbus.writeCoil(at: Machine.startBrewCoil, on: true))
+            try? await transport.sendModbusOneWay(
+                Modbus.writeCoil(at: Machine.startBrewCoil, on: false))
         }
     }
 

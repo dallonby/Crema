@@ -1,0 +1,34 @@
+version: "3.9"
+# Local dev stack: API + Postgres. For production, drop the `db` service and
+# point DATABASE_URL at your managed Postgres (Neon, Supabase, RDS, etc).
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgres://crema:crema@db:5432/crema
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      APPLE_CLIENT_ID: ${APPLE_CLIENT_ID:-coffee.crema.app}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: crema
+      POSTGRES_PASSWORD: crema
+      POSTGRES_DB: crema
+    ports:
+      - "5432:5432"
+    volumes:
+      - crema_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crema"]
+      interval: 5s
+      retries: 5
+volumes:
+  crema_pgdata:

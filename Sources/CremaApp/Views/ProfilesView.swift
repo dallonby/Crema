@@ -6,11 +6,18 @@ import CremaKit
 /// button to create a new one.
 struct ProfilesView: View {
     @Bindable var library: ProfileLibrary
+    /// Optional — when present, enables Share button per row + Browse button
+    /// in the footer. Omitted on screens where sharing isn't relevant
+    /// (currently always passed, but the optionality keeps tests / previews
+    /// simple).
+    var session: SignedInUser?
     @Environment(\.dismiss) private var dismiss
 
     @State private var editingProfile: EditableProfile?
     @State private var newProfile: EditableProfile?
     @State private var pendingDelete: BrewProfile?
+    @State private var sharingProfile: BrewProfile?
+    @State private var showBrowse = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -22,12 +29,16 @@ struct ProfilesView: View {
                         ProfileRow(
                             profile: profile,
                             isActive: profile.id == library.activeProfileID,
+                            canShare: session != nil,
                             onTap: {
                                 library.setActive(profile.id)
                                 dismiss()
                             },
                             onEdit: {
                                 editingProfile = EditableProfile.from(profile)
+                            },
+                            onShare: session == nil ? nil : {
+                                sharingProfile = profile
                             },
                             onDelete: library.profiles.count > 1 ? {
                                 pendingDelete = profile
@@ -45,19 +56,31 @@ struct ProfilesView: View {
         #endif
         .background(CremaColor.bg.ignoresSafeArea())
         .preferredColorScheme(.dark)
-        .sheet(item: $editingProfile) { editing in
+        .modifier(EditorPresentation(item: $editingProfile) { editing in
             ProfileEditView(
                 editing: editing,
                 onSave: { library.update($0) },
                 onCancel: {}
             )
-        }
-        .sheet(item: $newProfile) { editing in
+        })
+        .modifier(EditorPresentation(item: $newProfile) { editing in
             ProfileEditView(
                 editing: editing,
                 onSave: { library.add($0, setActive: true) },
                 onCancel: {}
             )
+        })
+        .sheet(item: $sharingProfile) { profile in
+            if let session {
+                ShareProfileSheet(profile: profile, session: session,
+                                   onDismiss: { sharingProfile = nil })
+            }
+        }
+        .sheet(isPresented: $showBrowse) {
+            if let session {
+                BrowseCommunitySheet(session: session, library: library,
+                                       onDismiss: { showBrowse = false })
+            }
         }
         .confirmationDialog(
             "Delete this profile?",
@@ -99,7 +122,7 @@ struct ProfilesView: View {
     }
 
     private var footer: some View {
-        HStack {
+        HStack(spacing: 10) {
             Button(action: { newProfile = EditableProfile() }) {
                 HStack(spacing: 6) {
                     Image(systemName: "plus.circle.fill")
@@ -117,10 +140,46 @@ struct ProfilesView: View {
             }
             .buttonStyle(.plain)
             Spacer()
+            if session != nil {
+                Button(action: { showBrowse = true }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "globe")
+                            .font(.system(size: 14, weight: .semibold))
+                        Text("Community")
+                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    }
+                    .foregroundStyle(CremaColor.matchaBright)
+                    .padding(.horizontal, 14)
+                    .frame(minHeight: 34)
+                    .background(
+                        Capsule().fill(CremaColor.matcha.opacity(0.16))
+                            .overlay(Capsule().strokeBorder(CremaColor.matcha.opacity(0.35), lineWidth: 0.5))
+                    )
+                }
+                .buttonStyle(.plain)
+            }
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 14)
         .background(CremaColor.surface.opacity(0.7))
+    }
+}
+
+// MARK: - Editor presentation
+
+/// Presents the profile editor full-screen on iOS (the landscape split layout
+/// needs the full screen width — a form sheet caps at ~540pt and boxes the
+/// chart in) and as a regular sheet on macOS.
+private struct EditorPresentation<Item: Identifiable, Sheet: View>: ViewModifier {
+    @Binding var item: Item?
+    @ViewBuilder var sheetContent: (Item) -> Sheet
+
+    func body(content: Content) -> some View {
+        #if os(iOS)
+        content.fullScreenCover(item: $item, content: sheetContent)
+        #else
+        content.sheet(item: $item, content: sheetContent)
+        #endif
     }
 }
 
@@ -129,8 +188,10 @@ struct ProfilesView: View {
 private struct ProfileRow: View {
     let profile: BrewProfile
     let isActive: Bool
+    let canShare: Bool
     let onTap: () -> Void
     let onEdit: () -> Void
+    let onShare: (() -> Void)?
     let onDelete: (() -> Void)?
 
     var body: some View {
@@ -165,6 +226,9 @@ private struct ProfileRow: View {
 
                 Menu {
                     Button("Edit", systemImage: "slider.horizontal.3", action: onEdit)
+                    if let onShare {
+                        Button("Share…", systemImage: "square.and.arrow.up", action: onShare)
+                    }
                     if let onDelete {
                         Button("Delete", systemImage: "trash", role: .destructive, action: onDelete)
                     }

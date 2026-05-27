@@ -21,6 +21,9 @@ struct BrewActionZone: View {
     let library: ProfileLibrary
     let history: ShotHistory
     let tipPreferences: TipPreferences
+    /// Parent-owned callback to spin up an AutoTuneSession + present its sheet.
+    /// Optional so the macOS / iPhone-portrait paths can omit if needed.
+    var onAutoTune: (() -> Void)? = nil
 
     var body: some View {
         Group {
@@ -28,7 +31,8 @@ struct BrewActionZone: View {
                 ReplayPlaybackBar(playback: replayPlayback)
             } else {
                 LiveBrewBar(driver: liveDriver, library: library,
-                            history: history, tipPreferences: tipPreferences)
+                            history: history, tipPreferences: tipPreferences,
+                            onAutoTune: onAutoTune)
             }
         }
         .animation(.smooth(duration: 0.35), value: mode)
@@ -48,6 +52,37 @@ struct BrewActionZone: View {
     }
 }
 
+// MARK: - Auto-tune entry chip
+
+/// Compact secondary action that sits beside the Brew button when the machine
+/// is ready. Subtle sparkle treatment to signal "smart, novel feature" without
+/// shouting over the primary Brew action.
+private struct AutoTuneChip: View {
+    let action: () -> Void
+    @State private var glimmer = false
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 5) {
+                Image(systemName: "wand.and.stars")
+                    .font(.system(size: 12, weight: .semibold))
+                    .symbolEffect(.pulse, options: .repeating, value: glimmer)
+                Text("Auto-tune")
+                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+            }
+            .foregroundStyle(CremaColor.crema)
+            .padding(.horizontal, 12)
+            .frame(minHeight: 34)
+            .background(
+                Capsule().fill(CremaColor.crema.opacity(0.16))
+                    .overlay(Capsule().strokeBorder(CremaColor.crema.opacity(0.4), lineWidth: 0.5))
+            )
+        }
+        .buttonStyle(.plain)
+        .onAppear { glimmer = true }
+    }
+}
+
 // MARK: - Live brew bar (state-driven)
 
 private struct LiveBrewBar: View {
@@ -55,6 +90,7 @@ private struct LiveBrewBar: View {
     let library: ProfileLibrary
     @Bindable var history: ShotHistory
     @Bindable var tipPreferences: TipPreferences
+    var onAutoTune: (() -> Void)? = nil
     @State private var showMachines = false
     @State private var showFeedback = false
 
@@ -105,6 +141,9 @@ private struct LiveBrewBar: View {
                     },
                     trailing: {
                         HStack(spacing: 10) {
+                            if let onAutoTune {
+                                AutoTuneChip(action: onAutoTune)
+                            }
                             if driver.playback.profile.grinder != nil {
                                 GrinderPill(driver: driver)
                             }

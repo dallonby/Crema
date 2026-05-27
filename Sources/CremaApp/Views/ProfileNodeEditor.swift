@@ -14,20 +14,37 @@ struct ProfileNodeEditor: View {
     @Binding var selectedStageID: UUID?
 
     @State private var draggingStageID: UUID?
-    /// Per-stage drag origin (cumulative time at stage end, setpoint value).
-    /// Captured at gesture start so deltas are stable across re-renders.
-    @State private var dragOrigin: (timeAtEnd: Double, value: Double)?
+    /// Per-stage drag origin captured ONCE at gesture start. Includes the
+    /// starting duration so we don't read mutating state during the drag —
+    /// reading `stage.duration` mid-drag created a positive-feedback loop
+    /// where every tick re-inflated the next (10 px of slow drag could
+    /// snowball into 45 s of movement).
+    @State private var dragOrigin: (duration: Double, value: Double)?
+    /// Locked `totalDuration` snapshot taken at drag start. Used to keep the
+    /// chart's horizontal scale STABLE during a drag — otherwise the chart
+    /// rescales under your finger as the dragged stage grows/shrinks, which
+    /// feels chaotic ("expand and contract far too quickly").
+    @State private var dragLockedTotalT: Double?
 
     /// Axis ceilings — fixed so dragging doesn't get "chased" by a rescaling
     /// axis underneath.
     private let maxPressure: Double = 9.0
     private let maxFlow: Double = 8.0
     private let nodeRadius: CGFloat = 11
+    /// Gesture damping. 1.0 = 1:1 — finger movement maps directly to time/
+    /// value change in the chart's coordinate scale. Earlier values were
+    /// lower to compensate for a compounding-feedback bug (each tick read
+    /// the just-updated stage.duration to back-calculate priorTime, which
+    /// re-inflated the next tick); with that bug fixed in onChanged a
+    /// straight 1:1 mapping feels tactile and predictable.
+    private let dragGain: Double = 1.0
 
     var body: some View {
         GeometryReader { geo in
             let plot = CGRect(x: 4, y: 12, width: geo.size.width - 8, height: geo.size.height - 28)
-            let totalT = max(editing.totalDuration, 1)
+            // While dragging, freeze the horizontal scale so the chart geometry
+            // doesn't shift under the user's finger.
+            let totalT = max(dragLockedTotalT ?? editing.totalDuration, 1)
 
             ZStack {
                 // Backdrop: faint grid + axis ticks (no labels — keep the
@@ -39,11 +56,13 @@ struct ProfileNodeEditor: View {
                 }
                 .allowsHitTesting(false)
 
-                // Tap-to-add catcher beneath the nodes.
+                // Background catches taps to *deselect* only — adding stages
+                // is an explicit action via the "Add stage" button (tap-to-add
+                // on dead space was too easy to trigger accidentally).
                 Color.clear
                     .contentShape(Rectangle())
-                    .onTapGesture { location in
-                        addStage(at: location, plot: plot, totalT: totalT)
+                    .onTapGesture { _ in
+                        if selectedStageID != nil { selectedStageID = nil }
                     }
 
                 // Stage nodes — one per stage, positioned at the stage's end
@@ -73,6 +92,11 @@ struct ProfileNodeEditor: View {
             }
             .animation(.smooth(duration: 0.25), value: selectedStageID)
             .animation(.smooth(duration: 0.18), value: editing.stages.map(\.id))
+            // Clip so a stage dragged past the chart's right edge can't bleed
+            // visually into the recipe pane next to us in the landscape split.
+            // Matches the editor card's outer corner radius (set in
+            // ProfileEditView.visualEditor).
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
     }
 
@@ -116,37 +140,52 @@ struct ProfileNodeEditor: View {
     // MARK: - Drag gesture
 
     private func dragGesture(for stage: EditableStage, plot: CGRect, totalT: Double) -> some Gesture {
-        DragGesture(minimumDistance: 1)
+        // CRITICAL: use `.global` coordinate space. The StageNode this gesture
+        // is attached to is positioned via `.position(item.point)` driven by
+        // the stage's data — when we update stage.duration in onChanged, the
+        // node moves, and a default-coordinate-space gesture measures
+        // translation relative to the moving view, creating a positive-feedback
+        // loop. Global coords are anchored to the screen so translation stays
+        // stable regardless of how the view underneath moves.
+        //
+        // Higher minimumDistance prevents micro-jitter from registering as a
+        // drag (8pt ≈ a thumb-rest twitch on iPad).
+        DragGesture(minimumDistance: 8, coordinateSpace: .global)
             .onChanged { value in
                 if draggingStageID != stage.id {
                     draggingStageID = stage.id
                     selectedStageID = stage.id
-                    // Capture the stage's start values once at gesture start.
+                    // Capture starting STATE once. All deltas are computed
+                    // from these stable values + the gesture's cumulative
+                    // translation. Never re-read stage.* during the drag —
+                    // that's what created the runaway feedback loop.
                     dragOrigin = (
-                        timeAtEnd: cumulativeTimeAtEnd(of: stage),
+                        duration: stage.duration,
                         value: stage.priority == .pressure ? stage.pressureBar : stage.flowMlPerSec
                     )
+                    dragLockedTotalT = max(editing.totalDuration, 1)
                 }
                 guard let origin = dragOrigin else { return }
+                let lockedT = dragLockedTotalT ?? totalT
 
-                // Vertical drag → setpoint. Each pixel of drag maps to the same
-                // fraction of the axis ceiling.
+                // Vertical drag → setpoint. dragGain dampens twitchiness.
                 let dy = value.translation.height
                 let valueRange = stage.priority == .pressure ? maxPressure : maxFlow
-                let valueDelta = -Double(dy) / Double(plot.height) * valueRange
+                let valueDelta = -Double(dy) / Double(plot.height) * valueRange * dragGain
                 var newValue = origin.value + valueDelta
-                // Snap to nice values for tactile feel.
-                let snap = stage.priority == .pressure ? 0.1 : 0.1
+                // Coarser snap = more tactile, less jittery.
+                let snap = stage.priority == .pressure ? 0.25 : 0.25
                 newValue = (newValue / snap).rounded() * snap
                 newValue = max(0, min(valueRange, newValue))
 
-                // Horizontal drag → duration. We move the stage's end time;
-                // the stage's duration is end - prior cumulative.
+                // Horizontal drag → duration. cumulative translation from
+                // gesture start (.global coord space below) → time, added to
+                // captured starting duration. No reading of stage.duration.
                 let dx = value.translation.width
-                let timeDelta = Double(dx) / Double(plot.width) * totalT
-                let priorTime = origin.timeAtEnd - stage.duration  // cumulative BEFORE this stage
-                var newDuration = (origin.timeAtEnd + timeDelta) - priorTime
-                newDuration = max(0.5, min(60, (newDuration / 0.5).rounded() * 0.5))
+                let timeDelta = Double(dx) / Double(plot.width) * lockedT * dragGain
+                var newDuration = origin.duration + timeDelta
+                // 1.0s snap reads as deliberate without feeling sticky.
+                newDuration = max(0.5, min(60, (newDuration / 1.0).rounded() * 1.0))
 
                 // Apply.
                 stage.duration = newDuration
@@ -159,6 +198,7 @@ struct ProfileNodeEditor: View {
             .onEnded { _ in
                 draggingStageID = nil
                 dragOrigin = nil
+                dragLockedTotalT = nil
             }
     }
 
@@ -170,43 +210,6 @@ struct ProfileNodeEditor: View {
             t += s.waitAfter
         }
         return t
-    }
-
-    // MARK: - Add stage on empty tap
-
-    private func addStage(at location: CGPoint, plot: CGRect, totalT: Double) {
-        // Convert the tap x to a time, find which existing stage it falls
-        // inside, and insert a new stage *after* it with the tap's y as its
-        // setpoint. If the tap is past the end of the profile, append.
-        guard plot.contains(location) else { return }
-        let t = Double((location.x - plot.minX) / plot.width) * totalT
-        let yFrac = 1 - Double((location.y - plot.minY) / plot.height)
-
-        // Decide priority from which half the tap landed in — top 60% reads
-        // as pressure-priority (bar territory), bottom 40% as flow.
-        // Picking from context > forcing a separate gesture for priority.
-        let priority: BrewStage.Priority = yFrac > 0.4 ? .pressure : .flow
-        let valueRange = priority == .pressure ? maxPressure : maxFlow
-        let setpoint = max(0.1, min(valueRange, yFrac * valueRange))
-
-        // Find insertion index by walking cumulative time.
-        var cursor: Double = 0
-        var insertAt = editing.stages.count
-        for (i, s) in editing.stages.enumerated() {
-            cursor += s.duration + s.waitAfter
-            if t < cursor { insertAt = i + 1; break }
-        }
-
-        let new = EditableStage(
-            label: "Stage \(editing.stages.count + 1)",
-            priority: priority,
-            duration: 4,
-            pressureBar: priority == .pressure ? setpoint : 0,
-            flowMlPerSec: priority == .flow ? setpoint : 0,
-            waitAfter: 0
-        )
-        editing.stages.insert(new, at: insertAt)
-        selectedStageID = new.id
     }
 
     // MARK: - Canvas drawing helpers

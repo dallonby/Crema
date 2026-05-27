@@ -242,6 +242,20 @@ public final class BLEMachineTransport: NSObject, MachineTransport, @unchecked S
         }
     }
 
+    public func sendModbusOneWay(_ frame: Data) async throws {
+        try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
+            bleQueue.async {
+                guard case .connected = self._state,
+                      let p = self.pendingPeripheral,
+                      let char = self.modbusChar else {
+                    cont.resume(throwing: TransportError.notConnected); return
+                }
+                p.writeValue(frame, for: char, type: .withoutResponse)
+                cont.resume()
+            }
+        }
+    }
+
     public func sendFF55(_ frame: Data) async throws {
         try await withCheckedThrowingContinuation { (cont: CheckedContinuation<Void, Error>) in
             bleQueue.async {

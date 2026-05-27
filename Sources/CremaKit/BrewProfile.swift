@@ -264,7 +264,10 @@ extension BrewProfile {
 extension BrewProfile {
     /// The TestyT profile captured live from the official app on 2026-05-26.
     /// Re-encoding this profile must produce the exact bytes in `PROTOCOL.md §3`.
+    /// Pinned UUID so migrations (e.g. pruning the dev fixture from saved
+    /// libraries in `ProfileLibrary.init`) can match it deterministically.
     public static let testyT = BrewProfile(
+        id: UUID(uuidString: "7E57717E-0000-0000-0000-000000000001")!,
         name: "TestyT",
         stages: [
             BrewStage(label: "Preinfuse", duration: 7, priority: .pressure,

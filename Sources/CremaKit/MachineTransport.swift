@@ -96,6 +96,14 @@ public protocol MachineTransport: Sendable {
     /// Fire-and-forget write on the FF55 characteristic. Responses (if any)
     /// arrive asynchronously via `receivedFrames`.
     func sendFF55(_ frame: Data) async throws
+
+    /// Fire-and-forget Modbus write — submits the frame to the BLE characteristic
+    /// without waiting for the response notification. Use this when you need
+    /// tight back-to-back timing between two writes (e.g. coil-150 press +
+    /// release for stop, which the official Android app fires ~50 ms apart;
+    /// awaiting the response between them stretches it to ~130 ms and the
+    /// firmware doesn't reliably recognise the long pulse as a toggle).
+    func sendModbusOneWay(_ frame: Data) async throws
 }
 
 extension MachineTransport {

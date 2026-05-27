@@ -199,6 +199,11 @@ public actor StubMachineTransport: MachineTransport {
         // No-op for now. In future the stub could synthesize a heartbeat back.
     }
 
+    public func sendModbusOneWay(_ frame: Data) async throws {
+        guard case .connected = _state else { throw TransportError.notConnected }
+        // Stub doesn't need to model the fire-and-forget timing — just no-op.
+    }
+
     // MARK: - Replay
 
     private func startReplay() {

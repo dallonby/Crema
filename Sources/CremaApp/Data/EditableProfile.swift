@@ -106,8 +106,10 @@ final class EditableProfile: Identifiable {
     /// point to modify instead of an empty list.
     static func defaultStages() -> [EditableStage] {
         [
+            // 2 s bloom pause after preinfuse — matches the bundled
+            // Classic Espresso default; a friendly starting point.
             EditableStage(label: "Preinfuse", priority: .pressure,
-                          duration: 6, pressureBar: 4.0, waitAfter: 6),
+                          duration: 6, pressureBar: 4.0, waitAfter: 2),
             EditableStage(label: "Soak", priority: .pressure,
                           duration: 3, pressureBar: 2.5, waitAfter: 0),
             EditableStage(label: "Extract", priority: .flow,
@@ -160,6 +162,8 @@ final class EditableProfile: Identifiable {
         // Insert a new stage that resembles a "continue from here" extension —
         // same priority as the last one, half its duration, copy its setpoint.
         // Better than landing the user on default zeros.
+        // 2s default `waitAfter` gives a sensible pause out of the gate — the
+        // user can slide it back to none, but 0 is rarely what you want.
         let template = stages.last
         let new = EditableStage(
             label: "Stage \(stages.count + 1)",
@@ -167,7 +171,7 @@ final class EditableProfile: Identifiable {
             duration: max(3, (template?.duration ?? 6) / 2),
             pressureBar: template?.pressureBar ?? 2,
             flowMlPerSec: template?.flowMlPerSec ?? 1.5,
-            waitAfter: 0
+            waitAfter: 2
         )
         new.isExpanded = true
         stages.append(new)

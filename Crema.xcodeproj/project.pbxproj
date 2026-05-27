@@ -7,51 +7,80 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02DEE2E0315B0D561B28E60B /* SignedInUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580B69D0C2AE9E781B41C210 /* SignedInUser.swift */; };
+		067A976277BA2659D6DE047F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4254A35D2DAF03E2176BE /* SignInView.swift */; };
 		085B0A4D43505401210C0B1A /* ShotPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268764B7A856C391071C786 /* ShotPlayback.swift */; };
 		0AFE3514D79EB46A87DC7F1C /* ShotChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45970EE58AAB2B10D530FA /* ShotChart.swift */; };
+		0D4344B3F5BCF1B72FC3A886 /* AutoTuneSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F92D6C26FB5D865237C96 /* AutoTuneSession.swift */; };
 		10D35C3F64C5BE44CA565300 /* ProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAEBDABF1BDCFE698044D8 /* ProfilesView.swift */; };
 		150A333B8855F0D10A5FEAC6 /* MachinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE0AA8AC6B81C3EC4698E5 /* MachinesView.swift */; };
 		18BDBCC6DDCF946566D09CF4 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAEF0CC73B720A89E31883D /* ProfileEditView.swift */; };
 		191CEFBAA5DD6744FE688F38 /* brew_testyt_full.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */; };
+		202D72B3B50C1BE349883E65 /* SignedInUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580B69D0C2AE9E781B41C210 /* SignedInUser.swift */; };
 		21C0A0F8B7D8DFDF65A74828 /* MetricHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AB9E8955DAF4265D52871 /* MetricHUD.swift */; };
 		25DE44274A6EE4E5238AE365 /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
 		266B08FCDDAFC1ADFD30D29F /* SuggestionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFE29FE0045903ABB62848 /* SuggestionsSheet.swift */; };
 		27AB8BFE7280F9B0963D1A60 /* ShotHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5422711AE7247A0D2E1E40 /* ShotHistoryView.swift */; };
 		2A987296E13976ACF87C55FE /* MachinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCE0AA8AC6B81C3EC4698E5 /* MachinesView.swift */; };
 		2D20D745DD464D8268ABABD8 /* LiveShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7082747C6956FB747956 /* LiveShotView.swift */; };
+		2D691EE3AABD48312CD13882 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A081602E044679DEC4CE7EB4 /* Assets.xcassets */; };
+		343255E29FE18306FDE6AEC5 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020E89A6E20DF116D43976B3 /* QRCode.swift */; };
+		35A680A6FD405D98587D5A61 /* ShareProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3670FCB0555289F6932480C5 /* ShareProfileSheet.swift */; };
+		35F40E5B35F63A035DA98DA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A081602E044679DEC4CE7EB4 /* Assets.xcassets */; };
 		3951D08908C94F688DC84C00 /* ShotSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5084C7A86F78F12486B22F /* ShotSample.swift */; };
 		39C23732A2F9A610918CB805 /* ProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAEBDABF1BDCFE698044D8 /* ProfilesView.swift */; };
 		4593F6681CDC56D18ED17A1E /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
+		472CFF019CFCE0F81269CE54 /* BrowseCommunitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */; };
 		4B17A10F4E9022F60E243877 /* ShotPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5268764B7A856C391071C786 /* ShotPlayback.swift */; };
 		4C35FF428F56863FF6133397 /* CremaKit in Frameworks */ = {isa = PBXBuildFile; productRef = D78B39B3787E10A7F8C82C89 /* CremaKit */; };
 		53F5BCD87620B45C69931530 /* ShotFeedbackSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCBFCE01BD2339F7E6A92E4 /* ShotFeedbackSheet.swift */; };
+		59E5ECC9241C4F7CABB0B808 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020E89A6E20DF116D43976B3 /* QRCode.swift */; };
 		59E6546EA949B1D0C125B4CE /* CremaTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */; };
+		5F689635190B79A21FC44664 /* AppleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5921A8EB95680234E2F6FA4F /* AppleSignInController.swift */; };
 		5FAEBAEF898BE17734EE65AC /* CremaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2DBDB56972958BC26ECEDF /* CremaApp.swift */; };
+		6F8093F4848AD912E6A9DC46 /* AutoTuneSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4BE327FE475A677144690 /* AutoTuneSheet.swift */; };
 		70BFE805E1B4F1E19D2D8389 /* SuggestionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFE29FE0045903ABB62848 /* SuggestionsSheet.swift */; };
 		726936C2BB09F8BECF22F689 /* ShotFeedbackSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCBFCE01BD2339F7E6A92E4 /* ShotFeedbackSheet.swift */; };
+		77C24E5AC5C7863719AE6F11 /* CommunityProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192EC451394CD56402653CD /* CommunityProfileStore.swift */; };
+		78E39E78FB4BE1C60D12A2CC /* AutoTuneSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F92D6C26FB5D865237C96 /* AutoTuneSession.swift */; };
 		79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
+		79FA9CD5628B5B0EE3AE3EDA /* brew_testyt_full.csv.bak in Resources */ = {isa = PBXBuildFile; fileRef = CDF90C8056300B65EB23C188 /* brew_testyt_full.csv.bak */; };
 		7C5A6A22EC88C6A9F1B576FE /* PathSmoothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */; };
+		8A082F3A28BA6FDBFB681C86 /* BrowseCommunitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */; };
 		8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
 		8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
 		8FDF32AFF6E4FBAF9685E135 /* ProfileNodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */; };
+		9F688620A25F39A410BF4328 /* ShareProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3670FCB0555289F6932480C5 /* ShareProfileSheet.swift */; };
 		A31B736B59FFB10ED836A423 /* LiveShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7082747C6956FB747956 /* LiveShotView.swift */; };
 		A55FEF7D1E150CCF1F370A94 /* CremaKit in Frameworks */ = {isa = PBXBuildFile; productRef = F41B9BFD9A7FED8F14F0C8D1 /* CremaKit */; };
+		A5733F282977B7D3C30E450D /* AppleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5921A8EB95680234E2F6FA4F /* AppleSignInController.swift */; };
+		AC0D53FC4EBE14913438AF2F /* AutoTuneSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4BE327FE475A677144690 /* AutoTuneSheet.swift */; };
 		B0F3F6993E8764119A1AE016 /* EditableProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */; };
 		B5159DFD6E6AE4BB7325F30C /* CremaTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */; };
+		B5DA22CF6D580DB0390BA2A6 /* ImportProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4334C0FD26AF9EE22E9BE /* ImportProfileSheet.swift */; };
 		BB2BEC75064AEA73630DB61D /* CremaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2DBDB56972958BC26ECEDF /* CremaApp.swift */; };
 		BF176755A6800F8CD5E03B76 /* StageTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */; };
+		C16782E0B7E75BB7BEDC9A19 /* AutoTuneSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223C290BF955812B56D865 /* AutoTuneSteps.swift */; };
 		C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45970EE58AAB2B10D530FA /* ShotChart.swift */; };
+		CA9C5895493137766011413B /* brew_testyt_full.csv.bak in Resources */ = {isa = PBXBuildFile; fileRef = CDF90C8056300B65EB23C188 /* brew_testyt_full.csv.bak */; };
 		D33ECE005FA2F2DB5634FEF6 /* EditableProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */; };
+		D5D88A93029EB931B97EADFC /* CommunityProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192EC451394CD56402653CD /* CommunityProfileStore.swift */; };
 		D977CD7155F1BC4C94F97256 /* ProfileNodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */; };
 		E22045411B8067008C8BEEBB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAEF0CC73B720A89E31883D /* ProfileEditView.swift */; };
+		E685D2B894AA784F383D70B6 /* AutoTuneSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223C290BF955812B56D865 /* AutoTuneSteps.swift */; };
+		E6C4D7CF2284993E3F953B19 /* ImportProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4334C0FD26AF9EE22E9BE /* ImportProfileSheet.swift */; };
 		E6D60E5885F07D14D79F42CB /* brew_testyt_full.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */; };
 		ED300449F7D59E8A7E76976E /* MetricHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769AB9E8955DAF4265D52871 /* MetricHUD.swift */; };
 		F55DE796358D95592BAE1420 /* ShotSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5084C7A86F78F12486B22F /* ShotSample.swift */; };
 		F6B86561B8B0E6E46145E49C /* ShotHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5422711AE7247A0D2E1E40 /* ShotHistoryView.swift */; };
+		F8799648572CE8D3150F3713 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4254A35D2DAF03E2176BE /* SignInView.swift */; };
 		FF391478471D1B17F6F1DFCD /* StageTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0192EC451394CD56402653CD /* CommunityProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityProfileStore.swift; sourceTree = "<group>"; };
+		020E89A6E20DF116D43976B3 /* QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		1C223C290BF955812B56D865 /* AutoTuneSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTuneSteps.swift; sourceTree = "<group>"; };
 		1D5084C7A86F78F12486B22F /* ShotSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotSample.swift; sourceTree = "<group>"; };
 		238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageTimeline.swift; sourceTree = "<group>"; };
 		2B0CE0B8AB8254494069AF76 /* CremaTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CremaTheme.swift; sourceTree = "<group>"; };
@@ -59,22 +88,32 @@
 		2DCE0AA8AC6B81C3EC4698E5 /* MachinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachinesView.swift; sourceTree = "<group>"; };
 		2E90AD8ADFA3032B567FC1C7 /* Crema-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Crema-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewActionZone.swift; sourceTree = "<group>"; };
+		3670FCB0555289F6932480C5 /* ShareProfileSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareProfileSheet.swift; sourceTree = "<group>"; };
 		39820D59310CDFB40C3B0ADF /* PathSmoothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathSmoothing.swift; sourceTree = "<group>"; };
 		3E4D7082747C6956FB747956 /* LiveShotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveShotView.swift; sourceTree = "<group>"; };
 		4629FB39D3A5FC432EE5D9B9 /* Crema */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Crema; path = .; sourceTree = SOURCE_ROOT; };
 		4E668C17D382823B628CF672 /* Crema-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crema-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCommunitySheet.swift; sourceTree = "<group>"; };
 		5268764B7A856C391071C786 /* ShotPlayback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotPlayback.swift; sourceTree = "<group>"; };
+		565F92D6C26FB5D865237C96 /* AutoTuneSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTuneSession.swift; sourceTree = "<group>"; };
+		580B69D0C2AE9E781B41C210 /* SignedInUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedInUser.swift; sourceTree = "<group>"; };
+		5921A8EB95680234E2F6FA4F /* AppleSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInController.swift; sourceTree = "<group>"; };
 		769AB9E8955DAF4265D52871 /* MetricHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricHUD.swift; sourceTree = "<group>"; };
 		7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriver.swift; sourceTree = "<group>"; };
 		9BEFE29FE0045903ABB62848 /* SuggestionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsSheet.swift; sourceTree = "<group>"; };
+		A081602E044679DEC4CE7EB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AFB4334C0FD26AF9EE22E9BE /* ImportProfileSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportProfileSheet.swift; sourceTree = "<group>"; };
 		B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableProfile.swift; sourceTree = "<group>"; };
 		B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNodeEditor.swift; sourceTree = "<group>"; };
 		CC5422711AE7247A0D2E1E40 /* ShotHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotHistoryView.swift; sourceTree = "<group>"; };
 		CD2DBDB56972958BC26ECEDF /* CremaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CremaApp.swift; sourceTree = "<group>"; };
+		CDB4BE327FE475A677144690 /* AutoTuneSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTuneSheet.swift; sourceTree = "<group>"; };
+		CDF90C8056300B65EB23C188 /* brew_testyt_full.csv.bak */ = {isa = PBXFileReference; path = brew_testyt_full.csv.bak; sourceTree = "<group>"; };
 		CF45970EE58AAB2B10D530FA /* ShotChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotChart.swift; sourceTree = "<group>"; };
 		DEAEF0CC73B720A89E31883D /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		EFCBFCE01BD2339F7E6A92E4 /* ShotFeedbackSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotFeedbackSheet.swift; sourceTree = "<group>"; };
 		F0DAEBDABF1BDCFE698044D8 /* ProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesView.swift; sourceTree = "<group>"; };
+		FDD4254A35D2DAF03E2176BE /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +136,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08E8F355E9FA5C889FCCFC54 /* AutoTune */ = {
+			isa = PBXGroup;
+			children = (
+				CDB4BE327FE475A677144690 /* AutoTuneSheet.swift */,
+				1C223C290BF955812B56D865 /* AutoTuneSteps.swift */,
+			);
+			path = AutoTune;
+			sourceTree = "<group>";
+		};
 		2AA5D90B26B72F4024DA45E9 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,7 +168,9 @@
 		787F5B82A4536B887D6C0A55 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A081602E044679DEC4CE7EB4 /* Assets.xcassets */,
 				2B16EE976C170D0252B28D3F /* brew_testyt_full.csv */,
+				CDF90C8056300B65EB23C188 /* brew_testyt_full.csv.bak */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -132,6 +182,18 @@
 				2AA5D90B26B72F4024DA45E9 /* Sources */,
 				A5A2A5F454DE940293ED5A6A /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		96BDD1AC71CAF895D91FC3B4 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */,
+				AFB4334C0FD26AF9EE22E9BE /* ImportProfileSheet.swift */,
+				020E89A6E20DF116D43976B3 /* QRCode.swift */,
+				3670FCB0555289F6932480C5 /* ShareProfileSheet.swift */,
+				FDD4254A35D2DAF03E2176BE /* SignInView.swift */,
+			);
+			path = Sharing;
 			sourceTree = "<group>";
 		};
 		A5A2A5F454DE940293ED5A6A /* Products */ = {
@@ -175,6 +237,8 @@
 				CC5422711AE7247A0D2E1E40 /* ShotHistoryView.swift */,
 				238DE0C06579BAA181B8DBD5 /* StageTimeline.swift */,
 				9BEFE29FE0045903ABB62848 /* SuggestionsSheet.swift */,
+				08E8F355E9FA5C889FCCFC54 /* AutoTune */,
+				96BDD1AC71CAF895D91FC3B4 /* Sharing */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,10 +246,14 @@
 		FCA80F29F8A6F4F36A4EE1AD /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5921A8EB95680234E2F6FA4F /* AppleSignInController.swift */,
+				565F92D6C26FB5D865237C96 /* AutoTuneSession.swift */,
+				0192EC451394CD56402653CD /* CommunityProfileStore.swift */,
 				B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */,
 				7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */,
 				5268764B7A856C391071C786 /* ShotPlayback.swift */,
 				1D5084C7A86F78F12486B22F /* ShotSample.swift */,
+				580B69D0C2AE9E781B41C210 /* SignedInUser.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -243,11 +311,11 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					5EDF9DDC5789E5EFBBE215FE = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = YDGQZ6G5L9;
 						ProvisioningStyle = Automatic;
 					};
 					F6F9154A133754C88AB46B95 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = YDGQZ6G5L9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -280,7 +348,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35F40E5B35F63A035DA98DA0 /* Assets.xcassets in Resources */,
 				E6D60E5885F07D14D79F42CB /* brew_testyt_full.csv in Resources */,
+				CA9C5895493137766011413B /* brew_testyt_full.csv.bak in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +358,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D691EE3AABD48312CD13882 /* Assets.xcassets in Resources */,
 				191CEFBAA5DD6744FE688F38 /* brew_testyt_full.csv in Resources */,
+				79FA9CD5628B5B0EE3AE3EDA /* brew_testyt_full.csv.bak in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,10 +371,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F689635190B79A21FC44664 /* AppleSignInController.swift in Sources */,
+				78E39E78FB4BE1C60D12A2CC /* AutoTuneSession.swift in Sources */,
+				6F8093F4848AD912E6A9DC46 /* AutoTuneSheet.swift in Sources */,
+				C16782E0B7E75BB7BEDC9A19 /* AutoTuneSteps.swift in Sources */,
 				25DE44274A6EE4E5238AE365 /* BrewActionZone.swift in Sources */,
+				8A082F3A28BA6FDBFB681C86 /* BrowseCommunitySheet.swift in Sources */,
+				D5D88A93029EB931B97EADFC /* CommunityProfileStore.swift in Sources */,
 				BB2BEC75064AEA73630DB61D /* CremaApp.swift in Sources */,
 				B5159DFD6E6AE4BB7325F30C /* CremaTheme.swift in Sources */,
 				D33ECE005FA2F2DB5634FEF6 /* EditableProfile.swift in Sources */,
+				B5DA22CF6D580DB0390BA2A6 /* ImportProfileSheet.swift in Sources */,
 				79A6A41D3CAA56E919F14293 /* LiveDriver.swift in Sources */,
 				2D20D745DD464D8268ABABD8 /* LiveShotView.swift in Sources */,
 				150A333B8855F0D10A5FEAC6 /* MachinesView.swift in Sources */,
@@ -311,11 +390,15 @@
 				E22045411B8067008C8BEEBB /* ProfileEditView.swift in Sources */,
 				8FDF32AFF6E4FBAF9685E135 /* ProfileNodeEditor.swift in Sources */,
 				39C23732A2F9A610918CB805 /* ProfilesView.swift in Sources */,
+				343255E29FE18306FDE6AEC5 /* QRCode.swift in Sources */,
+				35A680A6FD405D98587D5A61 /* ShareProfileSheet.swift in Sources */,
 				0AFE3514D79EB46A87DC7F1C /* ShotChart.swift in Sources */,
 				726936C2BB09F8BECF22F689 /* ShotFeedbackSheet.swift in Sources */,
 				F6B86561B8B0E6E46145E49C /* ShotHistoryView.swift in Sources */,
 				085B0A4D43505401210C0B1A /* ShotPlayback.swift in Sources */,
 				3951D08908C94F688DC84C00 /* ShotSample.swift in Sources */,
+				067A976277BA2659D6DE047F /* SignInView.swift in Sources */,
+				02DEE2E0315B0D561B28E60B /* SignedInUser.swift in Sources */,
 				FF391478471D1B17F6F1DFCD /* StageTimeline.swift in Sources */,
 				70BFE805E1B4F1E19D2D8389 /* SuggestionsSheet.swift in Sources */,
 			);
@@ -325,10 +408,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5733F282977B7D3C30E450D /* AppleSignInController.swift in Sources */,
+				0D4344B3F5BCF1B72FC3A886 /* AutoTuneSession.swift in Sources */,
+				AC0D53FC4EBE14913438AF2F /* AutoTuneSheet.swift in Sources */,
+				E685D2B894AA784F383D70B6 /* AutoTuneSteps.swift in Sources */,
 				8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */,
+				472CFF019CFCE0F81269CE54 /* BrowseCommunitySheet.swift in Sources */,
+				77C24E5AC5C7863719AE6F11 /* CommunityProfileStore.swift in Sources */,
 				5FAEBAEF898BE17734EE65AC /* CremaApp.swift in Sources */,
 				59E6546EA949B1D0C125B4CE /* CremaTheme.swift in Sources */,
 				B0F3F6993E8764119A1AE016 /* EditableProfile.swift in Sources */,
+				E6C4D7CF2284993E3F953B19 /* ImportProfileSheet.swift in Sources */,
 				8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */,
 				A31B736B59FFB10ED836A423 /* LiveShotView.swift in Sources */,
 				2A987296E13976ACF87C55FE /* MachinesView.swift in Sources */,
@@ -337,11 +427,15 @@
 				18BDBCC6DDCF946566D09CF4 /* ProfileEditView.swift in Sources */,
 				D977CD7155F1BC4C94F97256 /* ProfileNodeEditor.swift in Sources */,
 				10D35C3F64C5BE44CA565300 /* ProfilesView.swift in Sources */,
+				59E5ECC9241C4F7CABB0B808 /* QRCode.swift in Sources */,
+				9F688620A25F39A410BF4328 /* ShareProfileSheet.swift in Sources */,
 				C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */,
 				53F5BCD87620B45C69931530 /* ShotFeedbackSheet.swift in Sources */,
 				27AB8BFE7280F9B0963D1A60 /* ShotHistoryView.swift in Sources */,
 				4B17A10F4E9022F60E243877 /* ShotPlayback.swift in Sources */,
 				F55DE796358D95592BAE1420 /* ShotSample.swift in Sources */,
+				F8799648572CE8D3150F3713 /* SignInView.swift in Sources */,
+				202D72B3B50C1BE349883E65 /* SignedInUser.swift in Sources */,
 				BF176755A6800F8CD5E03B76 /* StageTimeline.swift in Sources */,
 				266B08FCDDAFC1ADFD30D29F /* SuggestionsSheet.swift in Sources */,
 			);
@@ -355,10 +449,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/$(TARGET_NAME).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = YDGQZ6G5L9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Crema;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -385,10 +480,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/$(TARGET_NAME).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YDGQZ6G5L9;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Crema;
@@ -412,10 +508,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/$(TARGET_NAME).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = YDGQZ6G5L9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Crema;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -442,10 +539,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/$(TARGET_NAME).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YDGQZ6G5L9;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Crema;

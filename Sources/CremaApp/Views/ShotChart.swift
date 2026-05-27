@@ -14,6 +14,22 @@ struct ShotChart: View {
     /// (~110×64 in the library row). Pure-curve rendering only.
     var compact: Bool = false
 
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var hSizeClass
+    #endif
+
+    /// Whether to label the ghost setpoint segments with stage name + value.
+    /// Suppressed on iPhone (compact width class) because the chart is so narrow
+    /// that labels overlap each other and the live trace.
+    private var showsGhostLabels: Bool {
+        if compact { return false }
+        #if os(iOS)
+        return hSizeClass != .compact
+        #else
+        return true
+        #endif
+    }
+
     // Y-axis ceilings — computed from data + profile, with sensible minimums so the
     // chart doesn't shrink-wrap so tight that a small overshoot pops off the top.
     private var maxPressure: Double {
@@ -188,6 +204,7 @@ struct ShotChart: View {
         // prior stage's setpoint at every same-priority transition (e.g. the
         // PREINFUSE 6.1 bar briefly showing at the start of SOAK 2.3 bar).
         let style = StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round)
+        let drawLabels = showsGhostLabels
         var cursor = 0.0
         for stage in profile.stages {
             let stageEnd = cursor + stage.duration
@@ -200,6 +217,17 @@ struct ShotChart: View {
                 p.move(to: CGPoint(x: x0, y: y))
                 p.addLine(to: CGPoint(x: x1, y: y))
                 ctx.stroke(p, with: .color(CremaColor.crema.opacity(0.42)), style: style)
+                if drawLabels {
+                    drawGhostLabel(
+                        ctx: ctx,
+                        text: "\(stage.label.isEmpty ? "Stage" : stage.label)  \(String(format: "%.1f bar", stage.pressureBar))",
+                        midX: (x0 + x1) / 2,
+                        segmentY: y,
+                        segmentWidth: x1 - x0,
+                        accent: CremaColor.crema,
+                        in: r
+                    )
+                }
             }
             if stage.priority == .flow && stage.flowMlPerSec > 0 {
                 let y = yFlow(stage.flowMlPerSec, in: r)
@@ -207,9 +235,57 @@ struct ShotChart: View {
                 p.move(to: CGPoint(x: x0, y: y))
                 p.addLine(to: CGPoint(x: x1, y: y))
                 ctx.stroke(p, with: .color(CremaColor.matcha.opacity(0.42)), style: style)
+                if drawLabels {
+                    drawGhostLabel(
+                        ctx: ctx,
+                        text: "\(stage.label.isEmpty ? "Stage" : stage.label)  \(String(format: "%.1f mL/s", stage.flowMlPerSec))",
+                        midX: (x0 + x1) / 2,
+                        segmentY: y,
+                        segmentWidth: x1 - x0,
+                        accent: CremaColor.matcha,
+                        in: r
+                    )
+                }
             }
             cursor = stageEnd + stage.waitAfter
         }
+    }
+
+    /// Tiny pill-shaped label centered over a ghost setpoint segment. Positioned
+    /// just above the segment line; flips below if there's no room at the top.
+    /// Suppressed when the segment is narrower than the label needs — better
+    /// to omit than to overflow onto the neighbour.
+    private func drawGhostLabel(
+        ctx: GraphicsContext,
+        text: String,
+        midX: CGFloat,
+        segmentY: CGFloat,
+        segmentWidth: CGFloat,
+        accent: Color,
+        in r: CGRect
+    ) {
+        let label = Text(text)
+            .font(.system(size: 9, weight: .semibold, design: .rounded).monospacedDigit())
+            .foregroundColor(CremaColor.cream.opacity(0.85))
+        let resolved = ctx.resolve(label)
+        let textSize = resolved.measure(in: CGSize(width: r.width, height: 30))
+        // Skip if the stage's segment is narrower than the label needs — better
+        // to draw nothing than overlap the next stage's label.
+        guard segmentWidth >= textSize.width + 4 else { return }
+        // Prefer above the segment, flip below if too close to the chart top.
+        let aboveY = segmentY - textSize.height - 6
+        let belowY = segmentY + 6
+        let originY = aboveY < r.minY + 2 ? belowY : aboveY
+        let rect = CGRect(
+            x: midX - textSize.width / 2 - 5,
+            y: originY,
+            width: textSize.width + 10,
+            height: textSize.height + 2
+        )
+        let pill = Capsule().path(in: rect)
+        ctx.fill(pill, with: .color(CremaColor.bg.opacity(0.75)))
+        ctx.stroke(pill, with: .color(accent.opacity(0.55)), lineWidth: 0.75)
+        ctx.draw(resolved, at: CGPoint(x: midX, y: rect.midY), anchor: .center)
     }
 
     // MARK: - Live series

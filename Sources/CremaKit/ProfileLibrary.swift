@@ -27,7 +27,13 @@ public final class ProfileLibrary {
         if let data = defaults.data(forKey: key),
            let decoded = try? JSONDecoder().decode([BrewProfile].self, from: data),
            !decoded.isEmpty {
-            loadedProfiles = decoded
+            // Migration: TestyT used to ship as a bundled default but is now
+            // only a test fixture. Strip any persisted copy from older installs
+            // so they lose the dev artifact without losing their own profiles.
+            // Older saves predate the pinned UUID, so match on name too.
+            let testyTID = BrewProfile.testyT.id
+            let pruned = decoded.filter { $0.id != testyTID && $0.name != "TestyT" }
+            loadedProfiles = pruned.isEmpty ? ProfileLibrary.bundledDefaults : pruned
         } else {
             loadedProfiles = ProfileLibrary.bundledDefaults
         }
@@ -106,10 +112,12 @@ public final class ProfileLibrary {
 
 extension ProfileLibrary {
     /// Profiles every new install ships with. Classic Espresso is FIRST so it
-    /// becomes the default-active for fresh installs — friendlier than the
-    /// dev-fixture-named TestyT for someone opening the app for the first time.
+    /// becomes the default-active for fresh installs.
+    /// `BrewProfile.testyT` is intentionally NOT bundled — it's a captured
+    /// dev fixture used by the encoder byte-exact tests, not a user-facing
+    /// recipe. Kept around as a public static so the tests can reference it.
     public static var bundledDefaults: [BrewProfile] {
-        [.classicEspresso, .turbo, .testyT]
+        [.classicEspresso, .turbo]
     }
 }
 
@@ -121,8 +129,10 @@ extension BrewProfile {
     public static let classicEspresso = BrewProfile(
         name: "Classic Espresso",
         stages: [
+            // 2 s bloom pause after preinfuse — short enough to feel responsive,
+            // long enough to let the puck saturate before extraction kicks in.
             BrewStage(label: "Preinfuse", duration: 6, priority: .pressure,
-                      pressureBar: 4.0, waitAfter: 8),
+                      pressureBar: 4.0, waitAfter: 2),
             BrewStage(label: "Extract",   duration: 22, priority: .flow,
                       flowMlPerSec: 1.7, waitAfter: 0),
             BrewStage(label: "Tail",      duration: 4, priority: .pressure,

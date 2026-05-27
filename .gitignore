@@ -1,26 +1,10 @@
-# SwiftPM build artifacts — large, regenerable, never useful in version control.
-.build/
-.swiftpm/
-Package.resolved
-
-# The .app bundle's MacOS/ holds the compiled binary; rebuilt every time.
-# The Resources/ subfolder holds the SwiftPM resource bundle, also copied at
-# build time. Info.plist IS source of truth — keep that.
-Crema.app/Contents/MacOS/
-Crema.app/Contents/Resources/
-
-# Xcode user state. The Crema.xcodeproj itself IS source-controlled (regenerated
-# from project.yml via xcodegen) but per-user state inside it is not.
-*.xcodeproj/xcuserdata/
-*.xcodeproj/project.xcworkspace/xcuserdata/
-*.xcworkspace/xcuserdata/
-
-# Xcode DerivedData (build output)
+# Local backups + build artifacts
+*.bak
+build/
+.DS_Store
 DerivedData/
 
-# macOS clutter.
-.DS_Store
-
-# Editor / IDE.
-.idea/
-.vscode/
+# Backend
+backend/node_modules/
+backend/dist/
+backend/.env

@@ -18,6 +18,15 @@ struct CremaApp: App {
     @State private var tipPreferences: TipPreferences
     @State private var replayPlayback: ShotPlayback
     @State private var liveDriver: LiveDriver
+    @State private var session: SignedInUser
+
+    /// Backend base URL. Defaults to localhost for dev — flip to your
+    /// production instance via `CREMA_BACKEND_URL` env at launch or by
+    /// editing this constant.
+    private static let defaultBackendURL = URL(
+        string: ProcessInfo.processInfo.environment["CREMA_BACKEND_URL"]
+                ?? "http://localhost:8080"
+    )!
 
     init() {
         let reg = MachineRegistry()
@@ -28,8 +37,9 @@ struct CremaApp: App {
         _library  = State(initialValue: lib)
         _history  = State(initialValue: hist)
         _tipPreferences = State(initialValue: tips)
-        _replayPlayback = State(initialValue: Self.makeReplayPlayback(profile: lib.active))
+        _replayPlayback = State(initialValue: Self.makeReplayPlayback())
         _liveDriver = State(initialValue: Self.makeLiveDriver(registry: reg, profile: lib.active))
+        _session = State(initialValue: SignedInUser(backendBaseURL: Self.defaultBackendURL))
     }
 
     var body: some Scene {
@@ -40,7 +50,8 @@ struct CremaApp: App {
                 liveDriver: liveDriver,
                 library: library,
                 history: history,
-                tipPreferences: tipPreferences
+                tipPreferences: tipPreferences,
+                session: session
             )
             #if os(macOS)
             .frame(minWidth: 1180, minHeight: 760)
@@ -49,14 +60,13 @@ struct CremaApp: App {
                 replayPlayback.play()
                 liveDriver.bootstrap()
             }
-            // When the user picks a different profile from the library, rebuild
-            // the engines so both REPLAY and LIVE modes use the new shape. The
-            // observed key is the active profile's id, not the value — id-only
-            // means we don't rebuild on slider-driven edits of the same profile.
+            // When the user picks a different profile, rebuild LIVE only.
+            // Demo/replay stays anchored to the profile the CSV was recorded
+            // against (TestyT) — overlaying that captured trace on a different
+            // profile's ghost lines was visually misleading and made the demo
+            // look broken.
             .onChange(of: library.activeProfileID) { _, _ in
                 let newProfile = library.active
-                replayPlayback = Self.makeReplayPlayback(profile: newProfile)
-                replayPlayback.play()
                 liveDriver = Self.makeLiveDriver(registry: registry, profile: newProfile)
                 liveDriver.bootstrap()
             }
@@ -67,9 +77,35 @@ struct CremaApp: App {
         #endif
     }
 
-    private static func makeReplayPlayback(profile: BrewProfile) -> ShotPlayback {
+    /// Replay always uses the bundled `brew_testyt_full.csv` paired with a
+    /// demo profile shaped to match its actual brew duration (~30 s — the CSV
+    /// is trimmed to the natural end of the shot).
+    ///
+    /// We DON'T use `BrewProfile.testyT` directly even though the CSV came
+    /// from that recipe: that constant is the byte-exact ground truth for the
+    /// 20-second-extract shot the official app captured, and the encoder unit
+    /// tests depend on it remaining unchanged. The demo profile here keeps the
+    /// same recipe shape but shortens the extract so the playhead stops when
+    /// the data does — no dead-air timer running past the end.
+    private static func makeReplayPlayback() -> ShotPlayback {
         let samples = (try? BrewCSVLoader.load(resource: "brew_testyt_full")) ?? []
-        return ShotPlayback(samples: samples, profile: profile)
+        let demoProfile = BrewProfile(
+            name: "Demo · TestyT",
+            stages: [
+                BrewStage(label: "Preinfuse", duration: 7, priority: .pressure,
+                          pressureBar: 6.1, waitAfter: 8),
+                BrewStage(label: "Soak",      duration: 3, priority: .pressure,
+                          pressureBar: 2.3),
+                BrewStage(label: "Extract",   duration: 12, priority: .flow,
+                          flowMlPerSec: 1.7, waitAfter: 0),
+                BrewStage(label: "Tail",      duration: 0, priority: .pressure,
+                          pressureBar: 1.1),
+            ],
+            mode: .flowVariablePressure,
+            target: .flow,
+            targetVolumeMl: 68
+        )
+        return ShotPlayback(samples: samples, profile: demoProfile)
     }
 
     private static func makeLiveDriver(registry: MachineRegistry, profile: BrewProfile) -> LiveDriver {

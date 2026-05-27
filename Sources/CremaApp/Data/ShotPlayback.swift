@@ -18,7 +18,12 @@ import CremaKit
 @Observable
 final class ShotPlayback {
     private(set) var samples: [ShotSample]
-    let profile: BrewProfile
+    /// The profile these samples are an instance of. Mutable so that when a
+    /// brew runs with a one-shot override (auto-tune temp profile), the chart
+    /// re-renders against the ghost lines that *actually drove the shot*,
+    /// not whatever happens to be active in the user's library. LiveDriver
+    /// sets this at the start of each brew.
+    var profile: BrewProfile
     let isLiveDriven: Bool
 
     /// Playhead in seconds (since brew start).
