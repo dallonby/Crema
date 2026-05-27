@@ -19,6 +19,8 @@ struct CremaApp: App {
     @State private var replayPlayback: ShotPlayback
     @State private var liveDriver: LiveDriver
     @State private var session: SignedInUser
+    @State private var pendingImportProfile: ShareAPIClient.ProfileDTO?
+    @State private var importError: String?
 
     /// Backend base URL. Defaults to localhost for dev — flip to your
     /// production instance via `CREMA_BACKEND_URL` env at launch or by
@@ -60,6 +62,23 @@ struct CremaApp: App {
                 replayPlayback.play()
                 liveDriver.bootstrap()
             }
+            // crema://profile/<id> deep links → fetch + present import preview
+            .onOpenURL { url in handleIncoming(url: url) }
+            // Imported .crema file (Files app, AirDrop landing, etc.)
+            .sheet(item: $pendingImportProfile) { dto in
+                ImportProfileSheet(profile: dto, library: library,
+                                     session: session,
+                                     onDone: { pendingImportProfile = nil })
+            }
+            .alert("Couldn't open profile",
+                   isPresented: Binding(
+                    get: { importError != nil },
+                    set: { if !$0 { importError = nil } })
+            ) {
+                Button("OK") { importError = nil }
+            } message: {
+                Text(importError ?? "")
+            }
             // When the user picks a different profile, rebuild LIVE only.
             // Demo/replay stays anchored to the profile the CSV was recorded
             // against (TestyT) — overlaying that captured trace on a different
@@ -87,6 +106,63 @@ struct CremaApp: App {
     /// tests depend on it remaining unchanged. The demo profile here keeps the
     /// same recipe shape but shortens the extract so the playhead stops when
     /// the data does — no dead-air timer running past the end.
+    /// Route an incoming URL — either a `crema://profile/<id>` deep link
+    /// (fetch from backend then present preview) or a `file://…/foo.crema`
+    /// file open (decode locally + present preview). Anything else is
+    /// ignored.
+    @MainActor
+    private func handleIncoming(url: URL) {
+        if let share = ShareableProfileURL(url: url) {
+            Task {
+                do {
+                    let dto = try await session.client.fetch(id: share.id)
+                    pendingImportProfile = dto
+                } catch {
+                    importError = "Couldn't fetch profile \(share.id): \(error)"
+                }
+            }
+            return
+        }
+        if url.isFileURL && url.pathExtension == ProfileShareCodec.fileExtension {
+            do {
+                let shareable = try ProfileShareCodec.read(url)
+                pendingImportProfile = makeDTO(from: shareable)
+            } catch {
+                importError = "Couldn't parse profile file: \(error)"
+            }
+            return
+        }
+    }
+
+    /// Wrap a locally-loaded `ShareableProfile` in a `ProfileDTO` shape so it
+    /// can be previewed with the same `ImportProfileSheet`. Author info
+    /// reads from `sharedByName` when present; falls back to "Unknown".
+    @MainActor
+    private func makeDTO(from s: ShareableProfile) -> ShareAPIClient.ProfileDTO {
+        let dict: [String: Any] = [
+            "id": "local-\(UUID().uuidString.prefix(8))",
+            "name": s.profile.name,
+            "description": s.description as Any,
+            "beanName": s.beanName as Any,
+            "equipment": s.equipment as Any,
+            "profileJson": (try? JSONSerialization.jsonObject(
+                with: JSONEncoder().encode(s.profile))) ?? [:],
+            "likesCount": 0,
+            "downloadsCount": 0,
+            "createdAt": ISO8601DateFormatter().string(from: Date()),
+            "author": [
+                "id": "local",
+                "displayName": s.sharedByName ?? "Unknown",
+                "avatarUrl": NSNull(),
+            ],
+        ]
+        let cleaned = dict.compactMapValues { $0 is NSNull ? nil : $0 }
+        let data = try! JSONSerialization.data(withJSONObject: cleaned)
+        let dec = JSONDecoder()
+        dec.dateDecodingStrategy = .iso8601
+        return try! dec.decode(ShareAPIClient.ProfileDTO.self, from: data)
+    }
+
     private static func makeReplayPlayback() -> ShotPlayback {
         let samples = (try? BrewCSVLoader.load(resource: "brew_testyt_full")) ?? []
         let demoProfile = BrewProfile(

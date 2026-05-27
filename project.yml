@@ -35,11 +35,48 @@ targets:
         buildPhase: sources
         excludes:
           - "Resources/**"
+          - "Generated-*-Info.plist"
       - path: Sources/CremaApp/Resources
         buildPhase: resources
     dependencies:
       - package: CremaKit
         product: CremaKit
+    info:
+      path: Sources/CremaApp/Generated-iOS-Info.plist
+      properties:
+        CFBundleDisplayName: Crema
+        LSApplicationCategoryType: public.app-category.lifestyle
+        UILaunchScreen: {}
+        UIApplicationSupportsIndirectInputEvents: true
+        NSBluetoothAlwaysUsageDescription: "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data."
+        UISupportedInterfaceOrientations~iphone:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        # ── Profile sharing: deep links + .crema file open ──
+        CFBundleURLTypes:
+          - CFBundleURLName: coffee.crema.app
+            CFBundleURLSchemes: [crema]
+          # Google OAuth — set CFBundleURLSchemes to your reversed-client-id
+          # from Google Cloud Console once configured. Placeholder for now.
+          # - CFBundleURLName: coffee.crema.app.google
+          #   CFBundleURLSchemes: [com.googleusercontent.apps.YOUR-ID]
+        UTExportedTypeDeclarations:
+          - UTTypeIdentifier: coffee.crema.profile
+            UTTypeDescription: Crema Brew Profile
+            UTTypeConformsTo: [public.json, public.data]
+            UTTypeTagSpecification:
+              public.filename-extension: [crema]
+              public.mime-type: [application/json]
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Crema Profile
+            LSHandlerRank: Owner
+            LSItemContentTypes: [coffee.crema.profile]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: coffee.crema.app
@@ -47,14 +84,7 @@ targets:
         MARKETING_VERSION: "0.1"
         CURRENT_PROJECT_VERSION: "5"
         TARGETED_DEVICE_FAMILY: "1,2"   # iPhone + iPad
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription: "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data."
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
-        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
-        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.lifestyle
-        INFOPLIST_KEY_CFBundleDisplayName: Crema
+        GENERATE_INFOPLIST_FILE: NO
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         DEVELOPMENT_TEAM: YDGQZ6G5L9
@@ -73,22 +103,42 @@ targets:
         buildPhase: sources
         excludes:
           - "Resources/**"
+          - "Generated-*-Info.plist"
       - path: Sources/CremaApp/Resources
         buildPhase: resources
     dependencies:
       - package: CremaKit
         product: CremaKit
+    info:
+      path: Sources/CremaApp/Generated-macOS-Info.plist
+      properties:
+        CFBundleDisplayName: Crema
+        LSApplicationCategoryType: public.app-category.lifestyle
+        NSHumanReadableCopyright: "© 2026"
+        NSBluetoothAlwaysUsageDescription: "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data."
+        CFBundleURLTypes:
+          - CFBundleURLName: coffee.crema.app
+            CFBundleURLSchemes: [crema]
+          # - CFBundleURLName: coffee.crema.app.google
+          #   CFBundleURLSchemes: [com.googleusercontent.apps.YOUR-ID]
+        UTExportedTypeDeclarations:
+          - UTTypeIdentifier: coffee.crema.profile
+            UTTypeDescription: Crema Brew Profile
+            UTTypeConformsTo: [public.json, public.data]
+            UTTypeTagSpecification:
+              public.filename-extension: [crema]
+              public.mime-type: [application/json]
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Crema Profile
+            LSHandlerRank: Owner
+            LSItemContentTypes: [coffee.crema.profile]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: coffee.crema.app
         PRODUCT_NAME: Crema
         MARKETING_VERSION: "0.1"
         CURRENT_PROJECT_VERSION: "1"
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription: "Crema connects to your Wendougee espresso machine over Bluetooth LE to send brew profiles and read live pressure / flow / temperature data."
-        INFOPLIST_KEY_NSHumanReadableCopyright: "© 2026"
-        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.lifestyle
-        INFOPLIST_KEY_CFBundleDisplayName: Crema
+        GENERATE_INFOPLIST_FILE: NO
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ENABLE_HARDENED_RUNTIME: NO
