@@ -8,3 +8,6 @@ DerivedData/
 backend/node_modules/
 backend/dist/
 backend/.env
+
+# macOS built app artifact (lives at repo root from `cp -R …`)
+Crema.app/
