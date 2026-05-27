@@ -6,6 +6,11 @@
     <array>
         <string>Default</string>
     </array>
+    <!-- Universal Links — same as iOS; see iOS entitlements file. -->
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>applinks:crema.coffee?mode=developer</string>
+    </array>
     <key>com.apple.security.app-sandbox</key>
     <false/>
     <key>com.apple.security.network.client</key>

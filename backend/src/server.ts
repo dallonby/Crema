@@ -5,6 +5,7 @@ import { logger } from "hono/logger";
 import auth from "./routes/auth.js";
 import profiles from "./routes/profiles.js";
 import users from "./routes/users.js";
+import wellKnown from "./routes/wellKnown.js";
 
 const app = new Hono();
 app.use("*", logger());
@@ -20,6 +21,7 @@ app.get("/health", (c) => c.json({ ok: true }));
 app.route("/auth", auth);
 app.route("/profiles", profiles);
 app.route("/users", users);
+app.route("/.well-known", wellKnown);
 
 // `/me` is just a convenience alias for `/users/me` — let users hit either.
 app.route("/me", new Hono().get("/", async (c) => {

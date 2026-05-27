@@ -30,6 +30,14 @@ Health check: `curl http://localhost:8080/health` → `{"ok":true}`.
      If unset, `/auth/sign-in-with-google` returns 501.
    - `PUBLIC_BASE_URL` — the user-facing URL of your deployment (used in
      share-link generation, e.g. `https://api.crema.coffee`)
+   - **For Universal / App Links (optional, recommended):**
+     - `APPLE_APP_ID` — `<team-id>.<bundle-id>`, e.g. `YDGQZ6G5L9.coffee.crema.app`
+     - `ANDROID_PACKAGE_NAME` — `coffee.crema.app`
+     - `ANDROID_SHA256_FINGERPRINTS` — comma-separated SHA-256 fingerprints
+       of your Android signing certs (release + debug)
+   When set, `/.well-known/apple-app-site-association` and
+   `/.well-known/assetlinks.json` are served so tapping a `<base>/p/<id>`
+   link in any iOS or Android app opens Crema directly when installed.
 3. Build the image (or use a Docker registry):
    ```bash
    docker build -t crema-backend .
@@ -62,6 +70,8 @@ Health check: `curl http://localhost:8080/health` → `{"ok":true}`.
 | DELETE | `/profiles/:id`                 | ✓    | Author can delete                  |
 | POST   | `/profiles/:id/like`            | ✓    | Like                               |
 | DELETE | `/profiles/:id/like`            | ✓    | Unlike                             |
+| GET    | `/.well-known/apple-app-site-association` | — | iOS Universal Links discovery      |
+| GET    | `/.well-known/assetlinks.json`  | —    | Android App Links discovery        |
 
 Auth header: `Authorization: Bearer <sessionToken>`.
 
