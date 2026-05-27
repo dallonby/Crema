@@ -90,9 +90,11 @@ struct BrowseCommunitySheet: View {
                     ProfileRow(
                         profile: p,
                         liked: store.likedIDs.contains(p.id),
-                        onTap:   { previewing = p },
-                        onLike:  { Task { await store.like(p) } },
-                        onUnlike:{ Task { await store.unlike(p) } }
+                        onTap:    { previewing = p },
+                        onLike:   { Task { await store.like(p) } },
+                        onUnlike: { Task { await store.unlike(p) } },
+                        onReport: { Task { await store.report(p) } },
+                        onBlock:  { Task { await store.block(p.author) } }
                     )
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
@@ -138,6 +140,11 @@ private struct ProfileRow: View {
     let onTap: () -> Void
     let onLike: () -> Void
     let onUnlike: () -> Void
+    let onReport: () -> Void
+    let onBlock: () -> Void
+
+    @State private var confirmingReport = false
+    @State private var confirmingBlock = false
 
     var body: some View {
         Button(action: onTap) {
@@ -184,6 +191,22 @@ private struct ProfileRow: View {
                     .padding(.horizontal, 10).padding(.vertical, 6)
                 }
                 .buttonStyle(.plain)
+                // App Store Guideline 1.2 — Report + Block menu per row.
+                Menu {
+                    Button("Report this profile", systemImage: "flag",
+                            role: .destructive) { confirmingReport = true }
+                    Button("Block @\(profile.author.displayName)", systemImage: "hand.raised",
+                            role: .destructive) { confirmingBlock = true }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(CremaColor.secondary)
+                        .frame(width: 28, height: 28)
+                        .contentShape(Rectangle())
+                }
+                .menuStyle(.borderlessButton)
+                .menuIndicator(.hidden)
+                .fixedSize()
             }
             .padding(.horizontal, 12).padding(.vertical, 10)
             .background(
@@ -194,5 +217,25 @@ private struct ProfileRow: View {
             )
         }
         .buttonStyle(.plain)
+        .confirmationDialog(
+            "Report this profile?",
+            isPresented: $confirmingReport,
+            titleVisibility: .visible
+        ) {
+            Button("Report", role: .destructive) { onReport() }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Reports are reviewed within 24 hours. The profile will hide from your feed immediately.")
+        }
+        .confirmationDialog(
+            "Block @\(profile.author.displayName)?",
+            isPresented: $confirmingBlock,
+            titleVisibility: .visible
+        ) {
+            Button("Block", role: .destructive) { onBlock() }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("You won't see profiles from this user again. They won't be notified.")
+        }
     }
 }

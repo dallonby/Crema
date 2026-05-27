@@ -164,6 +164,23 @@ public actor ShareAPIClient {
         return LikeResponse(likesCount: r.likesCount)
     }
 
+    // MARK: - Moderation
+
+    public func report(profileId: String, reason: String?) async throws {
+        let _: [String: Bool] = try await post("/profiles/\(profileId)/report",
+                                                body: ["reason": (reason ?? "") as Any],
+                                                auth: true)
+    }
+
+    public func block(userId: String) async throws {
+        let _: [String: Bool] = try await post("/users/\(userId)/block",
+                                                body: [:], auth: true)
+    }
+
+    public func unblock(userId: String) async throws {
+        try await deleteRequest("/users/\(userId)/block", auth: true)
+    }
+
     public func follow(userId: String) async throws {
         let _: [String: Bool] = try await post("/users/\(userId)/follow",
                                                 body: [:], auth: true)

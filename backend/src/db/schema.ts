@@ -77,5 +77,42 @@ export const follows = pgTable("follows", {
   followeeIdx: index("follows_followee_idx").on(t.followeeId),
 }));
 
+/**
+ * Moderation reports — fulfils Apple App Store Guideline 1.2 (UGC apps
+ * must offer a way to flag objectionable content). One row per (reporter,
+ * profile) — composite PK prevents spamming the same profile from one
+ * account. Reports beyond a threshold count auto-hide a profile from
+ * browse via `profiles_visible` view (TODO when threshold tuning is real).
+ */
+export const reports = pgTable("reports", {
+  reporterId: text("reporter_id").notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  profileId: text("profile_id").notNull()
+    .references(() => profiles.id, { onDelete: "cascade" }),
+  reason: text("reason"),  // optional free-form, capped server-side
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull().defaultNow(),
+}, (t) => ({
+  pk: primaryKey({ columns: [t.reporterId, t.profileId] }),
+  profileIdx: index("reports_profile_idx").on(t.profileId),
+}));
+
+/**
+ * User-level block list — fulfils App Store Guideline 1.2 ("block abusive
+ * users"). When blocker queries the browse feed, blocked users' uploads
+ * are filtered server-side.
+ */
+export const blocks = pgTable("blocks", {
+  blockerId: text("blocker_id").notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  blockedId: text("blocked_id").notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull().defaultNow(),
+}, (t) => ({
+  pk: primaryKey({ columns: [t.blockerId, t.blockedId] }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type Profile = typeof profiles.$inferSelect;
+export type Report = typeof reports.$inferSelect;

@@ -1,9 +1,10 @@
 import { Hono } from "hono";
 import { z } from "zod";
-import { and, desc, eq, lt, sql } from "drizzle-orm";
+import { and, desc, eq, lt, notInArray, sql } from "drizzle-orm";
 import { db, schema } from "../db/client.js";
 import { newProfileId } from "../lib/id.js";
 import { requireUser, type AuthVars } from "./middleware.js";
+import { checkProfileFields } from "../lib/moderation.js";
 
 const profiles = new Hono<{ Variables: AuthVars }>();
 
@@ -29,6 +30,16 @@ profiles.post("/", requireUser, async (c) => {
   const user = c.get("user");
   const body = UploadBody.safeParse(await c.req.json().catch(() => ({})));
   if (!body.success) return c.json({ error: body.error.format() }, 400);
+
+  // App Store Guideline 1.2: filter objectionable material at upload time.
+  // Slur list + phone/URL/email patterns. Rejects with 422.
+  const mod = checkProfileFields(body.data);
+  if (!mod.ok) {
+    return c.json({
+      error: "Profile rejected by content filter.",
+      reason: mod.reason,
+    }, 422);
+  }
 
   const id = newProfileId();
   const [row] = await db.insert(schema.profiles).values({
@@ -57,9 +68,27 @@ profiles.get("/", async (c) => {
   const cursorIso = c.req.query("cursor");          // ISO timestamp
   const limit = Math.min(Number(c.req.query("limit")) || 30, 100);
 
+  // If the caller is signed in, filter out authors they've blocked.
+  // Anonymous browsers see everything (no per-user block list to apply).
+  let blockedAuthorIds: string[] = [];
+  const header = c.req.header("Authorization") ?? "";
+  if (header.startsWith("Bearer ")) {
+    try {
+      const { verifySessionToken } = await import("../auth/jwt.js");
+      const session = await verifySessionToken(header.slice(7));
+      const rows = await db.select({ id: schema.blocks.blockedId })
+        .from(schema.blocks)
+        .where(eq(schema.blocks.blockerId, session.userId));
+      blockedAuthorIds = rows.map(r => r.id);
+    } catch { /* invalid token → treat as anon */ }
+  }
+
   const where = [
     authorId ? eq(schema.profiles.authorId, authorId) : undefined,
     cursorIso ? lt(schema.profiles.createdAt, new Date(cursorIso)) : undefined,
+    blockedAuthorIds.length
+      ? notInArray(schema.profiles.authorId, blockedAuthorIds)
+      : undefined,
   ].filter(Boolean);
 
   const rows = await db
@@ -76,6 +105,29 @@ profiles.get("/", async (c) => {
       ? rows[rows.length - 1].p.createdAt.toISOString()
       : null,
   });
+});
+
+// ---------------------------------------------------------------
+// Report a profile — App Store Guideline 1.2 requirement.
+// Idempotent (composite PK prevents one user from spamming reports).
+// ---------------------------------------------------------------
+profiles.post("/:id/report", requireUser, async (c) => {
+  const user = c.get("user");
+  const id = c.req.param("id");
+  const body = await c.req.json().catch(() => ({}));
+  const reason = typeof body.reason === "string"
+    ? body.reason.slice(0, 280)   // cap at tweet-length
+    : null;
+  // Confirm the profile exists first — better error than a foreign-key violation
+  const exists = await db.query.profiles.findFirst({
+    where: eq(schema.profiles.id, id), columns: { id: true },
+  });
+  if (!exists) return c.json({ error: "profile not found" }, 404);
+
+  await db.insert(schema.reports)
+    .values({ reporterId: user.id, profileId: id, reason })
+    .onConflictDoNothing();
+  return c.json({ ok: true });
 });
 
 // ---------------------------------------------------------------

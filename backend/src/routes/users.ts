@@ -82,6 +82,39 @@ users.get("/:id/following", async (c) => {
   return c.json({ users: rows.map((r) => shapeUser(r.u)) });
 });
 
+// ---- Block / unblock ----------------------------------------------------
+// App Store Guideline 1.2 requires "the ability to block abusive users."
+// Blocked authors are filtered out of GET /profiles when the caller is the
+// blocker (see profiles route). Idempotent.
+
+users.post("/:id/block", requireUser, async (c) => {
+  const me = c.get("user");
+  const targetId = c.req.param("id");
+  if (targetId === me.id) return c.json({ error: "can't block self" }, 400);
+  await db.insert(schema.blocks)
+    .values({ blockerId: me.id, blockedId: targetId })
+    .onConflictDoNothing();
+  return c.json({ ok: true });
+});
+
+users.delete("/:id/block", requireUser, async (c) => {
+  const me = c.get("user");
+  const targetId = c.req.param("id");
+  await db.delete(schema.blocks).where(and(
+    eq(schema.blocks.blockerId, me.id),
+    eq(schema.blocks.blockedId, targetId),
+  ));
+  return c.json({ ok: true });
+});
+
+users.get("/me/blocks", requireUser, async (c) => {
+  const me = c.get("user");
+  const rows = await db.select({ id: schema.blocks.blockedId,
+                                  createdAt: schema.blocks.createdAt })
+    .from(schema.blocks).where(eq(schema.blocks.blockerId, me.id));
+  return c.json({ blocked: rows });
+});
+
 users.get("/:id/stats", async (c) => {
   const id = c.req.param("id");
   const [stats] = await db.select({

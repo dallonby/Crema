@@ -30,6 +30,15 @@ final class CommunityProfileStore {
     /// heart icons. Lazily populated as the user likes things in this
     /// session; doesn't persist (the backend is the source of truth).
     private(set) var likedIDs: Set<String> = []
+    /// IDs of users this user has blocked. Belt-and-braces filter:
+    /// the server also drops their content from /profiles, but client-side
+    /// filtering means we hide them immediately on action without waiting
+    /// for a refresh, and keeps filtering even if the server check fails.
+    private(set) var blockedAuthorIDs: Set<String> = []
+    /// IDs of profiles the user has reported — local marker so we can
+    /// hide them client-side instantly even before any server-side
+    /// auto-hide threshold kicks in.
+    private(set) var reportedProfileIDs: Set<String> = []
 
     private let client: ShareAPIClient
 
@@ -80,6 +89,32 @@ final class CommunityProfileStore {
         } catch {
             likedIDs.remove(p.id)
             bump(id: p.id, delta: -1)
+        }
+    }
+
+    // MARK: - Moderation actions
+
+    /// Report a profile. On success, hide it client-side immediately so the
+    /// reporter doesn't see it again in this session.
+    func report(_ p: ShareAPIClient.ProfileDTO, reason: String? = nil) async {
+        reportedProfileIDs.insert(p.id)
+        profiles.removeAll { $0.id == p.id }
+        do {
+            try await client.report(profileId: p.id, reason: reason)
+        } catch {
+            self.error = "Couldn't submit report: \(error)"
+        }
+    }
+
+    /// Block a user. Drops all their content from the visible feed +
+    /// asks the server to filter their uploads from future browses.
+    func block(_ u: ShareAPIClient.UserDTO) async {
+        blockedAuthorIDs.insert(u.id)
+        profiles.removeAll { $0.author.id == u.id }
+        do {
+            try await client.block(userId: u.id)
+        } catch {
+            self.error = "Couldn't block user: \(error)"
         }
     }
 
