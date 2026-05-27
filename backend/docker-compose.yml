@@ -30,8 +30,10 @@ services:
       POSTGRES_USER: crema
       POSTGRES_PASSWORD: crema
       POSTGRES_DB: crema
-    ports:
-      - "5432:5432"
+    # No public port mapping — only the api container talks to the DB
+    # (over the internal compose network at hostname `db`). Avoids
+    # clashing with any host-level Postgres. Add a mapping back if you
+    # need direct access from your host for debugging.
     volumes:
       - crema_pgdata:/var/lib/postgresql/data
       # SQL files in db-init/ run in alphabetical order on first boot
