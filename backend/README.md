@@ -21,6 +21,9 @@ Health check: `curl http://localhost:8080/health` → `{"ok":true}`.
    - `JWT_SECRET` — 32+ char random string (used to sign session tokens)
    - `APPLE_CLIENT_ID` — the bundle id Apple issues identity tokens for
      (default `coffee.crema.app`)
+   - `GOOGLE_CLIENT_IDS` — comma-separated list of Google OAuth client ids
+     to accept (typically one for iOS, one for Android, one for web).
+     If unset, `/auth/sign-in-with-google` returns 501.
    - `PUBLIC_BASE_URL` — the user-facing URL of your deployment (used in
      share-link generation, e.g. `https://api.crema.coffee`)
 3. Build the image (or use a Docker registry):
@@ -40,6 +43,7 @@ Health check: `curl http://localhost:8080/health` → `{"ok":true}`.
 | Method | Path                            | Auth | Description                       |
 |--------|---------------------------------|------|-----------------------------------|
 | POST   | `/auth/sign-in-with-apple`      | —    | Trade Apple identity token for session |
+| POST   | `/auth/sign-in-with-google`     | —    | Trade Google ID token for session (iOS/Android/web) |
 | GET    | `/users/me`                     | ✓    | Current user                       |
 | PATCH  | `/users/me`                     | ✓    | Update display name / avatar       |
 | GET    | `/users/:id`                    | —    | Public user profile                |

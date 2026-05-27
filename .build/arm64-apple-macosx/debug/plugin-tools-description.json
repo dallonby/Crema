@@ -1,0 +1,999 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.xctest/Contents/MacOS/CremaPackageTests",
+      "packagePath" : "/Users/davidallonby/Source/Crema",
+      "productName" : "CremaPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.CremaKit-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/sources",
+      "importPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/BrewProfile.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/FF55.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/GrinderSettings.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Hex.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/LiveTelemetry.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineConstants.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineRegistry.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Modbus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileLibrary.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileTweakSuggester.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/StubMachineTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CremaKit",
+      "moduleOutputPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaKit.swiftmodule",
+      "objects" : [
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BrewProfile.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/FF55.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/GrinderSettings.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Hex.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/LiveTelemetry.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineConstants.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineRegistry.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineTransport.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Modbus.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileLibrary.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShotHistory.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/StubMachineTransport.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx15.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/include/CremaKit-Swift.h",
+        "-swift-version",
+        "6",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "crema"
+      ],
+      "outputFileMapPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BrewProfile.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/FF55.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/GrinderSettings.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Hex.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/LiveTelemetry.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineConstants.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineRegistry.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Modbus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileLibrary.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShotHistory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/StubMachineTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaKit.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/BrewProfile.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/FF55.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/GrinderSettings.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/Hex.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/LiveTelemetry.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineConstants.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineRegistry.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineTransport.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/Modbus.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileLibrary.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileTweakSuggester.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift",
+        "/Users/davidallonby/Source/Crema/Sources/CremaKit/StubMachineTransport.swift"
+      ],
+      "tempsPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CremaKitTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/sources",
+      "importPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/BrewProfileTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/FF55Tests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaKit.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CremaKitTests",
+      "moduleOutputPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaKitTests.swiftmodule",
+      "objects" : [
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swift.o",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx15.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "6",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "crema"
+      ],
+      "outputFileMapPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaKitTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/BrewProfileTests.swift",
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/FF55Tests.swift",
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift",
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift",
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift",
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift",
+        "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift"
+      ],
+      "tempsPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CremaPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/sources",
+      "importPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaKitTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CremaPackageTests",
+      "moduleOutputPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx15.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/include/CremaPackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "crema"
+      ],
+      "outputFileMapPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules/CremaPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "CremaKit" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CremaKit",
+      "-package-name",
+      "crema",
+      "-c",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/BrewProfile.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/FF55.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/GrinderSettings.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/Hex.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/LiveTelemetry.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineConstants.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineRegistry.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineTransport.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/Modbus.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileLibrary.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileTweakSuggester.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift",
+      "/Users/davidallonby/Source/Crema/Sources/CremaKit/StubMachineTransport.swift",
+      "-I",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx15.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/include/CremaKit-Swift.h",
+      "-swift-version",
+      "6",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "crema",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CremaKitTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CremaKitTests",
+      "-package-name",
+      "crema",
+      "-c",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/BrewProfileTests.swift",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/FF55Tests.swift",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift",
+      "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift",
+      "-I",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx15.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "6",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "crema",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CremaPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CremaPackageTests",
+      "-package-name",
+      "crema",
+      "-c",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx15.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/include/CremaPackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "crema",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "CremaKit" : [
+
+    ],
+    "CremaKitTests" : [
+      "CremaKit"
+    ],
+    "CremaPackageTests" : [
+      "CremaKitTests",
+      "CremaKit"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/BLEMachineTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/BrewProfile.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/FF55.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/GrinderSettings.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Hex.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/LiveTelemetry.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineConstants.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineRegistry.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/MachineTransport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/Modbus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileLibrary.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ProfileTweakSuggester.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/ShotHistory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Sources/CremaKit/StubMachineTransport.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/sources"
+    },
+    "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/BrewProfileTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/FF55Tests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/sources"
+    },
+    "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/sources"
+    },
+    "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BLEMachineTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/BrewProfile.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/FF55.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/GrinderSettings.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Hex.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/LiveTelemetry.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineConstants.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineRegistry.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/MachineTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/Modbus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileLibrary.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ProfileTweakSuggester.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/ShotHistory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKit.build/StubMachineTransport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.build/runner.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

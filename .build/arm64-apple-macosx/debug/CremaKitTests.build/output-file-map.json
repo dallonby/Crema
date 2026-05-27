@@ -1,0 +1,54 @@
+{
+  "": {
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/master.swiftdeps"
+  },
+  "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/BrewProfileTests.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/BrewProfileTests.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/FF55Tests.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/FF55Tests.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/GrinderSettingsTests.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/GrinderSettingsTests.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/MachineRegistryTests.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/MachineRegistryTests.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ModbusTests.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ModbusTests.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/ShotHistoryTests.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/ShotHistoryTests.dia"
+  },
+  "/Users/davidallonby/Source/Crema/Tests/CremaKitTests/StubTransportTests.swift": {
+    "dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.d",
+    "object": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.swift.o",
+    "swiftmodule": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.swiftdeps",
+    "diagnostics": "/Users/davidallonby/Source/Crema/.build/arm64-apple-macosx/debug/CremaKitTests.build/StubTransportTests.dia"
+  }
+}

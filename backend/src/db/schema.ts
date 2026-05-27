@@ -4,13 +4,19 @@ import {
 } from "drizzle-orm/pg-core";
 
 /**
- * Users — one row per Sign-In-with-Apple identity. The Apple `sub` claim is
- * a stable per-app identifier, so we key off that. Display name is what
- * other users see on shared profiles; users can change it freely.
+ * Users — one row per identity. Either `appleUserId` or `googleUserId` (or
+ * both, eventually) is set; the lookup path is by-provider. Both columns are
+ * unique-when-non-null so we don't accidentally fork an account by signing
+ * in via the other provider.
+ *
+ * A v2 will likely move to a separate `identities` table to support
+ * properly merging accounts that signed in via different providers but
+ * own the same email. For now, single-provider-per-user is simpler.
  */
 export const users = pgTable("users", {
   id: text("id").primaryKey(),                     // nanoid
-  appleUserId: text("apple_user_id").notNull().unique(),
+  appleUserId: text("apple_user_id").unique(),     // nullable — see above
+  googleUserId: text("google_user_id").unique(),
   displayName: text("display_name").notNull(),
   avatarUrl: text("avatar_url"),
   createdAt: timestamp("created_at", { withTimezone: true })
