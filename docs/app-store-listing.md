@@ -95,9 +95,14 @@ Resulting rating: **4+**.
 
 ### UGC explanation (mandatory if "yes" to user-generated content)
 
-> Users can share brew profiles with the community. Profiles are technical recipes (numerical pressure / flow / time values, equipment name, optional tasting note). The author's display name is shown. We provide moderation tools: report, hide, and account/profile deletion. Inappropriate content can be reported and is reviewed within 24 hours.
-
-⚠️ Note: this commits us to actually having a report/moderation pipeline. Currently we don't — flag this for v0.3.
+> Users can share brew profiles with the community. Profiles are technical recipes (numerical pressure / flow / time values, equipment name, optional tasting note). The author's display name is shown.
+>
+> Moderation primitives (all in v0.2):
+> • **Upload filter** — server-side check using the `obscenity` library (English with leetspeak/spacing detection) plus the LDNOOBW multi-language word lists (19 languages), plus phone/URL/email pattern rejection. Failed uploads return HTTP 422.
+> • **Report** — per-profile "Report this profile" action in both the community browse view and the import preview. Reports are stored server-side and reviewed within 24 hours.
+> • **Block user** — per-author "Block @user" action. Blocked authors' uploads are filtered out of the browse feed server-side and client-side.
+> • **Author-side delete** — uploads can be deleted by their author at any time from within the app.
+> • **Contact** — da@byeq.com (also on the support page).
 
 ## Support URL (mandatory)
 
