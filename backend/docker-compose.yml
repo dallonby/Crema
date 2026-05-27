@@ -26,6 +26,10 @@ services:
       - "5432:5432"
     volumes:
       - crema_pgdata:/var/lib/postgresql/data
+      # SQL files in db-init/ run in alphabetical order on first boot
+      # (Postgres image standard). Wipe the volume to re-apply (only safe
+      # locally — for prod you'd run them by hand).
+      - ./db-init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U crema"]
       interval: 5s

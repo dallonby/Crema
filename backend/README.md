@@ -8,8 +8,12 @@ Node.js with Postgres. Sign in with Apple for identity.
 ```bash
 cd backend
 docker compose up --build         # API on :8080, Postgres on :5432
-docker compose exec api npm run db:migrate
 ```
+
+Schema is applied automatically by Postgres on first boot
+(`db-init/*.sql` → `/docker-entrypoint-initdb.d/`). To re-apply after
+a schema change locally: `docker compose down -v` (wipes the volume),
+then `docker compose up`.
 
 Health check: `curl http://localhost:8080/health` → `{"ok":true}`.
 
