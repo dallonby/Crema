@@ -18,6 +18,7 @@ struct ProfilesView: View {
     @State private var pendingDelete: BrewProfile?
     @State private var sharingProfile: BrewProfile?
     @State private var showBrowse = false
+    @State private var showSettings = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -80,6 +81,12 @@ struct ProfilesView: View {
             if let session {
                 BrowseCommunitySheet(session: session, library: library,
                                        onDismiss: { showBrowse = false })
+            }
+        }
+        .sheet(isPresented: $showSettings) {
+            if let session {
+                SettingsSheet(session: session,
+                                onDismiss: { showSettings = false })
             }
         }
         .confirmationDialog(
@@ -155,6 +162,14 @@ struct ProfilesView: View {
                         Capsule().fill(CremaColor.matcha.opacity(0.16))
                             .overlay(Capsule().strokeBorder(CremaColor.matcha.opacity(0.35), lineWidth: 0.5))
                     )
+                }
+                .buttonStyle(.plain)
+                Button(action: { showSettings = true }) {
+                    Image(systemName: "gearshape.fill")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(CremaColor.secondary)
+                        .frame(width: 34, height: 34)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
             }

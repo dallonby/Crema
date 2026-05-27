@@ -52,6 +52,7 @@
 		8B8481330022A20EF2A2322C /* BrewActionZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA8FA0BDD6F827631AF448 /* BrewActionZone.swift */; };
 		8BC203F3E1C89909D19CC594 /* LiveDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */; };
 		8FDF32AFF6E4FBAF9685E135 /* ProfileNodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */; };
+		9B51FED166A2A718CFB751C7 /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2DA186DBAC5A5C132A9A7F /* SettingsSheet.swift */; };
 		9F688620A25F39A410BF4328 /* ShareProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3670FCB0555289F6932480C5 /* ShareProfileSheet.swift */; };
 		A31B736B59FFB10ED836A423 /* LiveShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D7082747C6956FB747956 /* LiveShotView.swift */; };
 		A55FEF7D1E150CCF1F370A94 /* CremaKit in Frameworks */ = {isa = PBXBuildFile; productRef = F41B9BFD9A7FED8F14F0C8D1 /* CremaKit */; };
@@ -65,6 +66,7 @@
 		C16782E0B7E75BB7BEDC9A19 /* AutoTuneSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C223C290BF955812B56D865 /* AutoTuneSteps.swift */; };
 		C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45970EE58AAB2B10D530FA /* ShotChart.swift */; };
 		CA9C5895493137766011413B /* brew_testyt_full.csv.bak in Resources */ = {isa = PBXBuildFile; fileRef = CDF90C8056300B65EB23C188 /* brew_testyt_full.csv.bak */; };
+		D01E78254F57A7D5182E909F /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2DA186DBAC5A5C132A9A7F /* SettingsSheet.swift */; };
 		D33ECE005FA2F2DB5634FEF6 /* EditableProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */; };
 		D5D88A93029EB931B97EADFC /* CommunityProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192EC451394CD56402653CD /* CommunityProfileStore.swift */; };
 		D977CD7155F1BC4C94F97256 /* ProfileNodeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */; };
@@ -105,6 +107,7 @@
 		7A66D2F1B43C1C7125A269A0 /* LiveDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriver.swift; sourceTree = "<group>"; };
 		9BEFE29FE0045903ABB62848 /* SuggestionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsSheet.swift; sourceTree = "<group>"; };
 		A081602E044679DEC4CE7EB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF2DA186DBAC5A5C132A9A7F /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
 		AFB4334C0FD26AF9EE22E9BE /* ImportProfileSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportProfileSheet.swift; sourceTree = "<group>"; };
 		B7263BCED2764D3B60B24AB4 /* EditableProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableProfile.swift; sourceTree = "<group>"; };
 		B860A49E5CA1BA35BFC7D87E /* ProfileNodeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNodeEditor.swift; sourceTree = "<group>"; };
@@ -193,6 +196,7 @@
 				4E76601BC3D65D2A3E636630 /* BrowseCommunitySheet.swift */,
 				AFB4334C0FD26AF9EE22E9BE /* ImportProfileSheet.swift */,
 				020E89A6E20DF116D43976B3 /* QRCode.swift */,
+				AF2DA186DBAC5A5C132A9A7F /* SettingsSheet.swift */,
 				3670FCB0555289F6932480C5 /* ShareProfileSheet.swift */,
 				FDD4254A35D2DAF03E2176BE /* SignInView.swift */,
 			);
@@ -396,6 +400,7 @@
 				8FDF32AFF6E4FBAF9685E135 /* ProfileNodeEditor.swift in Sources */,
 				39C23732A2F9A610918CB805 /* ProfilesView.swift in Sources */,
 				343255E29FE18306FDE6AEC5 /* QRCode.swift in Sources */,
+				9B51FED166A2A718CFB751C7 /* SettingsSheet.swift in Sources */,
 				35A680A6FD405D98587D5A61 /* ShareProfileSheet.swift in Sources */,
 				0AFE3514D79EB46A87DC7F1C /* ShotChart.swift in Sources */,
 				726936C2BB09F8BECF22F689 /* ShotFeedbackSheet.swift in Sources */,
@@ -434,6 +439,7 @@
 				D977CD7155F1BC4C94F97256 /* ProfileNodeEditor.swift in Sources */,
 				10D35C3F64C5BE44CA565300 /* ProfilesView.swift in Sources */,
 				59E5ECC9241C4F7CABB0B808 /* QRCode.swift in Sources */,
+				D01E78254F57A7D5182E909F /* SettingsSheet.swift in Sources */,
 				9F688620A25F39A410BF4328 /* ShareProfileSheet.swift in Sources */,
 				C93066A1F00C63BF9C952097 /* ShotChart.swift in Sources */,
 				53F5BCD87620B45C69931530 /* ShotFeedbackSheet.swift in Sources */,

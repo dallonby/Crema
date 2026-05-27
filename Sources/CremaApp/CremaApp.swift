@@ -22,13 +22,21 @@ struct CremaApp: App {
     @State private var pendingImportProfile: ShareAPIClient.ProfileDTO?
     @State private var importError: String?
 
-    /// Backend base URL. Defaults to localhost for dev — flip to your
-    /// production instance via `CREMA_BACKEND_URL` env at launch or by
-    /// editing this constant.
-    private static let defaultBackendURL = URL(
-        string: ProcessInfo.processInfo.environment["CREMA_BACKEND_URL"]
-                ?? "http://localhost:8080"
-    )!
+    /// Backend base URL. Resolution order, most-specific first:
+    /// 1. User override stored in UserDefaults (Settings → Backend)
+    /// 2. `CREMA_BACKEND_URL` env at launch
+    /// 3. localhost fallback
+    private static var resolvedBackendURL: URL {
+        if let stored = UserDefaults.standard.string(forKey: "crema.backend.url.override"),
+           let url = URL(string: stored), url.scheme?.hasPrefix("http") == true {
+            return url
+        }
+        if let env = ProcessInfo.processInfo.environment["CREMA_BACKEND_URL"],
+           let url = URL(string: env) {
+            return url
+        }
+        return URL(string: "http://localhost:8080")!
+    }
 
     init() {
         let reg = MachineRegistry()
@@ -41,7 +49,7 @@ struct CremaApp: App {
         _tipPreferences = State(initialValue: tips)
         _replayPlayback = State(initialValue: Self.makeReplayPlayback())
         _liveDriver = State(initialValue: Self.makeLiveDriver(registry: reg, profile: lib.active))
-        _session = State(initialValue: SignedInUser(backendBaseURL: Self.defaultBackendURL))
+        _session = State(initialValue: SignedInUser(backendBaseURL: Self.resolvedBackendURL))
     }
 
     var body: some Scene {

@@ -99,6 +99,14 @@ public actor ShareAPIClient {
         return r.user
     }
 
+    public func updateMe(displayName: String) async throws -> UserDTO {
+        struct R: Codable { let user: ShareAPIClient.UserDTO }
+        let r: R = try await patch("/users/me",
+                                    body: ["displayName": displayName],
+                                    auth: true)
+        return r.user
+    }
+
     // MARK: - Profiles
 
     public func upload(_ s: ShareableProfile) async throws -> UploadResponse {
@@ -160,6 +168,9 @@ public actor ShareAPIClient {
     }
     private func post<R: Decodable>(_ path: String, body: [String: Any], auth: Bool) async throws -> R {
         try await send(method: "POST", path: path, body: body, auth: auth)
+    }
+    private func patch<R: Decodable>(_ path: String, body: [String: Any], auth: Bool) async throws -> R {
+        try await send(method: "PATCH", path: path, body: body, auth: auth)
     }
     @discardableResult
     private func deleteRequest<R: Decodable>(_ path: String, auth: Bool) async throws -> R {

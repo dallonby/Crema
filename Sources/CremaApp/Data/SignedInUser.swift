@@ -116,6 +116,18 @@ final class SignedInUser {
         }
     }
 
+    /// Push a new display name to the backend + update local cache.
+    @discardableResult
+    func updateDisplayName(_ name: String) async -> Bool {
+        guard isSignedIn else { return false }
+        do {
+            let u = try await client.updateMe(displayName: name)
+            self.user = u
+            persistUser(u)
+            return true
+        } catch { return false }
+    }
+
     // MARK: - Private
 
     private func adopt(token: String, user: ShareAPIClient.UserDTO) {
