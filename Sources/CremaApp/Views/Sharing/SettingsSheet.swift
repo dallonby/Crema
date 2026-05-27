@@ -266,7 +266,7 @@ struct SettingsSheet: View {
     private var defaultBackendString: String {
         // Match the CremaApp default. Hardcoded mirror — keeps this view
         // self-contained.
-        "http://localhost:8080"
+        "https://api.caffecremalabs.com"
     }
 
     private var appVersion: String {

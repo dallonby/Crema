@@ -35,7 +35,7 @@ struct CremaApp: App {
            let url = URL(string: env) {
             return url
         }
-        return URL(string: "http://localhost:8080")!
+        return URL(string: "https://api.caffecremalabs.com")!
     }
 
     init() {
