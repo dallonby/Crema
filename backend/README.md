@@ -30,6 +30,9 @@ Health check: `curl http://localhost:8080/health` → `{"ok":true}`.
      If unset, `/auth/sign-in-with-google` returns 501.
    - `PUBLIC_BASE_URL` — the user-facing URL of your deployment (used in
      share-link generation, e.g. `https://api.crema.coffee`)
+   - `CORS_ORIGINS` — comma-separated origins allowed for browser access
+     (default `*` for dev convenience). Set for production:
+     `CORS_ORIGINS="https://crema.coffee,https://app.crema.coffee"`.
    - **For Universal / App Links (optional, recommended):**
      - `APPLE_APP_ID` — `<team-id>.<bundle-id>`, e.g. `YDGQZ6G5L9.coffee.crema.app`
      - `ANDROID_PACKAGE_NAME` — `coffee.crema.app`

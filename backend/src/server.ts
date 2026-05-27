@@ -6,10 +6,28 @@ import auth from "./routes/auth.js";
 import profiles from "./routes/profiles.js";
 import users from "./routes/users.js";
 import wellKnown from "./routes/wellKnown.js";
+import { makeRateLimiter } from "./lib/rateLimit.js";
 
 const app = new Hono();
 app.use("*", logger());
-app.use("*", cors({ origin: "*", allowMethods: ["GET", "POST", "PATCH", "DELETE"] }));
+
+// CORS — env-driven allowlist. Default to wildcard for dev convenience;
+// for production set `CORS_ORIGINS="https://crema.coffee,https://app.crema.coffee"`
+// to lock down which web origins can hit the API.
+const corsOrigins = (process.env.CORS_ORIGINS ?? "*")
+  .split(",").map(s => s.trim()).filter(Boolean);
+app.use("*", cors({
+  origin: corsOrigins.length === 1 && corsOrigins[0] === "*"
+    ? "*"
+    : (origin) => corsOrigins.includes(origin) ? origin : "",
+  allowMethods: ["GET", "POST", "PATCH", "DELETE"],
+}));
+
+// Rate limiting. Auth is tightest (anti-brute-force on token-exchange);
+// the rest get a generous bucket per IP. Single-instance in-memory state
+// — see lib/rateLimit.ts for the swap-out path to Redis if you scale out.
+const authLimit    = makeRateLimiter({ capacity: 10,  refillPerSec: 0.1 });
+const generalLimit = makeRateLimiter({ capacity: 120, refillPerSec: 2.0 });
 
 app.get("/", (c) => c.json({
   service: "crema-backend",
@@ -26,6 +44,12 @@ app.get("/", (c) => c.json({
   ],
 }));
 app.get("/health", (c) => c.json({ ok: true }));
+
+app.use("/auth/*",     authLimit);
+app.use("/profiles/*", generalLimit);
+app.use("/profiles",   generalLimit);   // matches the collection root
+app.use("/users/*",    generalLimit);
+// `/health`, `/`, `/.well-known/*` deliberately unlimited.
 
 app.route("/auth", auth);
 app.route("/profiles", profiles);
