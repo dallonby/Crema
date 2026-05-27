@@ -16,7 +16,7 @@
     -->
     <key>com.apple.developer.associated-domains</key>
     <array>
-        <string>applinks:crema.coffee?mode=developer</string>
+        <string>applinks:api.caffecremalabs.com?mode=developer</string>
     </array>
 </dict>
 </plist>
