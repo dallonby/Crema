@@ -6,6 +6,7 @@ import auth from "./routes/auth.js";
 import profiles from "./routes/profiles.js";
 import users from "./routes/users.js";
 import wellKnown from "./routes/wellKnown.js";
+import preview from "./routes/preview.js";
 import { makeRateLimiter } from "./lib/rateLimit.js";
 
 const app = new Hono();
@@ -49,12 +50,14 @@ app.use("/auth/*",     authLimit);
 app.use("/profiles/*", generalLimit);
 app.use("/profiles",   generalLimit);   // matches the collection root
 app.use("/users/*",    generalLimit);
+app.use("/p/*",        generalLimit);   // public profile preview hits DB
 // `/health`, `/`, `/.well-known/*` deliberately unlimited.
 
 app.route("/auth", auth);
 app.route("/profiles", profiles);
 app.route("/users", users);
 app.route("/.well-known", wellKnown);
+app.route("/p", preview);   // public HTML preview at /p/<id>
 
 // `/me` is just a convenience alias for `/users/me` — let users hit either.
 app.route("/me", new Hono().get("/", async (c) => {
