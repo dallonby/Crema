@@ -11,3 +11,4 @@ backend/.env
 
 # macOS built app artifact (lives at repo root from `cp -R …`)
 Crema.app/
+.build/
