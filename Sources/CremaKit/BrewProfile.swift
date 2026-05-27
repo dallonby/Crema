@@ -57,6 +57,10 @@ public struct BrewProfile: Sendable, Hashable, Identifiable, Codable {
     public let targetWeightG: UInt16?
     /// `craft.auto_link` — unused by us so far, stored for round-trip fidelity.
     public let autoLink: UInt16
+    /// Optional grinder settings to apply with this profile. When set, the UI
+    /// surfaces a "Set grinder" button next to Brew so the user can push the
+    /// grind size / RPM to the machine without leaving the brew screen.
+    public var grinder: GrinderSettings?
 
     public init(
         id: UUID = UUID(),
@@ -68,7 +72,8 @@ public struct BrewProfile: Sendable, Hashable, Identifiable, Codable {
         variableFlow: Bool = true,
         targetVolumeMl: UInt16? = nil,
         targetWeightG: UInt16? = nil,
-        autoLink: UInt16 = 0
+        autoLink: UInt16 = 0,
+        grinder: GrinderSettings? = nil
     ) {
         self.id = id
         self.name = name
@@ -80,6 +85,7 @@ public struct BrewProfile: Sendable, Hashable, Identifiable, Codable {
         self.targetVolumeMl = targetVolumeMl
         self.targetWeightG = targetWeightG
         self.autoLink = autoLink
+        self.grinder = grinder
     }
 
     /// Total wall-clock duration including waits.

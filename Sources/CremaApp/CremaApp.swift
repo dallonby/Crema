@@ -14,14 +14,20 @@ struct CremaApp: App {
     @State private var mode: AppMode = .live
     @State private var registry: MachineRegistry
     @State private var library: ProfileLibrary
+    @State private var history: ShotHistory
+    @State private var tipPreferences: TipPreferences
     @State private var replayPlayback: ShotPlayback
     @State private var liveDriver: LiveDriver
 
     init() {
         let reg = MachineRegistry()
         let lib = ProfileLibrary()
+        let hist = ShotHistory()
+        let tips = TipPreferences()
         _registry = State(initialValue: reg)
         _library  = State(initialValue: lib)
+        _history  = State(initialValue: hist)
+        _tipPreferences = State(initialValue: tips)
         _replayPlayback = State(initialValue: Self.makeReplayPlayback(profile: lib.active))
         _liveDriver = State(initialValue: Self.makeLiveDriver(registry: reg, profile: lib.active))
     }
@@ -32,7 +38,9 @@ struct CremaApp: App {
                 mode: $mode,
                 replayPlayback: replayPlayback,
                 liveDriver: liveDriver,
-                library: library
+                library: library,
+                history: history,
+                tipPreferences: tipPreferences
             )
             #if os(macOS)
             .frame(minWidth: 1180, minHeight: 760)

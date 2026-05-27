@@ -18,13 +18,17 @@ struct BrewActionZone: View {
     @Binding var mode: AppMode
     let liveDriver: LiveDriver
     let replayPlayback: ShotPlayback
+    let library: ProfileLibrary
+    let history: ShotHistory
+    let tipPreferences: TipPreferences
 
     var body: some View {
         Group {
             if mode == .replay {
                 ReplayPlaybackBar(playback: replayPlayback)
             } else {
-                LiveBrewBar(driver: liveDriver)
+                LiveBrewBar(driver: liveDriver, library: library,
+                            history: history, tipPreferences: tipPreferences)
             }
         }
         .animation(.smooth(duration: 0.35), value: mode)
@@ -48,7 +52,11 @@ struct BrewActionZone: View {
 
 private struct LiveBrewBar: View {
     @Bindable var driver: LiveDriver
+    let library: ProfileLibrary
+    @Bindable var history: ShotHistory
+    @Bindable var tipPreferences: TipPreferences
     @State private var showMachines = false
+    @State private var showFeedback = false
 
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var sizeClass
@@ -96,10 +104,15 @@ private struct LiveBrewBar: View {
                                        onTap: { showMachines = true })
                     },
                     trailing: {
-                        PrimaryPill(label: "Brew",
-                                    systemImage: "drop.fill",
-                                    tint: .crema, pulsing: true,
-                                    action: { driver.brew() })
+                        HStack(spacing: 10) {
+                            if driver.playback.profile.grinder != nil {
+                                GrinderPill(driver: driver)
+                            }
+                            PrimaryPill(label: "Brew",
+                                        systemImage: "drop.fill",
+                                        tint: .crema, pulsing: true,
+                                        action: { driver.brew() })
+                        }
                     }
                 )
             case .brewing(let name):
@@ -121,29 +134,29 @@ private struct LiveBrewBar: View {
                         ConnectionChip(name: name, active: true, isDimmed: false,
                                        onTap: { showMachines = true })
                         HStack(spacing: 8) {
-                            SecondaryPill(label: "Save",    systemImage: "square.and.arrow.down",
-                                          action: { /* TODO: save shot */ })
                             SecondaryPill(label: "Discard", systemImage: "trash",
                                           action: { driver.clearShot() })
+                            SecondaryPill(label: "Brew again", systemImage: "arrow.clockwise",
+                                          action: { driver.clearShot(); driver.brew() })
                         }
-                        PrimaryPill(label: "Brew again",
-                                    systemImage: "arrow.clockwise",
+                        PrimaryPill(label: "Save & Suggest",
+                                    systemImage: "square.and.arrow.down",
                                     tint: .crema, pulsing: false,
-                                    action: { driver.clearShot(); driver.brew() })
+                                    action: { showFeedback = true })
                     }
                 } else {
                     HStack(spacing: 12) {
                         ConnectionChip(name: name, active: true, isDimmed: false,
                                        onTap: { showMachines = true })
                         Spacer(minLength: 8)
-                        SecondaryPill(label: "Save",    systemImage: "square.and.arrow.down",
-                                      action: { /* TODO: save shot */ })
                         SecondaryPill(label: "Discard", systemImage: "trash",
                                       action: { driver.clearShot() })
-                        PrimaryPill(label: "Brew again",
-                                    systemImage: "arrow.clockwise",
+                        SecondaryPill(label: "Brew again", systemImage: "arrow.clockwise",
+                                      action: { driver.clearShot(); driver.brew() })
+                        PrimaryPill(label: "Save & Suggest",
+                                    systemImage: "square.and.arrow.down",
                                     tint: .crema, pulsing: false,
-                                    action: { driver.clearShot(); driver.brew() })
+                                    action: { showFeedback = true })
                     }
                 }
             case .failed(let reason):
@@ -195,6 +208,23 @@ private struct LiveBrewBar: View {
         }
         .sheet(isPresented: $showMachines) {
             MachinesView(driver: driver)
+        }
+        .sheet(isPresented: $showFeedback) {
+            ShotFeedbackSheet(
+                profile: driver.playback.profile,
+                actualTimeS: driver.playback.t,
+                curve: capturedCurve,
+                history: history,
+                tipPreferences: tipPreferences,
+                library: library
+            )
+        }
+    }
+
+    /// Snapshot the playback's samples as the persisted curve for history.
+    private var capturedCurve: [ShotLog.Sample] {
+        driver.playback.samples.map {
+            ShotLog.Sample(t: $0.t, pressureBar: $0.pressureBar, volumeMl: $0.volumeMl)
         }
     }
 
@@ -556,6 +586,47 @@ private struct ResponsiveTwoSlot<Leading: View, Trailing: View>: View {
                 trailing()
             }
         }
+    }
+}
+
+/// Secondary action button shown next to Brew when the active profile carries
+/// grinder settings. Tap pushes the FF55 grinder command and shows a brief
+/// "✓ Sent" confirmation so the user knows it landed (since the firmware
+/// doesn't produce a parseable ack for this write).
+private struct GrinderPill: View {
+    let driver: LiveDriver
+    @State private var justSent = false
+
+    var body: some View {
+        Button(action: {
+            driver.sendGrinderSettings()
+            justSent = true
+            Task {
+                try? await Task.sleep(nanoseconds: 1_400_000_000)
+                justSent = false
+            }
+        }) {
+            HStack(spacing: 6) {
+                Image(systemName: justSent ? "checkmark" : "circle.hexagongrid.fill")
+                    .font(.system(size: 13, weight: .semibold))
+                    .contentTransition(.symbolEffect(.replace))
+                Text(justSent ? "Sent" : "Set grinder")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .contentTransition(.identity)
+            }
+            .foregroundStyle(CremaColor.cream)
+            .padding(.horizontal, 14)
+            .frame(minHeight: 44)
+            .background {
+                Capsule()
+                    .fill(.ultraThinMaterial)
+                    .overlay(Capsule().strokeBorder(
+                        justSent ? CremaColor.connected.opacity(0.7) : CremaColor.hairline.opacity(0.6),
+                        lineWidth: 0.5))
+            }
+        }
+        .buttonStyle(PressDownStyle())
+        .animation(.snappy(duration: 0.22), value: justSent)
     }
 }
 

@@ -74,17 +74,32 @@ final class EditableProfile: Identifiable {
     var doseG: Double          // 12…22 typical
     var targetYieldG: Double   // 18…80 typical (= mL since espresso ≈ 1 g/mL)
     var stages: [EditableStage]
+    /// When `true`, the profile saves grinder settings and the brew zone shows
+    /// a "Set grinder" button next to Brew. When `false`, profile.grinder == nil
+    /// on save and the grinder controls disappear.
+    var grinderEnabled: Bool
+    var grinderSizeMicrons: Double  // 30…500 µm, stored as Double for slider math
+    var grinderRPM: Double           // 200…1200 typical
+    var grinderSingleDose: Bool
 
     init(id: UUID = UUID(),
          name: String = "New profile",
          doseG: Double = 18,
          targetYieldG: Double = 36,
-         stages: [EditableStage] = EditableProfile.defaultStages()) {
+         stages: [EditableStage] = EditableProfile.defaultStages(),
+         grinderEnabled: Bool = false,
+         grinderSizeMicrons: Double = 76,
+         grinderRPM: Double = 567,
+         grinderSingleDose: Bool = false) {
         self.id = id
         self.name = name
         self.doseG = doseG
         self.targetYieldG = targetYieldG
         self.stages = stages
+        self.grinderEnabled = grinderEnabled
+        self.grinderSizeMicrons = grinderSizeMicrons
+        self.grinderRPM = grinderRPM
+        self.grinderSingleDose = grinderSingleDose
     }
 
     /// Default 4-stage shape for a new profile — gives the user a real starting
@@ -107,13 +122,21 @@ final class EditableProfile: Identifiable {
         let compiledStages = stages.enumerated().map { i, s in
             s.toStage(isLast: i == last)
         }
+        let grinder: GrinderSettings? = grinderEnabled
+            ? GrinderSettings(
+                grindSizeMicrons: UInt8(min(255, max(0, grinderSizeMicrons.rounded()))),
+                rpm: UInt16(min(65535, max(0, grinderRPM.rounded()))),
+                singleDose: grinderSingleDose
+              )
+            : nil
         return BrewProfile(
             id: id,
             name: name.isEmpty ? "Untitled" : name,
             stages: compiledStages,
             mode: .flowVariablePressure,
             target: .flow,
-            targetVolumeMl: UInt16(targetYieldG.rounded())
+            targetVolumeMl: UInt16(targetYieldG.rounded()),
+            grinder: grinder
         )
     }
 
@@ -123,7 +146,11 @@ final class EditableProfile: Identifiable {
             name: profile.name,
             doseG: 18,                      // not stored in BrewProfile yet
             targetYieldG: Double(profile.targetVolumeMl ?? 36),
-            stages: profile.stages.map(EditableStage.init(from:))
+            stages: profile.stages.map(EditableStage.init(from:)),
+            grinderEnabled: profile.grinder != nil,
+            grinderSizeMicrons: Double(profile.grinder?.grindSizeMicrons ?? 76),
+            grinderRPM: Double(profile.grinder?.rpm ?? 567),
+            grinderSingleDose: profile.grinder?.singleDose ?? false
         )
     }
 

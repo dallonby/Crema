@@ -44,8 +44,12 @@ struct MachinesView: View {
             get: { renamingMachine != nil },
             set: { if !$0 { renamingMachine = nil } }
         ), presenting: renamingMachine) { machine in
+            #if os(iOS)
             TextField("Nickname", text: $renameText)
                 .textInputAutocapitalization(.words)
+            #else
+            TextField("Nickname", text: $renameText)
+            #endif
             Button("Save") {
                 driver.registry.rename(machine.id, to: renameText)
                 renamingMachine = nil
@@ -70,8 +74,11 @@ struct MachinesView: View {
             Spacer()
             Button(action: { dismiss() }) {
                 Text("Done")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundStyle(CremaColor.crema)
+                    .padding(.horizontal, 12)
+                    .frame(minHeight: 44)         // 44pt min tap target
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
         }

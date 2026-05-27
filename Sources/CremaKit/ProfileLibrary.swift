@@ -115,7 +115,9 @@ extension ProfileLibrary {
 
 extension BrewProfile {
     /// A traditional 1:2 espresso — gentle 4-bar preinfuse, 8 s bloom, hold
-    /// flow at 1.7 mL/s during extraction, soft pressure tail.
+    /// flow at 1.7 mL/s during extraction, soft pressure tail. Ships with
+    /// matched grinder settings (medium-fine, 567 RPM) so a fresh user can
+    /// try the full grinder-write flow without authoring anything.
     public static let classicEspresso = BrewProfile(
         name: "Classic Espresso",
         stages: [
@@ -128,7 +130,8 @@ extension BrewProfile {
         ],
         mode: .flowVariablePressure,
         target: .flow,
-        targetVolumeMl: 36
+        targetVolumeMl: 36,
+        grinder: GrinderSettings(grindSizeMicrons: 76, rpm: 567, singleDose: false)
     )
 
     /// Turbo / "modern" espresso — no preinfusion, fast flow, low pressure.

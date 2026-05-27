@@ -208,6 +208,16 @@ final class LiveDriver {
         }
     }
 
+    /// Push the active profile's grinder settings to the machine. No-op if the
+    /// profile has none. Fire-and-forget — the FF55 grinder write doesn't
+    /// produce a parseable ack from the firmware.
+    func sendGrinderSettings() {
+        guard let g = playback.profile.grinder else { return }
+        Task { [transport] in
+            try? await transport.sendGrinderSettings(g)
+        }
+    }
+
     /// User-initiated abort. The machine's stop protocol isn't fully captured
     /// yet — we send a press-and-release of coil 150 (mirror of the start
     /// gesture, on the theory the button toggles in/out of brewing). If that

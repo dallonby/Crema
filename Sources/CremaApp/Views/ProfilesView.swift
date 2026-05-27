@@ -85,8 +85,11 @@ struct ProfilesView: View {
             Spacer()
             Button(action: { dismiss() }) {
                 Text("Done")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundStyle(CremaColor.crema)
+                    .padding(.horizontal, 12)
+                    .frame(minHeight: 44)         // 44pt min tap target
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
         }

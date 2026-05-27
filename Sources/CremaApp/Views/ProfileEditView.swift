@@ -31,6 +31,7 @@ struct ProfileEditView: View {
                     preview
                 }
                 recipeSection
+                grinderSection
                 if mode == .list {
                     stagesSection
                 }
@@ -105,19 +106,32 @@ struct ProfileEditView: View {
 
     private var header: some View {
         HStack {
-            Button("Cancel", action: { onCancel(); dismiss() })
-                .foregroundStyle(CremaColor.secondary)
+            sheetHeaderButton("Cancel", primary: false) {
+                onCancel(); dismiss()
+            }
             Spacer()
             Text("Edit profile")
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                 .foregroundStyle(CremaColor.cream)
             Spacer()
-            Button("Save") {
+            sheetHeaderButton("Save", primary: true) {
                 onSave(editing.compile())
                 dismiss()
             }
-            .fontWeight(.semibold)
-            .foregroundStyle(CremaColor.crema)
+        }
+    }
+
+    /// 44pt-tall hit target so taps reliably land — bare-text buttons in the
+    /// header were "super flakey" (user report).
+    @ViewBuilder
+    private func sheetHeaderButton(_ label: String, primary: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(label)
+                .font(.system(size: 14, weight: primary ? .semibold : .regular, design: .rounded))
+                .foregroundStyle(primary ? CremaColor.crema : CremaColor.secondary)
+                .padding(.horizontal, 12)
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }
@@ -176,6 +190,48 @@ struct ProfileEditView: View {
         Text(String(format: "Ratio 1 : %.2f", editing.targetYieldG / max(editing.doseG, 1)))
             .font(.system(size: 11, design: .rounded).monospacedDigit())
             .foregroundStyle(CremaColor.secondary)
+    }
+
+    // MARK: - Grinder section
+
+    @ViewBuilder
+    private var grinderSection: some View {
+        HStack {
+            SectionHeader("Grinder")
+            Spacer()
+            Toggle("", isOn: $editing.grinderEnabled)
+                .labelsHidden()
+                .tint(CremaColor.crema)
+        }
+        if editing.grinderEnabled {
+            VStack(alignment: .leading, spacing: 12) {
+                SliderRow(label: "Grind size",
+                          value: $editing.grinderSizeMicrons,
+                          range: 30...500, step: 1,
+                          format: { String(format: "%.0f µm", $0) },
+                          accent: CremaColor.crema)
+                SliderRow(label: "Motor speed",
+                          value: $editing.grinderRPM,
+                          range: 200...1200, step: 10,
+                          format: { String(format: "%.0f rpm", $0) },
+                          accent: CremaColor.matcha)
+                HStack {
+                    Toggle("Single-dose mode", isOn: $editing.grinderSingleDose)
+                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .foregroundStyle(CremaColor.cream)
+                        .tint(CremaColor.crema)
+                    Spacer()
+                }
+                Text("Settings are sent to the machine when you tap **Set grinder** before brewing.")
+                    .font(.system(size: 11, design: .rounded))
+                    .foregroundStyle(CremaColor.secondary)
+            }
+            .transition(.opacity.combined(with: .move(edge: .top)))
+        } else {
+            Text("Save grinder settings with this profile to push grind size and RPM to your machine before brewing.")
+                .font(.system(size: 11, design: .rounded))
+                .foregroundStyle(CremaColor.secondary)
+        }
     }
 
     // MARK: - Stages section

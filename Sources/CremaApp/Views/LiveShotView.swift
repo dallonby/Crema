@@ -9,8 +9,11 @@ struct LiveShotView: View {
     @State var replayPlayback: ShotPlayback
     @State var liveDriver: LiveDriver
     @Bindable var library: ProfileLibrary
+    @Bindable var history: ShotHistory
+    @Bindable var tipPreferences: TipPreferences
 
     @State private var showLibrary = false
+    @State private var showHistory = false
 
     /// Whichever engine is currently driving the chart.
     private var playback: ShotPlayback {
@@ -79,7 +82,10 @@ struct LiveShotView: View {
                 BrewActionZone(
                     mode: $mode,
                     liveDriver: liveDriver,
-                    replayPlayback: replayPlayback
+                    replayPlayback: replayPlayback,
+                    library: library,
+                    history: history,
+                    tipPreferences: tipPreferences
                 )
                 .padding(.horizontal, 10)
                 .padding(.top, 14)
@@ -106,6 +112,9 @@ struct LiveShotView: View {
         .preferredColorScheme(.dark)
         .sheet(isPresented: $showLibrary) {
             ProfilesView(library: library)
+        }
+        .sheet(isPresented: $showHistory) {
+            ShotHistoryView(history: history)
         }
     }
 
@@ -160,12 +169,24 @@ struct LiveShotView: View {
                     .foregroundStyle(CremaColor.secondary)
             }
             Spacer()
+            historyButton
             modePill
             Text(String(format: "%05.2f s", playback.t))
                 .font(.system(size: 13, weight: .regular, design: .rounded).monospacedDigit())
                 .foregroundStyle(CremaColor.secondary)
                 .fixedSize()
         }
+    }
+
+    private var historyButton: some View {
+        Button(action: { showHistory = true }) {
+            Image(systemName: "clock.arrow.circlepath")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(CremaColor.secondary)
+                .frame(width: 44, height: 44)   // proper hit target
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     /// Tiny mode switcher in the header — a dev affordance, NOT a primary
