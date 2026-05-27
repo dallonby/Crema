@@ -1,6 +1,9 @@
 version: "3.9"
-# Local dev stack: API + Postgres. For production, drop the `db` service and
-# point DATABASE_URL at your managed Postgres (Neon, Supabase, RDS, etc).
+# Full stack: API + Postgres + Cloudflare Tunnel.
+# - Dev: `docker compose up` (api on :8080, db on :5432).
+# - Prod / self-host: set the env vars in .env (see .env.example) and
+#   drop the tunnel credentials JSON into ./cloudflared/. The tunnel
+#   service will expose the api at your routed hostname over public HTTPS.
 services:
   api:
     build: .
@@ -10,7 +13,12 @@ services:
       DATABASE_URL: postgres://crema:crema@db:5432/crema
       JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
       APPLE_CLIENT_ID: ${APPLE_CLIENT_ID:-coffee.crema.app}
+      GOOGLE_CLIENT_IDS: ${GOOGLE_CLIENT_IDS:-}
+      APPLE_APP_ID: ${APPLE_APP_ID:-}
+      ANDROID_PACKAGE_NAME: ${ANDROID_PACKAGE_NAME:-}
+      ANDROID_SHA256_FINGERPRINTS: ${ANDROID_SHA256_FINGERPRINTS:-}
       PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
       NODE_ENV: production
     depends_on:
       db:
@@ -34,5 +42,20 @@ services:
       test: ["CMD-SHELL", "pg_isready -U crema"]
       interval: 5s
       retries: 5
+  # Cloudflare Tunnel — routes a public hostname to the api service over
+  # Cloudflare's network. Eliminates the need for a public IP / port-forward
+  # / dynamic-DNS. Reads credentials from ./cloudflared/ (one tunnel JSON
+  # + config.yml). Profile-gated so dev users without a tunnel don't have
+  # to mock the credentials.
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: ["prod", "tunnel"]
+    command: tunnel --no-autoupdate run
+    volumes:
+      - ./cloudflared:/etc/cloudflared:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+
 volumes:
   crema_pgdata:

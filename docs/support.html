@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Support · CaffeCrema Labs</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0A0908">
+<link rel="icon" href="favicon.png">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(ellipse at 75% 15%, #38221060 0%, #1E120988 35%, #0A0908 100%);
+  background-attachment: fixed; color: #F5EFEA; min-height: 100dvh;
+  -webkit-font-smoothing: antialiased; line-height: 1.6;
+}
+.wrap { max-width: 680px; margin: 0 auto; padding: 48px 24px 96px; }
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+.dot { width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #FF9F50, #E8843C);
+  box-shadow: 0 0 12px #E8843C80; }
+.brand { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.brand a { color: inherit; text-decoration: none; }
+h1 { font-size: clamp(28px, 6vw, 40px); font-weight: 700;
+  letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.15; }
+h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+  margin: 32px 0 10px; color: #E8843C; }
+p, ul { margin-bottom: 14px; color: #F5EFEAdd; }
+ul { padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { color: #F5EFEA; font-weight: 600; }
+a { color: #FF9F50; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.contact-card { background: rgba(26, 22, 20, 0.5);
+  border: 0.5px solid #8A827C30; border-radius: 14px;
+  padding: 20px; margin: 24px 0 32px; }
+.contact-card .label { font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #8A827C; margin-bottom: 8px;
+  font-weight: 600; }
+.contact-card .email { font-size: 22px; font-weight: 600; }
+.contact-card .email a { color: #FF9F50; }
+.contact-card .note { font-size: 12px; color: #F5EFEAaa; margin-top: 8px; }
+footer { margin-top: 64px; padding-top: 24px;
+  border-top: 0.5px solid #8A827C30; text-align: center;
+  color: #8A827C70; font-size: 11px; }
+footer a { color: #8A827C; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span class="dot"></span><span class="brand"><a href="index.html">CaffeCrema Labs</a></span></header>
+
+<h1>Support</h1>
+<p>Get in touch with bug reports, feature requests, or hardware questions.</p>
+
+<div class="contact-card">
+  <div class="label">Email</div>
+  <div class="email"><a href="mailto:da@byeq.com">da@byeq.com</a></div>
+  <div class="note">We try to reply within 48 hours.</div>
+</div>
+
+<h2>Frequently asked</h2>
+
+<p><strong>Which machines does it work with?</strong><br>
+Wendougee <strong>LITA-BA</strong>, <strong>LITA-BR</strong>, and <strong>DATA-S</strong> — anything that speaks the LITA Bluetooth LE protocol.</p>
+
+<p><strong>Will it work with [other espresso machine]?</strong><br>
+Not yet. The protocol is reverse-engineered from the Wendougee family. We may add others later if there's demand and the protocol's accessible.</p>
+
+<p><strong>I don't have the machine — can I still try the app?</strong><br>
+Yes. Tap the <strong>Demo</strong> chip in the header to switch to replay mode. A real captured shot plays back through every screen.</p>
+
+<p><strong>The auto-tune wizard suggests a different grind size every shot.</strong><br>
+That's working as intended — it's converging on a dialed-in recipe across 3 guided shots, narrowing the adjustment each iteration. The saved profile uses your highest-scoring shot, trimmed to your target brew time.</p>
+
+<p><strong>My shared profile didn't sync to my other device.</strong><br>
+You need to be signed in with the same Apple ID on both devices and have explicitly imported the profile from the community on each. Cross-device library sync is on the v0.3 roadmap.</p>
+
+<p><strong>The abort button doesn't always stop the brew.</strong><br>
+Fixed in v0.2 — was a BLE timing issue (we held coil 150 too long for the firmware to recognise as a momentary toggle). If you're on an older version, update.</p>
+
+<p><strong>How do I delete my account / data?</strong><br>
+Email <a href="mailto:da@byeq.com">da@byeq.com</a> with your display name. We purge within 14 days. An in-app delete button is coming in v0.3.</p>
+
+<p><strong>The shot pulled way more than my target yield.</strong><br>
+The machine's volume meter reads <em>pump volume</em>, not cup yield — a lot of water soaks into the puck before anything lands in the cup. For accurate yield, either use a BLE scale (Bookoo / Acaia support coming soon) or watch your cup and tap <strong>Stop</strong> manually when it hits target.</p>
+
+<h2>Reporting a bug</h2>
+<p>Include in your email:</p>
+<ul>
+<li>What you did, what happened, what you expected</li>
+<li>App version + build number (Settings → About)</li>
+<li>Machine model (LITA-BA / BR / DATA-S)</li>
+<li>iOS / iPadOS / macOS version</li>
+<li>If you can reproduce it consistently, screen recording is gold</li>
+</ul>
+
+<h2>Privacy + data handling</h2>
+<p>See the <a href="privacy.html">privacy policy</a> for what we collect (almost nothing — and never your real identity).</p>
+
+<footer>
+© 2026 CaffeCrema Labs · <a href="privacy.html">Privacy</a> · <a href="index.html">Home</a>
+</footer>
+</div>
+</body>
+</html>

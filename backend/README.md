@@ -17,7 +17,40 @@ then `docker compose up`.
 
 Health check: `curl http://localhost:8080/health` → `{"ok":true}`.
 
-## Production deploy
+## Self-host with Docker (production-style)
+
+The compose stack now includes a `cloudflared` service profile-gated to
+`prod`. Whole API + DB + public tunnel comes up in one command, no
+public IP or port-forwarding required.
+
+```bash
+cd backend
+
+# 1. Set your secrets
+cp .env.example .env
+# … edit .env: JWT_SECRET, APPLE_APP_ID, GOOGLE_CLIENT_IDS …
+
+# 2. Drop the tunnel credentials in place
+#    (~/.cloudflared/<tunnel-id>.json from whichever machine ran
+#     `cloudflared tunnel create` against your Cloudflare account)
+mkdir -p cloudflared
+cp ~/.cloudflared/<tunnel-id>.json cloudflared/
+cp cloudflared/config.example.yml cloudflared/config.yml
+# … edit cloudflared/config.yml to put your tunnel UUID + hostname …
+
+# 3. Up the whole stack
+docker compose --profile prod up -d --build
+
+# 4. Check it
+docker compose ps
+docker compose logs -f cloudflared       # confirm 4 connections registered
+curl https://api.caffecremalabs.com/health
+```
+
+To tear down: `docker compose --profile prod down` (data persists in the
+`crema_pgdata` volume).
+
+## Production deploy (alternative — managed host)
 
 1. Provision a Postgres (Neon / Supabase / RDS / your own).
 2. Set environment:

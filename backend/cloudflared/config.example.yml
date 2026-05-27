@@ -1,0 +1,17 @@
+# Cloudflare Tunnel config — read by the `cloudflared` service in
+# docker-compose.yml. Copy to `config.yml` and edit the tunnel id.
+#
+# The credentials JSON (`<tunnel-id>.json`) goes alongside — get it from
+# `~/.cloudflared/<tunnel-id>.json` on whichever machine ran
+# `cloudflared tunnel create`. That file is gitignored — never commit it.
+
+tunnel: REPLACE-WITH-TUNNEL-UUID
+credentials-file: /etc/cloudflared/REPLACE-WITH-TUNNEL-UUID.json
+
+# Route incoming requests for the hostname into the api container.
+# `api` here is the docker-compose service name — resolves on the shared
+# network. The catch-all 404 at the end is required by cloudflared.
+ingress:
+  - hostname: api.caffecremalabs.com
+    service: http://api:8080
+  - service: http_status:404

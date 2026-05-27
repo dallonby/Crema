@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Privacy · CaffeCrema Labs</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0A0908">
+<link rel="icon" href="favicon.png">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(ellipse at 75% 15%, #38221060 0%, #1E120988 35%, #0A0908 100%);
+  background-attachment: fixed; color: #F5EFEA; min-height: 100dvh;
+  -webkit-font-smoothing: antialiased; line-height: 1.6;
+}
+.wrap { max-width: 680px; margin: 0 auto; padding: 48px 24px 96px; }
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+.dot { width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #FF9F50, #E8843C);
+  box-shadow: 0 0 12px #E8843C80; }
+.brand { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.brand a { color: inherit; text-decoration: none; }
+h1 { font-size: clamp(28px, 6vw, 40px); font-weight: 700;
+  letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.15; }
+h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+  margin: 32px 0 10px; color: #E8843C; }
+p, ul { margin-bottom: 14px; color: #F5EFEAdd; }
+ul { padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { color: #F5EFEA; font-weight: 600; }
+a { color: #FF9F50; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: #8A827C; font-weight: 600; margin-bottom: 8px; }
+code { font-family: "SF Mono", ui-monospace, monospace; font-size: 13px;
+  background: rgba(26, 22, 20, 0.7); padding: 2px 6px; border-radius: 4px; }
+footer { margin-top: 64px; padding-top: 24px;
+  border-top: 0.5px solid #8A827C30; text-align: center;
+  color: #8A827C70; font-size: 11px; }
+footer a { color: #8A827C; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span class="dot"></span><span class="brand"><a href="index.html">CaffeCrema Labs</a></span></header>
+
+<div class="eyebrow">Last updated · 27 May 2026</div>
+<h1>Privacy Policy</h1>
+<p>CaffeCrema Labs connects your iPhone, iPad, or Mac to a Wendougee LITA espresso machine over Bluetooth LE, lets you design and run brew profiles, and offers an optional community feature for sharing recipes. This document explains what data we collect, why, and how we handle it.</p>
+
+<h2>What stays on your device</h2>
+<ul>
+<li>Your brew profile library</li>
+<li>Shot history with tasting notes and yield</li>
+<li>Paired machine identifiers and connection state</li>
+<li>Any profile you author but don't explicitly share</li>
+</ul>
+<p>These are <strong>not</strong> transmitted to our servers.</p>
+
+<h2>What we collect when you sign in</h2>
+<p>Sign-in is optional and only required for community sharing. When you sign in with Apple or Google:</p>
+<ul>
+<li>We receive a pseudonymous <strong>user identifier</strong> from the provider — a stable opaque string. We never receive your Apple ID. Google additionally provides display name + avatar if you grant the <code>profile</code> scope.</li>
+<li>We store this identifier alongside a <strong>display name</strong> you choose.</li>
+<li>We do not receive or store your email address from the sign-in provider.</li>
+</ul>
+
+<h2>What we collect when you share a profile</h2>
+<ul>
+<li>The full <strong>brew profile</strong> (recipe shape, equipment notes, bean name if provided)</li>
+<li>Your display name as the author</li>
+</ul>
+<p>Shared profiles are <strong>public</strong> — anyone with the link or browsing the community feed can view and import them.</p>
+
+<h2>Likes and follows</h2>
+<p>Both are public signals stored on our backend.</p>
+
+<h2>What we do NOT collect</h2>
+<ul>
+<li>Location, health, contacts, photos, files</li>
+<li>Browsing or search history</li>
+<li>Financial information</li>
+<li>Advertising identifiers (IDFA / GAID)</li>
+<li>Crash analytics — no third-party SDK runs in the app</li>
+</ul>
+
+<h2>Tracking</h2>
+<p>We do not track you across apps or websites. No data is shared with advertising networks.</p>
+
+<h2>Bluetooth</h2>
+<p>Bluetooth LE talks to your espresso machine. Telemetry (pressure, flow, volume readings) and control commands stay on your device — they are not transmitted to our servers.</p>
+
+<h2>Children</h2>
+<p>The app is not directed at children under 13 and is rated 4+. We do not knowingly collect data from children.</p>
+
+<h2>Your rights</h2>
+<ul>
+<li><strong>Delete an uploaded profile</strong> at any time from within the app — it is removed from the server immediately.</li>
+<li><strong>Sign out</strong> from Settings → Sign Out.</li>
+<li><strong>Delete your account</strong> by emailing <a href="mailto:da@byeq.com">da@byeq.com</a> with your display name. We will purge your user record and all uploaded profiles within 14 days.</li>
+</ul>
+
+<h2>Data location</h2>
+<p>Our backend runs in the United Kingdom and stores data in PostgreSQL.</p>
+
+<h2>Changes</h2>
+<p>If we change this policy materially, the date above will update and the app will surface a notice on next launch.</p>
+
+<h2>Contact</h2>
+<p><a href="mailto:da@byeq.com">da@byeq.com</a></p>
+
+<footer>
+© 2026 CaffeCrema Labs · <a href="support.html">Support</a> · <a href="index.html">Home</a>
+</footer>
+</div>
+</body>
+</html>

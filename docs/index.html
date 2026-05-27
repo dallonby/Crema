@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CaffeCrema Labs · Espresso, dialed in.</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0A0908">
+<meta property="og:title" content="CaffeCrema Labs">
+<meta property="og:description" content="Espresso profiling for coffee nerds. iPhone, iPad, Mac.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.png">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(ellipse at 75% 15%, #38221060 0%, #1E120988 35%, #0A0908 100%);
+  background-attachment: fixed; color: #F5EFEA; min-height: 100dvh;
+  -webkit-font-smoothing: antialiased; line-height: 1.6;
+}
+.wrap { max-width: 680px; margin: 0 auto; padding: 64px 24px 96px; }
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 64px; }
+.dot { width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #FF9F50, #E8843C);
+  box-shadow: 0 0 12px #E8843C80; }
+.brand { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.hero { text-align: center; margin-bottom: 56px; }
+h1 { font-size: clamp(36px, 8vw, 56px); font-weight: 700;
+  letter-spacing: -0.025em; margin-bottom: 14px; line-height: 1.1; }
+.tagline { font-size: 18px; color: #F5EFEAaa; max-width: 540px;
+  margin: 0 auto; }
+.cta-row { display: flex; gap: 12px; justify-content: center;
+  margin-top: 36px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px; border-radius: 12px;
+  font-weight: 600; font-size: 14px;
+  text-decoration: none; transition: transform 0.1s ease; }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: linear-gradient(135deg, #FF9F50, #E8843C); color: #0A0908;
+  box-shadow: 0 4px 18px #E8843C66; }
+.btn-secondary { background: rgba(26, 22, 20, 0.6); color: #F5EFEA;
+  border: 0.5px solid #8A827C50; }
+h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em;
+  margin: 56px 0 14px; color: #E8843C; }
+p, ul { margin-bottom: 14px; color: #F5EFEAdd; }
+ul { padding-left: 22px; }
+li { margin-bottom: 8px; }
+strong { color: #F5EFEA; font-weight: 600; }
+a { color: #FF9F50; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: "SF Mono", ui-monospace, monospace; font-size: 13px;
+  background: rgba(26, 22, 20, 0.7); padding: 2px 6px; border-radius: 4px; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px; margin: 24px 0; }
+.feature {
+  background: rgba(26, 22, 20, 0.5); border-radius: 12px; padding: 18px;
+  border: 0.5px solid #8A827C30;
+}
+.feature h3 { font-size: 14px; font-weight: 600; color: #E8843C;
+  margin-bottom: 6px; }
+.feature p { font-size: 13px; color: #F5EFEAcc; margin: 0; line-height: 1.5; }
+footer { margin-top: 96px; padding-top: 24px;
+  border-top: 0.5px solid #8A827C30; text-align: center;
+  color: #8A827C70; font-size: 11px; }
+footer a { color: #8A827C; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span class="dot"></span><span class="brand">CaffeCrema Labs</span></header>
+
+<section class="hero">
+  <h1>Espresso, dialed in.</h1>
+  <p class="tagline">A native iPhone, iPad, and Mac client for the Wendougee LITA espresso machine. Author pressure and flow profiles, watch every shot in real time, dial in new beans with auto-tune, and share your best recipes with the community.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="mailto:da@byeq.com?subject=CaffeCrema TestFlight">Join the TestFlight beta</a>
+    <a class="btn btn-secondary" href="https://github.com/dallonby/Crema">View on GitHub</a>
+  </div>
+</section>
+
+<h2>Features</h2>
+<div class="feature-grid">
+  <div class="feature">
+    <h3>Live brew chart</h3>
+    <p>Real-time pressure, flow, and pumped-volume curves over ghost target lines. See the puck fight back as it happens.</p>
+  </div>
+  <div class="feature">
+    <h3>Multi-stage profiles</h3>
+    <p>Visual node editor or list form. Each stage independently pressure- or flow-priority. Preinfusion, soak, extraction, tail.</p>
+  </div>
+  <div class="feature">
+    <h3>Auto-tune any bean</h3>
+    <p>Three guided shots to dial in a new bean from scratch. Smart recommendations after every pull.</p>
+  </div>
+  <div class="feature">
+    <h3>Profile sharing</h3>
+    <p>One-tap upload to the community. crema:// deep links open the recipe in any installed copy of the app.</p>
+  </div>
+  <div class="feature">
+    <h3>Shot history</h3>
+    <p>Every brew saved with tasting note and yield. Targeted tweak suggestions for the next pull.</p>
+  </div>
+  <div class="feature">
+    <h3>Demo mode</h3>
+    <p>No machine? Replay a real captured shot through every screen, fully interactive, no hardware needed.</p>
+  </div>
+</div>
+
+<h2>Hardware</h2>
+<p>CaffeCrema Labs talks to the <strong>Wendougee LITA-BA</strong>, <strong>LITA-BR</strong>, and <strong>DATA-S</strong> espresso machines over Bluetooth LE. Other machines aren't supported yet — if there's demand and the protocol's accessible, we may add others.</p>
+
+<h2>Roadmap</h2>
+<ul>
+  <li>Public TestFlight beta — coming weeks</li>
+  <li>Public App Store launch — after TestFlight stabilises</li>
+  <li>Android client (Kotlin / Jetpack Compose)</li>
+  <li>BLE scale integration (Bookoo Themis, Acaia)</li>
+</ul>
+
+<h2>Open source</h2>
+<p>The app, the engine, and the backend are open at <a href="https://github.com/dallonby/Crema">github.com/dallonby/Crema</a>. The reverse-engineered protocol notes for the LITA family live at <a href="https://github.com/dallonby/LitaLite">github.com/dallonby/LitaLite</a>.</p>
+
+<h2>Contact</h2>
+<p><a href="mailto:da@byeq.com">da@byeq.com</a></p>
+
+<footer>
+© 2026 CaffeCrema Labs · <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a>
+</footer>
+</div>
+</body>
+</html>

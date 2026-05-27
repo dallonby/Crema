@@ -8,6 +8,9 @@ DerivedData/
 backend/node_modules/
 backend/dist/
 backend/.env
+# Cloudflare Tunnel credentials + active config — sensitive
+backend/cloudflared/*.json
+backend/cloudflared/config.yml
 
 # macOS built app artifact (lives at repo root from `cp -R …`)
 Crema.app/
